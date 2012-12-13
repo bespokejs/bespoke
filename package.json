@@ -1,0 +1,37 @@
+{
+  "name": "bespoke",
+  "title": "Bespoke.js",
+  "version": "0.0.1-alpha",
+  "description": "HTML5 Presentation Microlib",
+  "author": {
+    "name": "Mark Dalgleish",
+    "url": "http://markdalgleish.com"
+  },
+  "engines": {
+    "node": ">= 0.6.0"
+  },
+  "scripts": {
+    "test": "grunt jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/markdalgleish/bespoke.js.git"
+  },
+  "devDependencies": {
+    "grunt": "~0.3.17",
+    "grunt-jasmine-runner": "~0.6.0",
+    "temporary": "0.0.5"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://mit-license.org/markdalgleish"
+    }
+  ],
+  "keywords": [
+    "presentation",
+    "html5",
+    "keynote",
+    "powerpoint"
+  ]
+}
