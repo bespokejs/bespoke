@@ -4,7 +4,9 @@
 
 ### HTML5 Presentation Microlib
 
-Less than 1KB when minified and gzipped, with no dependencies, harnessing the power of CSS transitions.
+Less than 1KB when minified and gzipped, no dependencies, harnessing the power of CSS transitions.
+
+Bespoke.js is currently in alpha, use at your own risk.
 
 ## Getting Started
 
