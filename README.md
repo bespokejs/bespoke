@@ -1,3 +1,5 @@
+[![Build Status](https://secure.travis-ci.org/markdalgleish/bespoke.js.png)](http://travis-ci.org/markdalgleish/bespoke.js)
+
 # Bespoke.js
 
 ### HTML5 Presentation Microlib
