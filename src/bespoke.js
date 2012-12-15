@@ -1,4 +1,12 @@
-(function(moduleName, window, isArray){
+/*!
+ * Bespoke.js v0.0.1-alpha
+
+ * Copyright 2012, Mark Dalgleish
+ * This content is released under the MIT license
+ * http://mit-license.org/markdalgleish
+ */
+
+(function(moduleName, window, document, isArray){
 	'use strict';
 
 	function from(options) {
@@ -76,6 +84,42 @@
 		addClass(slides, 'slide');
 
 		document.addEventListener('keydown', handleKeydown);
+
+		(function() {
+			var startX,
+				moveX,
+
+				singleTouch = function(fn) {
+					return function(e) {
+						e.preventDefault();
+						if (e.touches.length === 1) {
+							fn(e.touches[0].pageX);
+						}
+					};
+				};
+
+			document.addEventListener('touchstart', singleTouch(function(x) {
+				startX = x;
+			}));
+
+			document.addEventListener('touchmove', singleTouch(function(x) {
+				moveX = x;
+			}));
+
+			document.addEventListener('touchend', function() {
+				var delta = moveX - startX;
+				
+				if (Math.abs(delta) < 50) {
+					return;
+				}
+
+				if (delta > 0) {
+					prev();
+				} else {
+					next();
+				}
+			});
+		}());
 
 		return {
 			activate: activate,
@@ -157,4 +201,4 @@
 		from: from
 	};
 
-}('bespoke', this, Array.isArray));
+}('bespoke', this, this.document, Array.isArray));

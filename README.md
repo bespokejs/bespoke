@@ -6,7 +6,7 @@
 
 Less than 1KB when minified and gzipped, no dependencies, harnessing the power of CSS transitions.
 
-Bespoke.js listens to keyboard events, and adds the CSS classes needed to create your own slide transitions.
+Bespoke.js listens to keyboard/touch events, and adds the CSS classes needed to create your own slide transitions.
 
 This project is currently in alpha, use at your own risk.
 
