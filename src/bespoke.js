@@ -1,11 +1,3 @@
-/*!
- * Bespoke.js v0.0.1-alpha
-
- * Copyright 2012, Mark Dalgleish
- * This content is released under the MIT license
- * http://mit-license.org/markdalgleish
- */
-
 (function(moduleName, window, document, isArray){
 	'use strict';
 
