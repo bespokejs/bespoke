@@ -104,6 +104,40 @@
 
 		});
 
+		describe("API", function() {
+
+			describe("next", function() {
+
+				it("should go to the next slide when not last slide", function() {
+					presentation.next();
+					expect(slides[1].className).toMatch(/bespoke-active(\s|$)/);
+				});
+
+				it("should do nothing when on last slide", function() {
+					presentation.activate(9);
+					presentation.next();
+					expect(slides[9].className).toMatch(/bespoke-active(\s|$)/);
+				});
+
+			});
+
+			describe("prev", function() {
+
+				it("should go to the previous slide when not first slide", function() {
+					presentation.activate(1);
+					presentation.prev();
+					expect(slides[0].className).toMatch(/bespoke-active(\s|$)/);
+				});
+
+				it("should do nothing when on first slide", function() {
+					presentation.prev();
+					expect(slides[0].className).toMatch(/bespoke-active(\s|$)/);
+				});
+
+			});
+
+		});
+
 	});
 
 }());
