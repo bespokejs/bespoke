@@ -122,32 +122,96 @@
 
 		describe("API", function() {
 
-			describe("next", function() {
+			describe("global 'bespoke' object", function() {
 
-				it("should go to the next slide when not last slide", function() {
-					presentation.next();
-					expect(slides[1].className).toMatch(/bespoke-active(\s|$)/);
+				describe("presentations", function() {
+
+					it("should contain a reference to created presentations", function() {
+						expect(presentation).toBe(bespoke.presentations[bespoke.presentations.length - 1]);
+					});
+
 				});
 
-				it("should do nothing when on last slide", function() {
-					presentation.activate(9);
-					presentation.next();
-					expect(slides[9].className).toMatch(/bespoke-active(\s|$)/);
+				describe("next", function() {
+
+					it("should call 'next' on all presentation instances", function() {
+						bespoke.presentations.forEach(function(presentation) {
+							presentation.next = sinon.spy();
+						});
+
+						bespoke.next();
+
+						bespoke.presentations.forEach(function(presentation) {
+							expect(presentation.next.called).toBe(true);
+						});
+					});
+
+				});
+
+				describe("prev", function() {
+
+					it("should call 'prev' on all presentation instances", function() {
+						bespoke.presentations.forEach(function(presentation) {
+							presentation.prev = sinon.spy();
+						});
+
+						bespoke.prev();
+
+						bespoke.presentations.forEach(function(presentation) {
+							expect(presentation.prev.called).toBe(true);
+						});
+					});
+
+				});
+
+				describe("activate", function() {
+
+					it("should call 'activate' on all presentation instances", function() {
+						bespoke.presentations.forEach(function(presentation) {
+							presentation.activate = sinon.spy();
+						});
+
+						bespoke.activate(0);
+
+						bespoke.presentations.forEach(function(presentation) {
+							expect(presentation.activate.calledWith(0)).toBe(true);
+						});
+					});
+
 				});
 
 			});
 
-			describe("prev", function() {
+			describe("presentation instances", function() {
 
-				it("should go to the previous slide when not first slide", function() {
-					presentation.activate(1);
-					presentation.prev();
-					expect(slides[0].className).toMatch(/bespoke-active(\s|$)/);
+				describe("next", function() {
+
+					it("should go to the next slide when not last slide", function() {
+						presentation.next();
+						expect(slides[1].className).toMatch(/bespoke-active(\s|$)/);
+					});
+
+					it("should do nothing when on last slide", function() {
+						presentation.activate(9);
+						presentation.next();
+						expect(slides[9].className).toMatch(/bespoke-active(\s|$)/);
+					});
+
 				});
 
-				it("should do nothing when on first slide", function() {
-					presentation.prev();
-					expect(slides[0].className).toMatch(/bespoke-active(\s|$)/);
+				describe("prev", function() {
+
+					it("should go to the previous slide when not first slide", function() {
+						presentation.activate(1);
+						presentation.prev();
+						expect(slides[0].className).toMatch(/bespoke-active(\s|$)/);
+					});
+
+					it("should do nothing when on first slide", function() {
+						presentation.prev();
+						expect(slides[0].className).toMatch(/bespoke-active(\s|$)/);
+					});
+
 				});
 
 			});

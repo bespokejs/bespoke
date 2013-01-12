@@ -1,7 +1,7 @@
 /*!
- * Bespoke.js v0.0.1-alpha-2
+ * Bespoke.js v0.0.1-alpha-3
 
- * Copyright 2012, Mark Dalgleish
+ * Copyright 2013, Mark Dalgleish
  * This content is released under the MIT license
  * http://mit-license.org/markdalgleish
  */
@@ -9,7 +9,9 @@
 (function(moduleName, window, document, isArray){
 	'use strict';
 
-	function from(options) {
+	var presentations = [];
+
+	var from = function(options) {
 		options = typeof options === 'string' ? { selector: defaults.selector } : options;
 
 		var config = extend({}, defaults, options),
@@ -25,13 +27,9 @@
 
 			slideBefore = function(slide) { return getSlideWithOffset(slide, -1); },
 
-			next = function() {
-				activate(slideAfter(activeSlide));
-			},
+			next = function() { activate(slideAfter(activeSlide)); },
 
-			prev = function() {
-				activate(slideBefore(activeSlide));
-			},
+			prev = function() { activate(slideBefore(activeSlide)); },
 
 			activate = function(indexOrElem) {
 				if (indexOrElem == null) {
@@ -92,9 +90,7 @@
 				singleTouch = function(fn) {
 					return function(e) {
 						e.preventDefault();
-						if (e.touches.length === 1) {
-							fn(e.touches[0].pageX);
-						}
+						e.touches.length === 1 && fn(e.touches[0].pageX);
 					};
 				};
 
@@ -113,20 +109,20 @@
 					return;
 				}
 
-				if (delta > 0) {
-					prev();
-				} else {
-					next();
-				}
+				delta > 0 ? prev() : next();
 			});
 		}());
 
-		return {
+		var presentation = {
 			activate: activate,
 			next: next,
 			prev: prev
 		};
-	}
+
+		presentations.push(presentation);
+
+		return presentation;
+	};
 
 	var defaults = {
 		selector: 'article'
@@ -196,9 +192,22 @@
 			}
 		};
 
+	var callOnAllInstances = function(method) {
+		return function() {
+			var args = arguments;
+			presentations.forEach(function(presentation) {
+				presentation[method].apply(null, args);
+			});
+		};
+	};
+
 	window[moduleName] = {
+		presentations: presentations,
 		defaults: defaults,
-		from: from
+		from: from,
+		next: callOnAllInstances('next'),
+		prev: callOnAllInstances('prev'),
+		activate: callOnAllInstances('activate')
 	};
 
 }('bespoke', this, this.document, Array.isArray));

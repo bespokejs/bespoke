@@ -34,7 +34,8 @@ module.exports = function(grunt) {
       }
     },
     jasmine: {
-      src : 'src/**/*.js',
+      src: 'src/**/*.js',
+      helpers: 'libs/**/*.js',
       specs: 'specs/**/*Spec.js'
     },
     lint: {
@@ -56,6 +57,7 @@ module.exports = function(grunt) {
         undef: true,
         boss: true,
         eqnull: true,
+        expr: true,
         browser: true,
         trailing: true,
         unused: true,
@@ -72,7 +74,8 @@ module.exports = function(grunt) {
         it: true,
         expect: true,
         beforeEach: true,
-        afterEach: true
+        afterEach: true,
+        sinon: true
       }
     },
     uglify: {}
