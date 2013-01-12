@@ -27,35 +27,40 @@ In your web page:
 </article>
 
 <script src="bespoke.min.js"></script>
-<script>
+```
+
+In your JavaScript:
+
+```js
 bespoke.from('article');
 
 // Control API:
 bespoke.next();
 bespoke.prev();
 bespoke.activate(0);
-</script>
 ```
 
 ## Advanced Usage
 
+### Presentation Instances
+
 Individual presentation instances can be created and controlled seperately.
 
 ```js
-var presOne = bespoke.from('#pres-one');
+var one = bespoke.from('#presentation-one');
 
-presOne.next();
-presOne.prev();
-presOne.activate(0);
+one.next();
+one.prev();
+one.activate(0);
 
-var presTwo = bespoke.from('#pres-two');
+var two = bespoke.from('#presentation-two');
 
-presTwo.next();
-presTwo.prev();
-presTwo.activate(0);
+two.next();
+two.prev();
+two.activate(0);
 ```
 
-All presentation instances exposed via the 'presentations' array:
+All presentation instances are exposed via the 'presentations' array:
 
 ```js
 var presentation = bespoke.from('article');
