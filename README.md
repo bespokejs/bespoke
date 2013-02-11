@@ -37,35 +37,35 @@ bespoke.from('article');
 // Control API:
 bespoke.next();
 bespoke.prev();
-bespoke.activate(0);
+bespoke.goto(0);
 ```
 
 ## Advanced Usage
 
-### Presentation Instances
+### Deck Instances
 
-Individual presentation instances can be created and controlled seperately.
+Individual deck instances can be created and controlled seperately.
 
 ```js
-var one = bespoke.from('#presentation-one');
+var one = bespoke.from('#deck-one');
 
 one.next();
 one.prev();
-one.activate(0);
+one.goto(0);
 
-var two = bespoke.from('#presentation-two');
+var two = bespoke.from('#deck-two');
 
 two.next();
 two.prev();
-two.activate(0);
+two.goto(0);
 ```
 
-All presentation instances are exposed via the 'presentations' array:
+All deck instances are exposed via the 'decks' array:
 
 ```js
-var presentation = bespoke.from('article');
+var deck = bespoke.from('article');
 
-presentation === bespoke.presentations[0]; // true
+deck === bespoke.decks[0]; // true
 ```
 
 ## Questions?

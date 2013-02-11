@@ -1,5 +1,5 @@
 /*!
- * Bespoke.js v0.0.1-alpha-3
+ * Bespoke.js v0.0.1-alpha-4
 
  * Copyright 2013, Mark Dalgleish
  * This content is released under the MIT license
@@ -9,13 +9,10 @@
 (function(moduleName, window, document, isArray){
 	'use strict';
 
-	var presentations = [];
+	var decks = [];
 
-	var from = function(options) {
-		options = typeof options === 'string' ? { selector: defaults.selector } : options;
-
-		var config = extend({}, defaults, options),
-			parent = document.querySelectorAll(config.selector)[0],
+	var from = function(selector) {
+		var parent = document.querySelectorAll(selector)[0],
 			slides = arrayFrom(parent.children),
 			activeSlide = slides[0];
 
@@ -105,7 +102,7 @@
 			document.addEventListener('touchend', function() {
 				var delta = moveX - startX;
 				
-				if (Math.abs(delta) < 50) {
+				if (Math.abs(delta) < 100) {
 					return;
 				}
 
@@ -113,34 +110,18 @@
 			});
 		}());
 
-		var presentation = {
-			activate: activate,
+		var deck = {
+			goto: activate,
 			next: next,
 			prev: prev
 		};
 
-		presentations.push(presentation);
+		decks.push(deck);
 
-		return presentation;
-	};
-
-	var defaults = {
-		selector: 'article'
+		return deck;
 	};
 
 	var arrayFrom = function(arrayLike) { return [].slice.call(arrayLike, 0); },
-
-		extend = function(obj) {
-			arrayFrom(arguments).forEach(function(source) {
-				if (source) {
-					for (var prop in source) {
-						obj[prop] = source[prop];
-					}
-				}
-			});
-
-			return obj;
-		},
 
 		prefixClass = function(cls) { return cls = cls === moduleName ? cls : moduleName + '-' + cls; },
 
@@ -190,24 +171,23 @@
 					.replace(classMatcher(cls), ' ')
 					.replace(/^\s+|\s+$/g, '');
 			}
-		};
+		},
 
-	var callOnAllInstances = function(method) {
-		return function() {
-			var args = arguments;
-			presentations.forEach(function(presentation) {
-				presentation[method].apply(null, args);
-			});
+		callOnAllInstances = function(method) {
+			return function() {
+				var args = arguments;
+				decks.forEach(function(deck) {
+					deck[method].apply(null, args);
+				});
+			};
 		};
-	};
 
 	window[moduleName] = {
-		presentations: presentations,
-		defaults: defaults,
+		decks: decks,
 		from: from,
 		next: callOnAllInstances('next'),
 		prev: callOnAllInstances('prev'),
-		activate: callOnAllInstances('activate')
+		goto: callOnAllInstances('goto')
 	};
 
 }('bespoke', this, this.document, Array.isArray));

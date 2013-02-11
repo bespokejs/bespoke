@@ -5,7 +5,7 @@
 
 		var article,
 			slides,
-			presentation;
+			deck;
 
 		beforeEach(function() {
 			slides = [];
@@ -18,7 +18,7 @@
 
 			document.body.appendChild(article);
 
-			presentation = bespoke.from('article');
+			deck = bespoke.from('article');
 		});
 
 		afterEach(function() {
@@ -40,7 +40,7 @@
 			describe("bespoke-active", function() {
 
 				it("should add a 'bespoke-active' class to the active slide", function() {
-					presentation.activate(3);
+					deck.goto(3);
 					expect(slides[3].className).toMatch(/bespoke-active(\s|$)/);
 				});
 
@@ -73,7 +73,7 @@
 			describe("bespoke-before", function() {
 
 				it("should add a 'bespoke-before' class to all slides before active slide", function() {
-					presentation.activate(5);
+					deck.goto(5);
 					
 					var beforeSlides = slides.slice(0, 4);
 
@@ -83,7 +83,7 @@
 				});
 
 				it("should not add a 'bespoke-before' class to all slides after active slide", function() {
-					presentation.activate(5);
+					deck.goto(5);
 					
 					var notBeforeSlides = slides.slice(5, 9);
 
@@ -97,7 +97,7 @@
 			describe("bespoke-before", function() {
 
 				it("should add a 'bespoke-after' class to all slides after active slide", function() {
-					presentation.activate(5);
+					deck.goto(5);
 					
 					var afterSlides = slides.slice(6);
 
@@ -107,7 +107,7 @@
 				});
 
 				it("should not add a 'bespoke-after' class to all slides before active slide", function() {
-					presentation.activate(5);
+					deck.goto(5);
 					
 					var notAfterSlides = slides.slice(0, 5);
 
@@ -124,25 +124,25 @@
 
 			describe("global 'bespoke' object", function() {
 
-				describe("presentations", function() {
+				describe("decks", function() {
 
-					it("should contain a reference to created presentations", function() {
-						expect(presentation).toBe(bespoke.presentations[bespoke.presentations.length - 1]);
+					it("should contain a reference to created decks", function() {
+						expect(deck).toBe(bespoke.decks[bespoke.decks.length - 1]);
 					});
 
 				});
 
 				describe("next", function() {
 
-					it("should call 'next' on all presentation instances", function() {
-						bespoke.presentations.forEach(function(presentation) {
-							presentation.next = sinon.spy();
+					it("should call 'next' on all deck instances", function() {
+						bespoke.decks.forEach(function(deck) {
+							deck.next = sinon.spy();
 						});
 
 						bespoke.next();
 
-						bespoke.presentations.forEach(function(presentation) {
-							expect(presentation.next.called).toBe(true);
+						bespoke.decks.forEach(function(deck) {
+							expect(deck.next.called).toBe(true);
 						});
 					});
 
@@ -150,31 +150,31 @@
 
 				describe("prev", function() {
 
-					it("should call 'prev' on all presentation instances", function() {
-						bespoke.presentations.forEach(function(presentation) {
-							presentation.prev = sinon.spy();
+					it("should call 'prev' on all deck instances", function() {
+						bespoke.decks.forEach(function(deck) {
+							deck.prev = sinon.spy();
 						});
 
 						bespoke.prev();
 
-						bespoke.presentations.forEach(function(presentation) {
-							expect(presentation.prev.called).toBe(true);
+						bespoke.decks.forEach(function(deck) {
+							expect(deck.prev.called).toBe(true);
 						});
 					});
 
 				});
 
-				describe("activate", function() {
+				describe("goto", function() {
 
-					it("should call 'activate' on all presentation instances", function() {
-						bespoke.presentations.forEach(function(presentation) {
-							presentation.activate = sinon.spy();
+					it("should call 'goto' on all deck instances", function() {
+						bespoke.decks.forEach(function(deck) {
+							deck.goto = sinon.spy();
 						});
 
-						bespoke.activate(0);
+						bespoke.goto(0);
 
-						bespoke.presentations.forEach(function(presentation) {
-							expect(presentation.activate.calledWith(0)).toBe(true);
+						bespoke.decks.forEach(function(deck) {
+							expect(deck.goto.calledWith(0)).toBe(true);
 						});
 					});
 
@@ -182,18 +182,18 @@
 
 			});
 
-			describe("presentation instances", function() {
+			describe("deck instances", function() {
 
 				describe("next", function() {
 
 					it("should go to the next slide when not last slide", function() {
-						presentation.next();
+						deck.next();
 						expect(slides[1].className).toMatch(/bespoke-active(\s|$)/);
 					});
 
 					it("should do nothing when on last slide", function() {
-						presentation.activate(9);
-						presentation.next();
+						deck.goto(9);
+						deck.next();
 						expect(slides[9].className).toMatch(/bespoke-active(\s|$)/);
 					});
 
@@ -202,13 +202,13 @@
 				describe("prev", function() {
 
 					it("should go to the previous slide when not first slide", function() {
-						presentation.activate(1);
-						presentation.prev();
+						deck.goto(1);
+						deck.prev();
 						expect(slides[0].className).toMatch(/bespoke-active(\s|$)/);
 					});
 
 					it("should do nothing when on first slide", function() {
-						presentation.prev();
+						deck.prev();
 						expect(slides[0].className).toMatch(/bespoke-active(\s|$)/);
 					});
 
