@@ -129,6 +129,31 @@ h2 {
 	opacity: 0.8;
 }
 
+header p {
+	-webkit-transition: opacity .5s ease;
+	-moz-transition: opacity .5s ease;
+	-ms-transition: opacity .5s ease;
+	-o-transition: opacity .5s ease;
+	transition: opacity .5s ease;
+	position: absolute;
+	left: 50%;
+	bottom: 50px;
+	margin-left: -91px;
+	text-align: center;
+	padding: 10px 15px;
+	width: 182px;
+	z-index: 40;
+	border-radius: 6px;
+	color: white;
+	background: #808080;
+	font-size: 12px;
+	opacity: 0;
+}
+
+header p.visible {
+	opacity: 1;
+}
+
 @media 
 (-webkit-min-device-pixel-ratio: 2),
 (min-resolution: 192dpi) {
@@ -181,6 +206,11 @@ section {
 	-ms-transform: none;
 	-o-transform: none;
 	transform: none;
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
+	-o-transform-style: preserve-3d;
+	transform-style: preserve-3d;
 	background: #c0c0c0;
 	border-radius: 30px;
 	width: 512px;
@@ -214,9 +244,14 @@ section.bespoke-active {
 		margin-top: -80px;
 	}
 
-	li {
+	h2 {
 		font-size: 14px;
 		margin-top: 22px;
+	}
+
+	header p {
+		font-size: 11px;
+		bottom: 40px;
 	}
 
 	footer {

@@ -1,47 +1,51 @@
 (function() {
+	'use strict';
 
-	// Create presentation
-	bespoke.from('article');
+	var themes,
+		selectedThemeIndex,
+		instructionsTimeout;
 
-	// Set up themes
-	var themes = [
-		'coverflow',
-		'cube',
-		'concave',
-		'classic'
-	];
+	init();
 
-	var selectedThemeIndex = 0;
-
-	function nextTheme() { offsetSelectedTheme(1) }
-
-	function prevTheme() { offsetSelectedTheme(-1) }
-
-	function offsetSelectedTheme(n) {
-		selectTheme(modulo(selectedThemeIndex + n, themes.length));
+	function init() {
+		bespoke.from('article');
+		initThemeSwitching();
 	}
 
-	function modulo(num, n) { return ((num % n) + n) % n; }
+	function initThemeSwitching() {
+		themes = [
+			'coverflow',
+			'cube',
+			'concave',
+			'classic'
+		];
+		
+		selectedThemeIndex = 0;
 
-	function selectTheme(index) {
-		var theme = themes[index];
-		document.body.className = theme;
-		document.getElementById('theme').innerHTML = theme[0].toUpperCase() + theme.slice(1);
-		selectedThemeIndex = index;
+		initInstructions();
+		initKeys();
+		initGestures();
+		initButtons();
+
+		selectTheme(0);
 	}
 
-	function isTouch() {
-		return !!('ontouchstart' in window) || navigator.msMaxTouchPoints;
+	function initInstructions() {
+		if (isTouch()) {
+			document.getElementById('input-method').innerHTML = 'Swipe up and down';
+		}
+
+		instructionsTimeout = setTimeout(showInstructions, 5000);
 	}
 
-	// Allow theme changes via keyboard
-	document.addEventListener('keyup', function(e) {
-		e.which === 38 && prevTheme();
-		e.which === 40 && nextTheme();
-	});
+	function initKeys() {
+		document.addEventListener('keyup', function(e) {
+			e.which === 38 && prevTheme();
+			e.which === 40 && nextTheme();
+		});
+	}
 
-	// Allow theme changes via vertical swipe
-	(function() {
+	function initGestures() {
 		var startY,
 			moveY,
 
@@ -69,12 +73,49 @@
 
 			delta < 0 ? prevTheme() : nextTheme();
 		});
-	}());
+	}
 
-	// Allow theme changes via arrows
-	document.getElementById('up-arrow').addEventListener('click', prevTheme);
-	document.getElementById('down-arrow').addEventListener('click', nextTheme);
+	function initButtons() {
+		document.getElementById('up-arrow').addEventListener('click', prevTheme);
+		document.getElementById('down-arrow').addEventListener('click', nextTheme);
+	}
 
-	selectTheme(0);
+	function selectTheme(index) {
+		var theme = themes[index];
+		document.body.className = theme;
+		document.getElementById('theme').innerHTML = theme[0].toUpperCase() + theme.slice(1);
+		selectedThemeIndex = index;
+	}
+
+	function nextTheme() {
+		offsetSelectedTheme(1);
+		hideInstructions();
+	}
+
+	function prevTheme() {
+		offsetSelectedTheme(-1);
+		hideInstructions();
+	}
+
+	function offsetSelectedTheme(n) {
+		selectTheme(modulo(selectedThemeIndex + n, themes.length));
+	}
+
+	function showInstructions() {
+		document.querySelectorAll('header p')[0].className = 'visible';
+	}
+
+	function hideInstructions() {
+		clearTimeout(instructionsTimeout);
+		document.querySelectorAll('header p')[0].className = 'hidden';
+	}
+
+	function isTouch() {
+		return !!('ontouchstart' in window) || navigator.msMaxTouchPoints;
+	}
+
+	function modulo(num, n) {
+		return ((num % n) + n) % n;
+	}
 
 }());
