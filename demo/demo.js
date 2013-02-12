@@ -15,9 +15,10 @@
 	function initThemeSwitching() {
 		themes = [
 			'coverflow',
+			'classic',
 			'cube',
-			'concave',
-			'classic'
+			'carousel',
+			'concave'
 		];
 		
 		selectedThemeIndex = 0;
@@ -39,6 +40,14 @@
 	}
 
 	function initKeys() {
+		if (/Firefox/.test(navigator.userAgent)) {
+			document.addEventListener('keydown', function(e) {
+				if (e.which >= 37 && e.which <= 40) {
+					e.preventDefault();
+				}
+			});
+		}
+
 		document.addEventListener('keyup', function(e) {
 			e.which === 38 && prevTheme();
 			e.which === 40 && nextTheme();
@@ -71,7 +80,7 @@
 				return;
 			}
 
-			delta < 0 ? prevTheme() : nextTheme();
+			delta < 0 ? nextTheme() : prevTheme();
 		});
 	}
 

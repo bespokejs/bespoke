@@ -49,11 +49,11 @@ footer a {
 }
 
 .themes {
-	width: 140px;
+	width: 180px;
 	position: absolute;
 	left: 50%;
 	top: 0;
-	margin-left: -30px;
+	margin-left: -49px;
 }
 
 .themes strong {
@@ -123,10 +123,10 @@ h2 {
 	margin-top: 14px;
 	text-align: center;
 	font-family: Gill Sans, Myriad Pro, Helvetica Neue, Helvetica, Arial, sans-serif;
-	font-size: 18px;
+	font-size: 19px;
 	font-weight: 200;
 	color: white;
-	opacity: 0.8;
+	opacity: 0.9;
 }
 
 header p {
@@ -188,11 +188,11 @@ header p.visible {
 }
 
 article {
-	-webkit-perspective: 600;
-	-moz-perspective: 600;
-	-ms-perspective: 600;
-	-o-perspective: 600;
-	perspective: 600;
+	-webkit-perspective: 600px;
+	-moz-perspective: 600px;
+	-ms-perspective: 600px;
+	-o-perspective: 600px;
+	perspective: 600px;
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -206,11 +206,6 @@ section {
 	-ms-transform: none;
 	-o-transform: none;
 	transform: none;
-	-webkit-transform-style: preserve-3d;
-	-moz-transform-style: preserve-3d;
-	-ms-transform-style: preserve-3d;
-	-o-transform-style: preserve-3d;
-	transform-style: preserve-3d;
 	background: #c0c0c0;
 	border-radius: 30px;
 	width: 512px;
@@ -224,11 +219,11 @@ section {
 }
 body,
 section.bespoke-slide {
-	-webkit-transition: all .8s ease;
-	-moz-transition: all .8s ease;
-	-ms-transition: all .8s ease;
-	-o-transition: all .8s ease;
-	transition: all .8s ease;
+	-webkit-transition: all .7s ease;
+	-moz-transition: all .7s ease;
+	-ms-transition: all .7s ease;
+	-o-transition: all .7s ease;
+	transition: all .7s ease;
 }
 section.bespoke-active {
 	opacity: 1;
@@ -250,8 +245,9 @@ section.bespoke-active {
 	}
 
 	header p {
-		font-size: 11px;
+		font-size: 10px;
 		bottom: 40px;
+		padding: 6px 12px;
 	}
 
 	footer {
