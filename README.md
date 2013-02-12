@@ -2,13 +2,11 @@
 
 # Bespoke.js
 
-### HTML5 Presentation Microlib
+### DIY Presentation Micro-Framework
 
-Less than 1KB minified and gzipped, no dependencies, harnessing the power of CSS transitions.
+Bespoke.js provides the class names to your slides, you provide the CSS.
 
-Bespoke.js listens to keyboard/touch events, and adds the CSS classes needed to create your own slide transitions.
-
-This project is currently in alpha, use at your own risk.
+Less than 1KB minified and gzipped, no dependencies, harnessing the power of CSS transforms and transitions.
 
 ## Getting Started
 
