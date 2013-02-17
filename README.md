@@ -44,7 +44,7 @@ To control the state of the presentation:
 ```js
 bespoke.next();
 bespoke.prev();
-bespoke.goto(0);
+bespoke.to(0);
 ```
 
 ## Advanced Usage
@@ -58,13 +58,13 @@ var one = bespoke.horizontal.from('#deck-one');
 
 one.next();
 one.prev();
-one.goto(0);
+one.to(0);
 
 var two = bespoke.horizontal.from('#deck-two');
 
 two.next();
 two.prev();
-two.goto(0);
+two.to(0);
 ```
 
 All deck instances are exposed via the 'decks' array:
