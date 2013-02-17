@@ -266,6 +266,28 @@
 								expect(horizontal.calledWith(deck)).toBe(true);
 							});
 
+							it("should allow custom plugins to be specified", function() {
+								bespoke.plugins.testPlugin = sinon.spy();
+								
+								var deck = bespoke.horizontal.from("article", { testPlugin: true });
+								
+								expect(horizontal.calledWith(deck)).toBe(true);
+								expect(bespoke.plugins.testPlugin.calledWith(deck)).toBe(true);
+
+								delete bespoke.plugins.testPlugin;
+							});
+
+							it("should allow custom plugins to be specified with options", function() {
+								bespoke.plugins.testPlugin = sinon.spy();
+								
+								var deck = bespoke.horizontal.from("article", { testPlugin: { foo: 'bar' } });
+								
+								expect(horizontal.calledWith(deck)).toBe(true);
+								expect(bespoke.plugins.testPlugin.calledWith(deck, { foo: 'bar' })).toBe(true);
+
+								delete bespoke.plugins.testPlugin;
+							});
+
 						});
 
 						describe("vertical", function() {
@@ -285,6 +307,28 @@
 							it("should allow the 'vertical' plugin using the shorthand", function() {
 								var deck = bespoke.vertical.from("article");
 								expect(vertical.calledWith(deck)).toBe(true);
+							});
+
+							it("should allow custom plugins to be specified", function() {
+								bespoke.plugins.testPlugin = sinon.spy();
+								
+								var deck = bespoke.vertical.from("article", { testPlugin: true });
+								
+								expect(vertical.calledWith(deck)).toBe(true);
+								expect(bespoke.plugins.testPlugin.calledWith(deck)).toBe(true);
+
+								delete bespoke.plugins.testPlugin;
+							});
+
+							it("should allow custom plugins to be specified with options", function() {
+								bespoke.plugins.testPlugin = sinon.spy();
+								
+								var deck = bespoke.vertical.from("article", { testPlugin: { foo: 'bar' } });
+								
+								expect(vertical.calledWith(deck)).toBe(true);
+								expect(bespoke.plugins.testPlugin.calledWith(deck, { foo: 'bar' })).toBe(true);
+
+								delete bespoke.plugins.testPlugin;
 							});
 
 						});
