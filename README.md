@@ -39,6 +39,12 @@ Or, for a vertical presentation:
 bespoke.vertical.from('article');
 ```
 
+Or, to disable the inbuilt event handlers and implement your own:
+
+```js
+bespoke.from('article');
+```
+
 To control the state of the presentation:
 
 ```js
