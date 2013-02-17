@@ -1,162 +1,154 @@
-(function(moduleName, window, document, isArray){
+(function(moduleName, window, document){
 	'use strict';
 
-	var decks = [];
+	var decks = [],
 
-	var from = function(selector) {
-		var parent = document.querySelectorAll(selector)[0],
-			slides = arrayFrom(parent.children),
-			activeSlide = slides[0];
+		from = function(selector, selectedPlugins) {
+			var parent = document.querySelector(selector),
+				slides = [].slice.call(parent.children, 0),
+				activeSlide = slides[0],
 
-		var getSlide = function(indexOrElem) { return slides[indexOrElem] || indexOrElem; },
+				next = function() {
+					activateSlideWithOffset(1);
+				},
 
-			getSlideWithOffset = function(s, offset) { return slides[slides.indexOf(s) + offset]; },
+				prev = function() {
+					activateSlideWithOffset(-1);
+				},
 
-			slideAfter = function(slide) { return getSlideWithOffset(slide, 1); },
+				activate = function(indexOrElem) {
+					if (indexOrElem == null) {
+						return;
+					}
 
-			slideBefore = function(slide) { return getSlideWithOffset(slide, -1); },
+					activeSlide = slides[indexOrElem] || indexOrElem;
 
-			next = function() { activate(slideAfter(activeSlide)); },
+					slides.forEach(deactivate);
 
-			prev = function() { activate(slideBefore(activeSlide)); },
+					addClass(activeSlide, 'active');
+					removeClass(activeSlide, 'inactive');
+				},
 
-			activate = function(indexOrElem) {
-				if (indexOrElem == null) {
-					return;
-				}
+				deactivate = function(slide, i) {
+					[
+						'before+',
+						'before-[0-9]+',
+						'after',
+						'after-[0-9]+',
+						'active'
+					].forEach(removeClass.bind(null, slide));
 
-				activeSlide = getSlide(indexOrElem);
+					if (slide === activeSlide) {
+						return;
+					}
 
-				slides.forEach(deactivate);
+					var offset = i - slides.indexOf(activeSlide),
+						offsetClass = offset > 0 ? 'after' : 'before';
 
-				addClass(activeSlide, 'active');
-				removeClass(activeSlide, 'inactive');
-			},
+					[
+						'inactive',
+						offsetClass,
+						offsetClass + '-' + Math.abs(offset)
+					].forEach(addClass.bind(null, slide));
+				},
 
-			deactivate = function(slide, i) {
-				removeClasses(slide, [
-					'before+',
-					'before-[0-9]+',
-					'after',
-					'after-[0-9]+',
-					'active'
-				]);
-
-				if (slide === activeSlide) {
-					return;
-				}
-
-				var offset = i - slides.indexOf(activeSlide),
-					offsetClass = offset > 0 ? 'after' : 'before';
-
-				addClasses(slide, [
-					'inactive',
-					offsetClass,
-					offsetClass + '-' + Math.abs(offset)
-				]);
-			},
-
-			handleKeydown = function(e) {
-				var key = e.which || e.keyCode;
-				if (key === 37) {
-					prev();
-				} else if (key === 32 || key === 39) {
-					next();
-				}
-			};
-
-		activate(slides[0]);
-
-		addClass(parent, 'parent');
-		addClass(slides, 'slide');
-
-		document.addEventListener('keydown', handleKeydown);
-
-		(function() {
-			var startX,
-				moveX,
-
-				singleTouch = function(fn) {
-					return function(e) {
-						e.preventDefault();
-						e.touches.length === 1 && fn(e.touches[0].pageX);
-					};
+				activateSlideWithOffset = function(offset) {
+					activate(slides[slides.indexOf(activeSlide) + offset]);
 				};
 
-			document.addEventListener('touchstart', singleTouch(function(x) {
-				startX = x;
-			}));
+			activate(slides[0]);
 
-			document.addEventListener('touchmove', singleTouch(function(x) {
-				moveX = x;
-			}));
-
-			document.addEventListener('touchend', function() {
-				var delta = moveX - startX;
-				
-				if (Math.abs(delta) < 100) {
-					return;
-				}
-
-				delta > 0 ? prev() : next();
+			addClass(parent, 'parent');
+			
+			slides.forEach(function(slide) {
+				addClass(slide, 'slide');
 			});
-		}());
 
-		var deck = {
-			goto: activate,
-			next: next,
-			prev: prev
-		};
+			var deck = {
+				to: activate,
+				next: next,
+				prev: prev,
+				parent: parent,
+				slides: slides
+			};
 
-		decks.push(deck);
+			Object.keys(selectedPlugins || {}).forEach(function(pluginName) {
+				var config = selectedPlugins[pluginName];
+				config && plugins[pluginName](deck, config === true ? {} : config);
+			});
 
-		return deck;
-	};
+			decks.push(deck);
 
-	var arrayFrom = function(arrayLike) { return [].slice.call(arrayLike, 0); },
-
-		prefixClass = function(cls) { return cls = cls === moduleName ? cls : moduleName + '-' + cls; },
-
-		classMatcher = function(cls) { return new RegExp('(\\s|^)'+cls+'(\\s|$)', 'gi'); },
-
-		hasClass = function(el, cls) { return classMatcher(cls).test(el.className); },
-
-		addClass = function(el, className) {
-			return (isArray(el) && addClassToElements(el, className)) ||
-				(isArray(className) && addClasses(el, className)) ||
-				addClassToElement(el, className);
+			return deck;
 		},
 
-		addClassToElements = function(elements, classNames) {
-			elements.forEach(function(el) { addClass(el, classNames); });
+		makePluginForAxis = function(axis) {
+			return function(deck) {
+				var startPosition,
+					delta,
+
+					singleTouch = function(fn) {
+						return function(e) {
+							e.preventDefault();
+							e.touches.length === 1 && fn(e.touches[0]['page' + axis]);
+						};
+					};
+
+				document.addEventListener('keydown', function(e) {
+					var key = e.which;
+
+					if (axis === 'X') {
+						key === 37 && deck.prev();
+						(key === 32 || key === 39) && deck.next();
+					} else {
+						key === 38 && deck.prev();
+						(key === 32 || key === 40) && deck.next();
+					}
+				});
+
+				document.addEventListener('touchstart', singleTouch(function(position) {
+					startPosition = position;
+				}));
+
+				document.addEventListener('touchmove', singleTouch(function(position) {
+					delta = position - startPosition;
+				}));
+
+				document.addEventListener('touchend', function() {
+					if (Math.abs(delta) < 100) {
+						return;
+					}
+
+					delta > 0 ? deck.prev() : deck.next();
+				});
+			};
 		},
 
-		addClasses = function(el, classNames) {
-			classNames.forEach(function(cls) { addClass(el, cls); });
+		plugins = {
+			horizontal: makePluginForAxis('X'),
+			vertical: makePluginForAxis('Y')
 		},
 
-		addClassToElement = function(el, cls) {
+		hasClass = function(el, cls) {
+			return classMatcher(cls).test(el.className);
+		},
+
+		prefixClass = function(cls) {
+			return cls = cls === moduleName ? cls : moduleName + '-' + cls;
+		},
+
+		classMatcher = function(cls) {
+			return new RegExp('(\\s|^)'+cls+'(\\s|$)', 'gi');
+		},
+
+		addClass = function(el, cls) {
 			cls = prefixClass(cls);
 			if (!hasClass(el, cls)) {
 				el.className += (el.className ? ' ' : '') + cls;
 			}
 		},
 
-		removeClass = function(el, className) {
-			return (isArray(el) && removeClassFromElements(el, className)) ||
-				(isArray(className) && removeClasses(el, className)) ||
-				removeClassFromElement(el, className);
-		},
-
-		removeClassFromElements = function(elements, className) {
-			elements.forEach(function(el) { removeClass(el, className); });
-		},
-
-		removeClasses = function(el, classNames) {
-			classNames.forEach(function(className) { removeClass(el, className); });
-		},
-
-		removeClassFromElement = function(el, cls) {
+		removeClass = function(el, cls) {
 			cls = prefixClass(cls);
 			if (hasClass(el, cls)) {
 				el.className = el.className
@@ -166,20 +158,32 @@
 		},
 
 		callOnAllInstances = function(method) {
-			return function() {
-				var args = arguments;
+			return function(arg) {
 				decks.forEach(function(deck) {
-					deck[method].apply(null, args);
+					deck[method].call(null, arg);
 				});
+			};
+		},
+
+		bindPlugin = function(pluginName) {
+			return {
+				from: function(selector, selectedPlugins) {
+					selectedPlugins = selectedPlugins || {};
+					selectedPlugins[pluginName] = true;
+					return from(selector, selectedPlugins);
+				}
 			};
 		};
 
 	window[moduleName] = {
-		decks: decks,
 		from: from,
+		to: callOnAllInstances('to'),
 		next: callOnAllInstances('next'),
 		prev: callOnAllInstances('prev'),
-		goto: callOnAllInstances('goto')
+		horizontal: bindPlugin('horizontal'),
+		vertical: bindPlugin('vertical'),
+		plugins: plugins,
+		decks: decks
 	};
 
-}('bespoke', this, this.document, Array.isArray));
+}('bespoke', this, this.document));

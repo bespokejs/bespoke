@@ -5,12 +5,12 @@
 		selectedThemeIndex,
 		instructionsTimeout;
 
-	init();
-
 	function init() {
-		bespoke.from('article');
+		bespoke.horizontal.from('article');
 		initThemeSwitching();
 	}
+
+	init();
 
 	function initThemeSwitching() {
 		themes = [

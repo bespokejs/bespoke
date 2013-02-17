@@ -10,7 +10,8 @@ module.exports = function(grunt) {
     meta: {
       banner: '/*!\n' +
         ' * <%= pkg.title || pkg.name %> v<%= pkg.version %>\n' +
-        '<% if (pkg.homepage) { %> * <%= pkg.homepage %>\n<% } %>\n' +
+        '<% if (pkg.homepage) { %> * <%= pkg.homepage %>\n<% } %>' +
+        ' *\n' +
         ' * Copyright <%= grunt.template.today("yyyy") %>, <%= pkg.author.name %>\n' +
         ' * This content is released under the' +
         ' <%= _.pluck(pkg.licenses, "type").join(", ") %> license<%= pkg.licenses.length === 1 ? "" : "s" %>\n' +
@@ -48,7 +49,7 @@ module.exports = function(grunt) {
     jshint: {
       options: {
         curly: true,
-        eqeqeq: true,
+        eqeqeq: false,
         immed: true,
         latedef: true,
         newcap: true,

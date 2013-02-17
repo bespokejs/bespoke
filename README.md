@@ -30,9 +30,18 @@ In your web page:
 In your JavaScript:
 
 ```js
-bespoke.from('article');
+bespoke.horizontal.from('article');
+```
 
-// Control API:
+Or, for a vertical presentation:
+
+```js
+bespoke.vertical.from('article');
+```
+
+To control the state of the presentation:
+
+```js
 bespoke.next();
 bespoke.prev();
 bespoke.goto(0);
@@ -45,13 +54,13 @@ bespoke.goto(0);
 Individual deck instances can be created and controlled seperately.
 
 ```js
-var one = bespoke.from('#deck-one');
+var one = bespoke.horizontal.from('#deck-one');
 
 one.next();
 one.prev();
 one.goto(0);
 
-var two = bespoke.from('#deck-two');
+var two = bespoke.horizontal.from('#deck-two');
 
 two.next();
 two.prev();
@@ -61,7 +70,7 @@ two.goto(0);
 All deck instances are exposed via the 'decks' array:
 
 ```js
-var deck = bespoke.from('article');
+var deck = bespoke.horizontal.from('article');
 
 deck === bespoke.decks[0]; // true
 ```
