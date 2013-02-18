@@ -31,7 +31,7 @@
 		describe("classes", function() {
 
 			it("should add a 'bespoke' class to the container", function() {
-				expect(article.className).toBe('bespoke-parent');
+				expect(article.className).toMatch(/bespoke-parent/);
 			});
 
 			it("should add a 'bespoke-slide' class to the slides", function() {
@@ -43,7 +43,7 @@
 			describe("bespoke-active", function() {
 
 				it("should add a 'bespoke-active' class to the active slide", function() {
-					deck.to(3);
+					deck.slide(3);
 					expect(slides[3].className).toMatch(/bespoke-active(\s|$)/);
 				});
 
@@ -76,7 +76,7 @@
 			describe("bespoke-before", function() {
 
 				it("should add a 'bespoke-before' class to all slides before active slide", function() {
-					deck.to(5);
+					deck.slide(5);
 					
 					var beforeSlides = slides.slice(0, 4);
 
@@ -86,7 +86,7 @@
 				});
 
 				it("should not add a 'bespoke-before' class to all slides after active slide", function() {
-					deck.to(5);
+					deck.slide(5);
 					
 					var notBeforeSlides = slides.slice(5, 9);
 
@@ -100,7 +100,7 @@
 			describe("bespoke-before", function() {
 
 				it("should add a 'bespoke-after' class to all slides after active slide", function() {
-					deck.to(5);
+					deck.slide(5);
 					
 					var afterSlides = slides.slice(6);
 
@@ -110,7 +110,7 @@
 				});
 
 				it("should not add a 'bespoke-after' class to all slides before active slide", function() {
-					deck.to(5);
+					deck.slide(5);
 					
 					var notAfterSlides = slides.slice(0, 5);
 
@@ -167,18 +167,102 @@
 
 				});
 
-				describe("to", function() {
+				describe("slide", function() {
 
-					it("should call 'to' on all deck instances", function() {
+					it("should call 'slide' on all deck instances", function() {
 						bespoke.decks.forEach(function(deck) {
-							deck.to = sinon.spy();
+							deck.slide = sinon.spy();
 						});
 
-						bespoke.to(0);
+						bespoke.slide(0);
 
 						bespoke.decks.forEach(function(deck) {
-							expect(deck.to.calledWith(0)).toBe(true);
+							expect(deck.slide.calledWith(0)).toBe(true);
 						});
+					});
+
+				});
+
+				describe("on", function() {
+
+					describe("activate", function() {
+
+						it("shouldn't call handlers in the same tick", function() {
+							var callback = sinon.spy();
+							bespoke.on("activate", callback);
+							deck.next();
+							expect(callback.called).toBe(false);
+						});
+
+						it("should call handlers in a later tick when slide is activated", function() {
+							var callback;
+
+							runs(function() {
+								callback = sinon.spy();
+								bespoke.on("activate", callback);
+								deck.next();
+							});
+
+							waitsFor(function() {
+								return callback.called;
+							}, 100);
+
+							runs(function() {
+								expect(callback.called).toBe(true);
+							});
+						});
+
+						it("should pass payload to 'slide' handler when slide is activated", function() {
+							var callback,
+								SLIDE_INDEX = 0,
+								ACTIVE_SLIDE = deck.slides[SLIDE_INDEX];
+
+							runs(function() {
+								callback = sinon.spy();
+								bespoke.on("activate", callback);
+								deck.slide(SLIDE_INDEX);
+							});
+
+							waitsFor(function() {
+								return callback.called;
+							}, 100);
+
+							runs(function() {
+								expect(callback.calledWith({
+									slide: ACTIVE_SLIDE,
+									index: SLIDE_INDEX
+								})).toBe(true);
+							});
+						});
+
+					});
+
+					describe("deactivate", function() {
+
+						it("should pass payload to 'slide' handler once when slide is deactivated", function() {
+							var callback,
+								SLIDE_INDEX = 0,
+								DEACTIVATED_SLIDE = deck.slides[SLIDE_INDEX];
+
+							runs(function() {
+								callback = sinon.spy();
+								bespoke.on("deactivate", callback);
+								deck.slide(1);
+							});
+
+							waitsFor(function() {
+								return callback.called;
+							}, 100);
+
+							runs(function() {
+								expect(callback.calledWith({
+									slide: DEACTIVATED_SLIDE,
+									index: SLIDE_INDEX
+								})).toBe(true);
+								expect(callback.callCount).toBe(1);
+							});
+						});
+
 					});
 
 				});
@@ -195,7 +279,7 @@
 					});
 
 					it("should do nothing when on last slide", function() {
-						deck.to(9);
+						deck.slide(9);
 						deck.next();
 						expect(slides[9].className).toMatch(/bespoke-active(\s|$)/);
 					});
@@ -205,7 +289,7 @@
 				describe("prev", function() {
 
 					it("should go to the previous slide when not first slide", function() {
-						deck.to(1);
+						deck.slide(1);
 						deck.prev();
 						expect(slides[0].className).toMatch(/bespoke-active(\s|$)/);
 					});
@@ -213,6 +297,90 @@
 					it("should do nothing when on first slide", function() {
 						deck.prev();
 						expect(slides[0].className).toMatch(/bespoke-active(\s|$)/);
+					});
+
+				});
+
+				describe("on", function() {
+
+					describe("activate", function() {
+
+						it("shouldn't call handlers in the same tick", function() {
+							var callback = sinon.spy();
+							deck.on("activate", callback);
+							deck.next();
+							expect(callback.called).toBe(false);
+						});
+
+						it("should call handler in a later tick when slide is activated", function() {
+							var callback;
+
+							runs(function() {
+								callback = sinon.spy();
+								deck.on("activate", callback);
+								deck.next();
+							});
+
+							waitsFor(function() {
+								return callback.called;
+							}, 100);
+
+							runs(function() {
+								expect(callback.called).toBe(true);
+							});
+						});
+
+						it("should pass payload to 'activate' handler when slide is activated", function() {
+							var callback,
+								SLIDE_INDEX = 0,
+								ACTIVATED_SLIDE = deck.slides[SLIDE_INDEX];
+
+							runs(function() {
+								callback = sinon.spy();
+								deck.on("activate", callback);
+								deck.slide(SLIDE_INDEX);
+							});
+
+							waitsFor(function() {
+								return callback.called;
+							}, 100);
+
+							runs(function() {
+								expect(callback.calledWith({
+									slide: ACTIVATED_SLIDE,
+									index: SLIDE_INDEX
+								})).toBe(true);
+							});
+						});
+
+					});
+
+					describe("deactivate", function() {
+
+						it("should pass payload to 'activate' handler once when slide is activated", function() {
+							var callback,
+								SLIDE_INDEX = 0,
+								DEACTIVATED_SLIDE = deck.slides[SLIDE_INDEX];
+
+							runs(function() {
+								callback = sinon.spy();
+								deck.on("deactivate", callback);
+								deck.slide(1);
+							});
+
+							waitsFor(function() {
+								return callback.called;
+							}, 100);
+
+							runs(function() {
+								expect(callback.calledWith({
+									slide: DEACTIVATED_SLIDE,
+									index: SLIDE_INDEX
+								})).toBe(true);
+								expect(callback.callCount).toBe(1);
+							});
+						});
+
 					});
 
 				});

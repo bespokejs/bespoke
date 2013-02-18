@@ -3,76 +3,104 @@
 
 	var decks = [],
 
+		bespokeListeners = {},
+
+		on = function(listeners, eventName, callback) {
+			(listeners[eventName] || (listeners[eventName] = [])).push(callback);
+		},
+
+		off = function(listeners, eventName, callback) {
+			(listeners[eventName] || []).reduce(function(listener) {
+				return listener !== callback;
+			});
+		},
+
+		fire = function(listeners, eventName, payload) {
+			(listeners[eventName] || [])
+				.concat((listeners !== bespokeListeners && bespokeListeners[eventName]) || [])
+				.map(function(callback) {
+					setTimeout(callback.bind(null, payload), 0);
+				});
+		},
+
 		from = function(selector, selectedPlugins) {
 			var parent = document.querySelector(selector),
 				slides = [].slice.call(parent.children, 0),
 				activeSlide = slides[0],
+				deckListeners = {},
 
-				next = function() {
-					activateSlideWithOffset(1);
-				},
+				activate = function(index) {
+					activeSlide && fire(deckListeners, 'deactivate', {
+						slide: activeSlide,
+						index: slides.indexOf(activeSlide)
+					});
 
-				prev = function() {
-					activateSlideWithOffset(-1);
-				},
-
-				activate = function(indexOrElem) {
-					if (indexOrElem == null) {
+					if (!(activeSlide = slides[index])) {
 						return;
 					}
 
-					activeSlide = slides[indexOrElem] || indexOrElem;
-
-					slides.forEach(deactivate);
+					slides.map(deactivate);
 
 					addClass(activeSlide, 'active');
 					removeClass(activeSlide, 'inactive');
+
+					fire(deckListeners, 'activate', {
+						slide: activeSlide,
+						index: index
+					});
 				},
 
-				deactivate = function(slide, i) {
+				deactivate = function(slide, index) {
 					[
-						'before+',
-						'before-[0-9]+',
+						'before',
+						'before-\\d+',
 						'after',
-						'after-[0-9]+',
-						'active'
-					].forEach(removeClass.bind(null, slide));
+						'after-\\d+',
+						'active',
+						'inactive'
+					].map(removeClass.bind(null, slide));
 
 					if (slide === activeSlide) {
 						return;
 					}
 
-					var offset = i - slides.indexOf(activeSlide),
+					var offset = index - slides.indexOf(activeSlide),
 						offsetClass = offset > 0 ? 'after' : 'before';
 
 					[
 						'inactive',
 						offsetClass,
 						offsetClass + '-' + Math.abs(offset)
-					].forEach(addClass.bind(null, slide));
+					].map(addClass.bind(null, slide));
 				},
 
-				activateSlideWithOffset = function(offset) {
-					activate(slides[slides.indexOf(activeSlide) + offset]);
+				next = function() {
+					activate(slides.indexOf(activeSlide) + 1);
+				},
+
+				prev = function() {
+					activate(slides.indexOf(activeSlide) - 1);
+				},
+
+				deck = {
+					on: on.bind(null, deckListeners),
+					off: off.bind(null, deckListeners),
+					slide: activate,
+					next: next,
+					prev: prev,
+					parent: parent,
+					slides: slides
 				};
 
-			activate(slides[0]);
+			activate(0);
 
 			addClass(parent, 'parent');
 			
-			slides.forEach(function(slide) {
+			slides.map(function(slide) {
 				addClass(slide, 'slide');
 			});
 
-			var deck = {
-				to: activate,
-				next: next,
-				prev: prev,
-				parent: parent,
-				slides: slides
-			};
-
-			Object.keys(selectedPlugins || {}).forEach(function(pluginName) {
+			Object.keys(selectedPlugins || {}).map(function(pluginName) {
 				var config = selectedPlugins[pluginName];
 				config && plugins[pluginName](deck, config === true ? {} : config);
 			});
@@ -129,37 +157,29 @@
 			vertical: makePluginForAxis('Y')
 		},
 
-		hasClass = function(el, cls) {
-			return classMatcher(cls).test(el.className);
-		},
-
 		prefixClass = function(cls) {
-			return cls = cls === moduleName ? cls : moduleName + '-' + cls;
-		},
-
-		classMatcher = function(cls) {
-			return new RegExp('(\\s|^)'+cls+'(\\s|$)', 'gi');
+			return moduleName + '-' + cls;
 		},
 
 		addClass = function(el, cls) {
-			cls = prefixClass(cls);
-			if (!hasClass(el, cls)) {
-				el.className += (el.className ? ' ' : '') + cls;
-			}
+			el.className += ' ' + prefixClass(cls);
 		},
 
 		removeClass = function(el, cls) {
 			cls = prefixClass(cls);
-			if (hasClass(el, cls)) {
+
+			var classMatcher = new RegExp('(\\s|^)'+cls+'(\\s|$)', 'gi');
+
+			if (classMatcher.test(el.className)) {
 				el.className = el.className
-					.replace(classMatcher(cls), ' ')
+					.replace(classMatcher, ' ')
 					.replace(/^\s+|\s+$/g, '');
 			}
 		},
 
 		callOnAllInstances = function(method) {
 			return function(arg) {
-				decks.forEach(function(deck) {
+				decks.map(function(deck) {
 					deck[method].call(null, arg);
 				});
 			};
@@ -168,16 +188,21 @@
 		bindPlugin = function(pluginName) {
 			return {
 				from: function(selector, selectedPlugins) {
-					selectedPlugins = selectedPlugins || {};
-					selectedPlugins[pluginName] = true;
+					(selectedPlugins = selectedPlugins || {})[pluginName] = true;
 					return from(selector, selectedPlugins);
 				}
 			};
 		};
 
 	window[moduleName] = {
+		on: function(eventName, callback) {
+				on(bespokeListeners, eventName, callback);
+			},
+		off: function(eventName, callback) {
+				off(bespokeListeners, eventName, callback);
+			},
 		from: from,
-		to: callOnAllInstances('to'),
+		slide: callOnAllInstances('slide'),
 		next: callOnAllInstances('next'),
 		prev: callOnAllInstances('prev'),
 		horizontal: bindPlugin('horizontal'),
@@ -186,4 +211,4 @@
 		decks: decks
 	};
 
-}('bespoke', this, this.document));
+}('bespoke', this, document));

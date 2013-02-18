@@ -49,7 +49,7 @@ module.exports = function(grunt) {
     jshint: {
       options: {
         curly: true,
-        eqeqeq: false,
+        eqeqeq: true,
         immed: true,
         latedef: true,
         newcap: true,
@@ -65,7 +65,7 @@ module.exports = function(grunt) {
         es5: true,
         strict: true,
         maxcomplexity: 3,
-        maxparams: 4,
+        maxparams: 5,
         maxlen: 120,
         maxdepth: 2
       },
@@ -76,6 +76,8 @@ module.exports = function(grunt) {
         expect: true,
         beforeEach: true,
         afterEach: true,
+        runs: true,
+        waitsFor: true,
         sinon: true
       }
     },
