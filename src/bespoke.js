@@ -30,14 +30,16 @@
 				deckListeners = {},
 
 				activate = function(index) {
-					activeSlide && fire(deckListeners, 'deactivate', {
+					if (!slides[index]) {
+						return;
+					}
+
+					fire(deckListeners, 'deactivate', {
 						slide: activeSlide,
 						index: slides.indexOf(activeSlide)
 					});
 
-					if (!(activeSlide = slides[index])) {
-						return;
-					}
+					activeSlide = slides[index];
 
 					slides.map(deactivate);
 

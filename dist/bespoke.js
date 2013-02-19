@@ -1,5 +1,5 @@
 /*!
- * Bespoke.js v0.0.1-alpha-6
+ * Bespoke.js v0.0.1-alpha-7
  *
  * Copyright 2013, Mark Dalgleish
  * This content is released under the MIT license
@@ -38,14 +38,16 @@
 				deckListeners = {},
 
 				activate = function(index) {
-					activeSlide && fire(deckListeners, 'deactivate', {
+					if (!slides[index]) {
+						return;
+					}
+
+					fire(deckListeners, 'deactivate', {
 						slide: activeSlide,
 						index: slides.indexOf(activeSlide)
 					});
 
-					if (!(activeSlide = slides[index])) {
-						return;
-					}
+					activeSlide = slides[index];
 
 					slides.map(deactivate);
 

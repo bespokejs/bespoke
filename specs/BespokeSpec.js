@@ -281,7 +281,16 @@
 					it("should do nothing when on last slide", function() {
 						deck.slide(9);
 						deck.next();
+						deck.next();
 						expect(slides[9].className).toMatch(/bespoke-active(\s|$)/);
+					});
+
+					it("should do nothing when on last slide and not change any state", function() {
+						deck.slide(9);
+						deck.next();
+						deck.next();
+						deck.prev();
+						expect(slides[8].className).toMatch(/bespoke-active(\s|$)/);
 					});
 
 				});
@@ -296,7 +305,14 @@
 
 					it("should do nothing when on first slide", function() {
 						deck.prev();
+						deck.prev();
 						expect(slides[0].className).toMatch(/bespoke-active(\s|$)/);
+					});
+
+					it("should do nothing when on first slide and not change any state", function() {
+						deck.prev();
+						deck.next();
+						expect(slides[1].className).toMatch(/bespoke-active(\s|$)/);
 					});
 
 				});
