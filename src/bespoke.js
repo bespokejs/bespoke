@@ -197,14 +197,14 @@
 		};
 
 	window[moduleName] = {
-		on: on.bind(null, bespokeListeners),
-		off: off.bind(null, bespokeListeners),
 		from: from,
 		slide: callOnAllInstances('slide'),
 		next: callOnAllInstances('next'),
 		prev: callOnAllInstances('prev'),
 		horizontal: bindPlugin('horizontal'),
 		vertical: bindPlugin('vertical'),
+		on: on.bind(null, bespokeListeners),
+		off: off.bind(null, bespokeListeners),
 		plugins: plugins,
 		decks: decks
 	};
