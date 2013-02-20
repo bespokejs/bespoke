@@ -197,12 +197,8 @@
 		};
 
 	window[moduleName] = {
-		on: function(eventName, callback) {
-				on(bespokeListeners, eventName, callback);
-			},
-		off: function(eventName, callback) {
-				off(bespokeListeners, eventName, callback);
-			},
+		on: on.bind(null, bespokeListeners),
+		off: off.bind(null, bespokeListeners),
 		from: from,
 		slide: callOnAllInstances('slide'),
 		next: callOnAllInstances('next'),

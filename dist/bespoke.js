@@ -1,5 +1,5 @@
 /*!
- * Bespoke.js v0.0.1-alpha-7
+ * Bespoke.js v0.0.1-alpha-8
  *
  * Copyright 2013, Mark Dalgleish
  * This content is released under the MIT license
@@ -205,12 +205,8 @@
 		};
 
 	window[moduleName] = {
-		on: function(eventName, callback) {
-				on(bespokeListeners, eventName, callback);
-			},
-		off: function(eventName, callback) {
-				off(bespokeListeners, eventName, callback);
-			},
+		on: on.bind(null, bespokeListeners),
+		off: off.bind(null, bespokeListeners),
 		from: from,
 		slide: callOnAllInstances('slide'),
 		next: callOnAllInstances('next'),
