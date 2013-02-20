@@ -56,7 +56,7 @@
 	background: rgba(235, 156, 184, 0.3);
 }
 .concave section,
-.arrow:hover {
+.concave .arrow:hover {
 	background: rgb(235, 156, 184);
 }
 .concave a {
