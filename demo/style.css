@@ -111,11 +111,13 @@ h1 {
 	position: absolute;
 	z-index: 20;
 	top: 50%;
-	left: 0;
 	right: 0;
 	height: 82px;
 	margin-top: -110px;
-	margin-left: -2px;
+
+	width: 776px;
+	left: 50%;
+	margin-left: -388px;
 }
 
 h2 {
@@ -245,7 +247,7 @@ section.bespoke-active {
 	}
 
 	h1 {
-		margin-top: -80px;
+		margin-top: -95px;
 	}
 
 	h2 {
@@ -285,4 +287,76 @@ section.bespoke-active {
 	section {
 		margin-top: -216px;
 	}
+}
+
+
+@media only screen and (max-width: 640px) {
+
+	footer .credits p {
+		position: relative;
+		top: -6px;
+		width: 160px;
+	}
+
+}
+
+@media only screen and (max-width: 570px) {
+
+	#forkme {
+		right: -78px;
+		top: 32px;
+	}
+
+	#forkme a {
+		font-size: 9px;
+	}
+
+	h1 {
+		-webkit-transform: scale(0.27);
+		-moz-transform: scale(0.27);
+		-ms-transform: scale(0.27);
+		-o-transform: scale(0.27);
+		transform: scale(0.27);
+		margin-top: -94px;
+	}
+
+	h2 {
+		font-size: 12px;
+		margin-top: -7px;
+	}
+
+	article {
+		-webkit-transform: scale(0.5) translateY(-27px);
+		-moz-transform: scale(0.5) translateY(-27px);
+		-ms-transform: scale(0.5) translateY(-27px);
+		-o-transform: scale(0.5) translateY(-27px);
+		transform: scale(0.5) translateY(-27px);
+	}
+
+	.themes {
+		left: auto;
+		right: -88px;
+	}
+
+	.themes strong {
+		display: block;
+	}
+
+	.themes .colon {
+		display: none;
+	}
+
+	footer p {
+		position: relative;
+		top: -6px;
+	}
+
+	footer .credits p {
+		width: 160px;
+	}
+
+	footer .themes p {
+		width: 110px;
+	}
+
 }
