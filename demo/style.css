@@ -33,6 +33,7 @@ footer {
 }
 
 footer img {
+	border: 0;
 	border-radius: 4px;
 	float: left;
 	width: 30px;
@@ -95,7 +96,15 @@ footer a {
 h1 {
 	color: white;
 	font-family: Raleway Dots;
-	font-size: 78px;
+
+	/* Fix thin font rendering on Windows */
+	font-size: 156px;
+	-webkit-transform: scale(0.5);
+	-moz-transform: scale(0.5);
+	-ms-transform: scale(0.5);
+	-o-transform: scale(0.5);
+	transform: scale(0.5);
+
 	font-weight: normal;
 	text-align: center;
 	text-shadow: 0 0 1px white, 0 0 1px white, 0 0 1px white;
@@ -105,7 +114,7 @@ h1 {
 	left: 0;
 	right: 0;
 	height: 82px;
-	margin-top: -90px;
+	margin-top: -110px;
 	margin-left: -2px;
 }
 
@@ -122,8 +131,8 @@ h2 {
 	z-index: 30;
 	margin-top: 14px;
 	text-align: center;
-	font-family: Gill Sans, Myriad Pro, Helvetica Neue, Helvetica, Arial, sans-serif;
-	font-size: 19px;
+	font-family: Gill Sans, Segoe UI Light, Helvetica, Arial, sans-serif;
+	font-size: 17px;
 	font-weight: 200;
 	color: white;
 	opacity: 0.9;
