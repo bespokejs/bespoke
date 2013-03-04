@@ -4,9 +4,11 @@
 
 ### DIY Presentation Micro-Framework
 
-Bespoke.js provides the class names to your slides, you provide the CSS.
+Less than 1KB minified and gzipped, with no dependencies.
 
-Less than 1KB minified and gzipped, no dependencies, harnessing the power of CSS transforms and transitions.
+Bespoke.js provides the foundation, then gets out of your way so you can focus on uniquely crafting your own personal deck style.
+
+Using keyboard and touch events, Bespoke.js adds classes to your slides, you provide the CSS transitions.
 
 ## Getting Started
 
@@ -15,7 +17,9 @@ Download the [production version][min] or the [development version][max].
 [min]: https://raw.github.com/markdalgleish/bespoke.js/master/dist/bespoke.min.js
 [max]: https://raw.github.com/markdalgleish/bespoke.js/master/dist/bespoke.js
 
-In your web page:
+### Markup
+
+The tags you use are completely optional. Once a 'Bespoke parent' is selected, the child elements become slides.
 
 ```html
 <article>
@@ -27,25 +31,37 @@ In your web page:
 <script src="bespoke.min.js"></script>
 ```
 
-In your JavaScript:
+### JavaScript
+
+Decks are created by selecting the parent element with the `from` method, with optional 'horizontal' or 'vertical' event handlers.
+
+#### Horizontal Deck
+
+Uses horizontal arrows and swipes for navigation.
 
 ```js
 bespoke.horizontal.from('article');
 ```
 
-Or, for a vertical presentation:
+#### Vertical Deck
+
+Uses vertical arrows and swipes for navigation.
 
 ```js
 bespoke.vertical.from('article');
 ```
 
-Or, to disable the inbuilt event handlers and implement your own:
+#### Minimal Deck
+
+For the purist. Minimal decks provide an API with zero event handlers, giving you complete control.
 
 ```js
 bespoke.from('article');
 ```
 
-To control the state of the presentation:
+#### Control API
+
+To programatically control your presentation, or to implement a custom interface when using a minimal deck:
 
 ```js
 bespoke.next();
