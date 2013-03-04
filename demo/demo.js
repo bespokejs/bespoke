@@ -62,7 +62,8 @@
 	}
 
 	function initSlideGestures() {
-		var startPosition,
+		var touchTarget = document.getElementById('touch-target'),
+			startPosition,
 			delta,
 
 			singleTouch = function(fn, preventDefault) {
@@ -91,11 +92,9 @@
 				delta > 0 ? deck.prev() : deck.next();
 			};
 
-		[deck.parent, document.querySelector('h1'), document.querySelector('h2')].forEach(function(element) {
-			element.addEventListener('touchstart', touchstart);
-			element.addEventListener('touchmove', touchmove);
-			element.addEventListener('touchend', touchend);
-		});
+		touchTarget.addEventListener('touchstart', touchstart);
+		touchTarget.addEventListener('touchmove', touchmove);
+		touchTarget.addEventListener('touchend', touchend);
 	}
 
 	function initThemeGestures() {

@@ -91,7 +91,16 @@ footer a {
 	-ms-transform: rotate(180deg);
 	-o-transform: rotate(180deg);
 	transform: rotate(180deg);
-	left: -24px;}
+	left: -24px;
+}
+
+#touch-target {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
 
 h1 {
 	color: white;
