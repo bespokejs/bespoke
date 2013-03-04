@@ -3,10 +3,11 @@
 
 	var themes,
 		selectedThemeIndex,
-		instructionsTimeout;
+		instructionsTimeout,
+		deck;
 
 	function init() {
-		bespoke.horizontal.from('article');
+		deck = bespoke.from('article');
 		initThemeSwitching();
 	}
 
@@ -25,7 +26,8 @@
 
 		initInstructions();
 		initKeys();
-		initGestures();
+		initSlideGestures();
+		initThemeGestures();
 		initButtons();
 
 		selectTheme(0);
@@ -49,38 +51,81 @@
 		}
 
 		document.addEventListener('keyup', function(e) {
-			e.which === 38 && prevTheme();
-			e.which === 40 && nextTheme();
+			var key = e.which;
+
+			key === 37 && deck.prev();
+			(key === 32 || key === 39) && deck.next();
+
+			key === 38 && prevTheme();
+			key === 40 && nextTheme();
 		});
 	}
 
-	function initGestures() {
-		var startY,
-			moveY,
+	function initSlideGestures() {
+		var startPosition,
+			delta,
 
-			singleTouch = function(fn) {
+			singleTouch = function(fn, preventDefault) {
 				return function(e) {
-					e.preventDefault();
+					if (preventDefault) {
+						e.preventDefault();
+					}
+					e.touches.length === 1 && fn(e.touches[0].pageX);
+				};
+			},
+
+			touchstart = singleTouch(function(position) {
+				startPosition = position;
+				delta = 0;
+			}),
+
+			touchmove = singleTouch(function(position) {
+				delta = position - startPosition;
+			}, true),
+
+			touchend = function() {
+				if (Math.abs(delta) < 50) {
+					return;
+				}
+
+				delta > 0 ? deck.prev() : deck.next();
+			};
+
+		[deck.parent, document.querySelector('h1'), document.querySelector('h2')].forEach(function(element) {
+			element.addEventListener('touchstart', touchstart);
+			element.addEventListener('touchmove', touchmove);
+			element.addEventListener('touchend', touchend);
+		});
+	}
+
+	function initThemeGestures() {
+		var startPosition,
+			delta,
+
+			singleTouch = function(fn, preventDefault) {
+				return function(e) {
+					if (preventDefault) {
+						e.preventDefault();
+					}
 					e.touches.length === 1 && fn(e.touches[0].pageY);
 				};
 			};
 
-		document.addEventListener('touchstart', singleTouch(function(y) {
-			startY = y;
+		document.addEventListener('touchstart', singleTouch(function(position) {
+			startPosition = position;
+			delta = 0;
 		}));
 
-		document.addEventListener('touchmove', singleTouch(function(y) {
-			moveY = y;
-		}));
+		document.addEventListener('touchmove', singleTouch(function(position) {
+			delta = position - startPosition;
+		}, true));
 
 		document.addEventListener('touchend', function() {
-			var delta = moveY - startY;
-			
 			if (Math.abs(delta) < 100) {
 				return;
 			}
 
-			delta < 0 ? nextTheme() : prevTheme();
+			delta > 0 ? prevTheme() : nextTheme();
 		});
 	}
 

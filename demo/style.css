@@ -7,7 +7,7 @@
 }
 
 body {
-	overflow: hidden;
+	overflow-x: hidden;
 	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
 	font-size: 12px;
 	color: #606060;
@@ -230,11 +230,11 @@ section {
 }
 body,
 section.bespoke-slide {
-	-webkit-transition: all .7s ease;
-	-moz-transition: all .7s ease;
-	-ms-transition: all .7s ease;
-	-o-transition: all .7s ease;
-	transition: all .7s ease;
+	-webkit-transition: -webkit-transform .7s ease, opacity .7s ease, background-color .7s ease;
+	-moz-transition: -moz-transform .7s ease, opacity .7s ease, background-color .7s ease;
+	-ms-transition: -ms-transform .7s ease, opacity .7s ease, background-color .7s ease;
+	-o-transition: -o-transform .7s ease, opacity .7s ease, background-color .7s ease;
+	transition: transform .7s ease, opacity .7s ease, background-color .7s ease;
 }
 section.bespoke-active {
 	opacity: 1;
@@ -286,6 +286,24 @@ section.bespoke-active {
 
 	section {
 		margin-top: -216px;
+	}
+
+	a,
+	.arrow {
+		-webkit-transform: none;
+		-moz-transform: none;
+		-ms-transform: none;
+		-o-transform: none;
+		transform: none;
+	}
+
+	body,
+	section.bespoke-slide {
+		-webkit-transition: -webkit-transform .7s ease, opacity .7s ease;
+		-moz-transition: -moz-transform .7s ease, opacity .7s ease;
+		-ms-transition: -ms-transform .7s ease, opacity .7s ease;
+		-o-transition: -o-transform .7s ease, opacity .7s ease;
+		transition: transform .7s ease, opacity .7s ease;
 	}
 }
 
@@ -348,7 +366,7 @@ section.bespoke-active {
 
 	footer p {
 		position: relative;
-		top: -6px;
+		top: -8px;
 	}
 
 	footer .credits p {
