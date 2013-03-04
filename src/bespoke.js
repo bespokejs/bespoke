@@ -136,16 +136,17 @@
 					}
 				});
 
-				document.addEventListener('touchstart', singleTouch(function(position) {
+				deck.parent.addEventListener('touchstart', singleTouch(function(position) {
 					startPosition = position;
+					delta = 0;
 				}));
 
-				document.addEventListener('touchmove', singleTouch(function(position) {
+				deck.parent.addEventListener('touchmove', singleTouch(function(position) {
 					delta = position - startPosition;
 				}));
 
-				document.addEventListener('touchend', function() {
-					if (Math.abs(delta) < 100) {
+				deck.parent.addEventListener('touchend', function() {
+					if (Math.abs(delta) < 50) {
 						return;
 					}
 

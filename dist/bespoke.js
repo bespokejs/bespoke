@@ -1,5 +1,5 @@
 /*!
- * Bespoke.js v0.0.1-alpha-8
+ * Bespoke.js v0.0.1-alpha-9
  *
  * Copyright 2013, Mark Dalgleish
  * This content is released under the MIT license
@@ -144,16 +144,17 @@
 					}
 				});
 
-				document.addEventListener('touchstart', singleTouch(function(position) {
+				deck.parent.addEventListener('touchstart', singleTouch(function(position) {
 					startPosition = position;
+					delta = 0;
 				}));
 
-				document.addEventListener('touchmove', singleTouch(function(position) {
+				deck.parent.addEventListener('touchmove', singleTouch(function(position) {
 					delta = position - startPosition;
 				}));
 
-				document.addEventListener('touchend', function() {
-					if (Math.abs(delta) < 100) {
+				deck.parent.addEventListener('touchend', function() {
+					if (Math.abs(delta) < 50) {
 						return;
 					}
 
