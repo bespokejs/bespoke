@@ -8,7 +8,7 @@ Less than 1KB minified and gzipped, with no dependencies.
 
 Bespoke.js provides the foundation, then gets out of your way so you can focus on uniquely crafting your own personal deck style.
 
-Using keyboard and touch events, Bespoke.js adds classes to your slides, you provide the CSS transitions.
+Using keyboard and touch events, Bespoke.js adds classes to your slides, while you provide the CSS transitions.
 
 ## Getting Started
 
@@ -19,7 +19,7 @@ Download the [production version][min] or the [development version][max].
 
 ### Markup
 
-The tags you use are completely optional. Once a 'Bespoke parent' is selected, the child elements become slides.
+The tags you use are completely optional. Once a parent element is selected, the child elements become slides.
 
 ```html
 <article>
@@ -33,7 +33,7 @@ The tags you use are completely optional. Once a 'Bespoke parent' is selected, t
 
 ### JavaScript
 
-Decks are created by selecting the parent element with the `from` method, with optional 'horizontal' or 'vertical' event handlers.
+Decks are created by selecting the parent element with the `from()` method, with optional 'horizontal' or 'vertical' event handlers.
 
 #### Horizontal Deck
 
@@ -61,7 +61,7 @@ bespoke.from('article');
 
 #### Control API
 
-To programatically control your presentation, or to implement a custom interface when using a minimal deck:
+To programmatically control your presentation, or to implement a custom interface when using a minimal deck:
 
 ```js
 bespoke.next();
