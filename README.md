@@ -10,18 +10,22 @@ Bespoke.js provides the foundation, then gets out of your way so you can focus o
 
 Using keyboard and touch events, Bespoke.js adds classes to your slides, while you provide the CSS transitions.
 
-## Getting Started
+## Download
 
 Download the [production version][min] or the [development version][max].
 
 [min]: https://raw.github.com/markdalgleish/bespoke.js/master/dist/bespoke.min.js
 [max]: https://raw.github.com/markdalgleish/bespoke.js/master/dist/bespoke.js
 
+## Getting Started
+
 ### Markup
 
 The tags you use are completely optional. Once a parent element is selected, the child elements become slides.
 
 ```html
+<link rel="stylesheet" href="path/to/my/theme.css">
+
 <article>
 	<section>Slide 1</section>
 	<section>Slide 2</section>
@@ -35,7 +39,7 @@ The tags you use are completely optional. Once a parent element is selected, the
 
 Decks are created by selecting the parent element with the `from()` method, with optional 'horizontal' or 'vertical' event handlers.
 
-#### Horizontal Deck
+##### Horizontal Deck
 
 Uses horizontal arrows and swipes for navigation.
 
@@ -43,7 +47,7 @@ Uses horizontal arrows and swipes for navigation.
 bespoke.horizontal.from('article');
 ```
 
-#### Vertical Deck
+##### Vertical Deck
 
 Uses vertical arrows and swipes for navigation.
 
@@ -51,7 +55,7 @@ Uses vertical arrows and swipes for navigation.
 bespoke.vertical.from('article');
 ```
 
-#### Minimal Deck
+##### Minimal Deck
 
 For the purist. Minimal decks provide an API with zero event handlers, giving you complete control.
 
@@ -59,14 +63,32 @@ For the purist. Minimal decks provide an API with zero event handlers, giving yo
 bespoke.from('article');
 ```
 
-#### Control API
+##### Control API
 
-To programmatically control your presentation, or to implement a custom interface when using a minimal deck:
+Programmatically control your presentation, or to implement a custom interface when using a minimal deck.
 
 ```js
 bespoke.next();
 bespoke.prev();
 bespoke.slide(0);
+```
+
+##### Events
+
+Attach event handlers to slide `activate` and `deactivate` events.
+
+```js
+bespoke.on('activate', function(e) {
+	e.slide; // Activated slide
+	e.index; // Index of activated slide
+});
+```
+
+```js
+bespoke.on('deactivate', function(e) {
+	e.slide; // Deactivated slide
+	e.index; // Index of deactivated slide
+});
 ```
 
 ## Advanced Usage
@@ -77,25 +99,25 @@ Individual deck instances can be created and controlled seperately.
 
 ```js
 var one = bespoke.horizontal.from('#deck-one');
-
 one.next();
 one.prev();
 one.slide(0);
 
 var two = bespoke.horizontal.from('#deck-two');
-
 two.next();
 two.prev();
 two.slide(0);
 ```
 
-All deck instances are exposed via the 'decks' array:
+The following properties are available on each instance:
 
-```js
-var deck = bespoke.horizontal.from('article');
-
-deck === bespoke.decks[0]; // true
-```
+ * `next()`
+ * `prev()`
+ * `slide(index)`
+ * `on(eventname, callback)`, for attaching event handlers
+ * `off(eventname, callback)`, for removing event handlers
+ * `parent`, a reference to the deck's parent element
+ * `slides`, an array of slide elements
 
 ## Questions?
 
