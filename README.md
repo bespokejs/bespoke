@@ -19,6 +19,12 @@ Download the [production version][min] or the [development version][max].
 
 ## Getting Started
 
+To create a Bespoke.js presentation, follow these 3 simple steps:
+
+ * [Create a new page with required resources and slide markup](#markup),
+ * [Initialise Bespoke.js via the JavaScript API](#javascript), and
+ * [Create a custom style sheet using the Bespoke.js classes](#css)
+
 ### Markup
 
 The tags you use are completely optional. Once a parent element is selected, the child elements become slides.
@@ -33,15 +39,16 @@ The tags you use are completely optional. Once a parent element is selected, the
 </article>
 
 <script src="bespoke.min.js"></script>
+<script src="path/to/my/script.js"></script>
 ```
 
 ### JavaScript
 
-Decks are created by selecting the parent element with the `from()` method, with optional 'horizontal' or 'vertical' event handlers.
+Decks are created by selecting the parent element with the `from(selector)` method, with optional 'horizontal' or 'vertical' event handlers.
 
 ##### Horizontal Deck
 
-Uses horizontal arrows and swipes for navigation.
+Uses space bar, horizontal arrows and swipes for navigation.
 
 ```js
 bespoke.horizontal.from('article');
@@ -49,7 +56,7 @@ bespoke.horizontal.from('article');
 
 ##### Vertical Deck
 
-Uses vertical arrows and swipes for navigation.
+Uses space bar, vertical arrows and swipes for navigation.
 
 ```js
 bespoke.vertical.from('article');
@@ -57,15 +64,30 @@ bespoke.vertical.from('article');
 
 ##### Minimal Deck
 
-For the purist. Minimal decks provide an API with zero event handlers, giving you complete control.
+For the purist. Minimal decks provide a [simple control API](#control-api) with zero event handlers.
 
 ```js
 bespoke.from('article');
 ```
 
-##### Control API
+### CSS
 
-Programmatically control your presentation, or to implement a custom interface when using a minimal deck.
+To create your own custom deck styles, Bespoke.js provides the necessary classes to your elements.
+
+ * `bespoke-parent` on the deck's containing element
+ * `bespoke-slide` on every slide element
+ * `bespoke-active` on the active slide
+ * `bespoke-inactive` on all inactive slides
+ * `bespoke-before` on all slides before the active slide
+ * `bespoke-before-n`, where 'n' is the distance before the active slide
+ * `bespoke-after` on all slides after the active slide
+ * `bespoke-after-n`, where 'n' is the distance after the active slide
+
+## Advanced Usage
+
+### Control API
+
+Programmatically control your presentation, or implement a custom interface when using a [minimal deck](#minimal-deck).
 
 ```js
 bespoke.next();
@@ -73,7 +95,7 @@ bespoke.prev();
 bespoke.slide(0);
 ```
 
-##### Events
+### Events
 
 Attach event handlers to slide `activate` and `deactivate` events.
 
@@ -91,11 +113,9 @@ bespoke.on('deactivate', function(e) {
 });
 ```
 
-## Advanced Usage
-
 ### Deck Instances
 
-Individual deck instances can be created and controlled seperately.
+Individual deck instances can be created and controlled separately.
 
 ```js
 var one = bespoke.horizontal.from('#deck-one');
