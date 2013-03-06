@@ -21,9 +21,9 @@ Download the [production version][min] or the [development version][max].
 
 To create a Bespoke.js presentation, follow these 3 simple steps:
 
- * [Create a new page with required resources and slide markup](#markup),
- * [Initialise Bespoke.js via the JavaScript API](#javascript), and
- * [Create a custom style sheet using the Bespoke.js classes](#css)
+ * Create a new page with [required slide markup](#markup) and resources
+ * Activate your presentation via the [JavaScript API](#javascript)
+ * Create a custom style sheet, using the provided [Bespoke.js classes](#css) to power your CSS transitions
 
 ### Markup
 
@@ -74,14 +74,40 @@ bespoke.from('article');
 
 To create your own custom deck styles, Bespoke.js provides the necessary classes to your elements.
 
- * `bespoke-parent` on the deck's containing element
- * `bespoke-slide` on every slide element
- * `bespoke-active` on the active slide
- * `bespoke-inactive` on all inactive slides
- * `bespoke-before` on all slides before the active slide
- * `bespoke-before-n`, where 'n' is the distance before the active slide
- * `bespoke-after` on all slides after the active slide
- * `bespoke-after-n`, where 'n' is the distance after the active slide
+<table>
+	 <tr>
+	 	<td><b>bespoke-parent</b></td>
+	 	<td>The deck's containing element</td>
+	 </tr>
+	 <tr>
+	 	<td><b>bespoke-slide</b></td>
+	 	<td>Every slide element</td>
+	 </tr>
+	 <tr>
+	 	<td><b>bespoke-active</b></td>
+	 	<td>The active slide</td>
+	 </tr>
+	 <tr>
+	 	<td><b>bespoke-inactive</b></td>
+	 	<td>All inactive slides</td>
+	 </tr>
+	 <tr>
+	 	<td><b>bespoke-before</b></td>
+	 	<td>All slides before the active slide</td>
+	 </tr>
+	 <tr>
+	 	<td><b>bespoke-before-<em>n</em></b></td>
+	 	<td>All slides before the active slive, with <em>n</em> value incrementing</td>
+	 </tr>
+	 <tr>
+	 	<td><b>bespoke-after</b></td>
+	 	<td>All slides after the active slide</td>
+	 </tr>
+	 <tr>
+	 	<td><b>bespoke-after-<em>n</em></b></td>
+	 	<td>All slides after the active slive, with <em>n</em> value incrementing</td>
+	 </tr>
+</table>
 
 ## Advanced Usage
 
@@ -115,6 +141,8 @@ bespoke.on('deactivate', function(e) {
 
 ### Deck Instances
 
+##### Creating Deck Instances
+
 Individual deck instances can be created and controlled separately.
 
 ```js
@@ -128,16 +156,40 @@ two.next();
 two.prev();
 two.slide(0);
 ```
+##### Deck Instance Properties
 
 The following properties are available on each instance:
 
- * `next()`
- * `prev()`
- * `slide(index)`
- * `on(eventname, callback)`, for attaching event handlers
- * `off(eventname, callback)`, for removing event handlers
- * `parent`, a reference to the deck's parent element
- * `slides`, an array of slide elements
+<table>
+	<tr>
+		<td><strong>next()</strong></td>
+		<td>Next slide</td>
+	</tr>
+	<tr>
+		<td><strong>prev()</strong></td>
+		<td>Previous slide</td>
+	</tr>
+	<tr>
+		<td><strong>slide(<em>index</em>)</strong></td>
+		<td>Activate a specific slide by index</td>
+	</tr>
+	<tr>
+		<td><strong>on(<em>event, callback</em>)</strong></td>
+		<td>Attach event handlers</td>
+	</tr>
+	<tr>
+		<td><strong>off(<em>event, callback</em>)</strong></td>
+		<td>Remove event handlers</td>
+	</tr>
+	<tr>
+		<td><strong>parent</strong></td>
+		<td>The deck's parent element</td>
+	</tr>
+	<tr>
+		<td><strong>slides</strong></td>
+		<td>An array of slide elements</td>
+	</tr>
+</table>
 
 ## Questions?
 
