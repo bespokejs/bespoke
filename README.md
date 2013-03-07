@@ -25,7 +25,9 @@ To create a Bespoke.js presentation, follow these 3 simple steps:
  * Activate your presentation via the [JavaScript API](#javascript)
  * Create a custom style sheet, using the provided [Bespoke.js classes](#css) to power your CSS transitions
 
-Need to go beyond the basics, and share your extra functionality with others? [Write a plugin!](#plugins)
+Need to extend Bespoke.js? Want to re-use your extra functionality, or share it with others? [Write a plugin!](#plugins)
+
+## Basic Usage
 
 ### Markup
 
