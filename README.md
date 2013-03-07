@@ -25,6 +25,8 @@ To create a Bespoke.js presentation, follow these 3 simple steps:
  * Activate your presentation via the [JavaScript API](#javascript)
  * Create a custom style sheet, using the provided [Bespoke.js classes](#css) to power your CSS transitions
 
+Need to go beyond the basics, and share your extra functionality with others? [Write a plugin!](#plugins)
+
 ### Markup
 
 The tags you use are completely optional. Once a parent element is selected, the child elements become slides.
@@ -33,9 +35,9 @@ The tags you use are completely optional. Once a parent element is selected, the
 <link rel="stylesheet" href="path/to/my/theme.css">
 
 <article>
-	<section>Slide 1</section>
-	<section>Slide 2</section>
-	<section>Slide 3</section>
+  <section>Slide 1</section>
+  <section>Slide 2</section>
+  <section>Slide 3</section>
 </article>
 
 <script src="bespoke.min.js"></script>
@@ -75,38 +77,38 @@ bespoke.from('article');
 To create your own custom deck styles, Bespoke.js provides the necessary classes to your elements.
 
 <table>
-	 <tr>
-	 	<td><b>bespoke-parent</b></td>
-	 	<td>The deck's containing element</td>
-	 </tr>
-	 <tr>
-	 	<td><b>bespoke-slide</b></td>
-	 	<td>Every slide element</td>
-	 </tr>
-	 <tr>
-	 	<td><b>bespoke-active</b></td>
-	 	<td>The active slide</td>
-	 </tr>
-	 <tr>
-	 	<td><b>bespoke-inactive</b></td>
-	 	<td>All inactive slides</td>
-	 </tr>
-	 <tr>
-	 	<td><b>bespoke-before</b></td>
-	 	<td>All slides before the active slide</td>
-	 </tr>
-	 <tr>
-	 	<td><b>bespoke-before-<em>n</em></b></td>
-	 	<td>All slides before the active slive, with <em>n</em> value incrementing</td>
-	 </tr>
-	 <tr>
-	 	<td><b>bespoke-after</b></td>
-	 	<td>All slides after the active slide</td>
-	 </tr>
-	 <tr>
-	 	<td><b>bespoke-after-<em>n</em></b></td>
-	 	<td>All slides after the active slive, with <em>n</em> value incrementing</td>
-	 </tr>
+   <tr>
+    <td><b>bespoke-parent</b></td>
+    <td>The deck's containing element</td>
+   </tr>
+   <tr>
+    <td><b>bespoke-slide</b></td>
+    <td>Every slide element</td>
+   </tr>
+   <tr>
+    <td><b>bespoke-active</b></td>
+    <td>The active slide</td>
+   </tr>
+   <tr>
+    <td><b>bespoke-inactive</b></td>
+    <td>All inactive slides</td>
+   </tr>
+   <tr>
+    <td><b>bespoke-before</b></td>
+    <td>All slides before the active slide</td>
+   </tr>
+   <tr>
+    <td><b>bespoke-before-<em>n</em></b></td>
+    <td>All slides before the active slive, with <em>n</em> value incrementing</td>
+   </tr>
+   <tr>
+    <td><b>bespoke-after</b></td>
+    <td>All slides after the active slide</td>
+   </tr>
+   <tr>
+    <td><b>bespoke-after-<em>n</em></b></td>
+    <td>All slides after the active slive, with <em>n</em> value incrementing</td>
+   </tr>
 </table>
 
 ## Advanced Usage
@@ -127,15 +129,15 @@ Attach event handlers to slide `activate` and `deactivate` events.
 
 ```js
 bespoke.on('activate', function(e) {
-	e.slide; // Activated slide
-	e.index; // Index of activated slide
+  e.slide; // Activated slide
+  e.index; // Index of activated slide
 });
 ```
 
 ```js
 bespoke.on('deactivate', function(e) {
-	e.slide; // Deactivated slide
-	e.index; // Index of deactivated slide
+  e.slide; // Deactivated slide
+  e.index; // Index of deactivated slide
 });
 ```
 
@@ -161,35 +163,86 @@ two.slide(0);
 The following properties are available on each instance:
 
 <table>
-	<tr>
-		<td><strong>next()</strong></td>
-		<td>Next slide</td>
-	</tr>
-	<tr>
-		<td><strong>prev()</strong></td>
-		<td>Previous slide</td>
-	</tr>
-	<tr>
-		<td><strong>slide(<em>index</em>)</strong></td>
-		<td>Activate a specific slide by index</td>
-	</tr>
-	<tr>
-		<td><strong>on(<em>event, callback</em>)</strong></td>
-		<td>Attach event handlers</td>
-	</tr>
-	<tr>
-		<td><strong>off(<em>event, callback</em>)</strong></td>
-		<td>Remove event handlers</td>
-	</tr>
-	<tr>
-		<td><strong>parent</strong></td>
-		<td>The deck's parent element</td>
-	</tr>
-	<tr>
-		<td><strong>slides</strong></td>
-		<td>An array of slide elements</td>
-	</tr>
+  <tr>
+    <td><strong>next()</strong></td>
+    <td>Next slide</td>
+  </tr>
+  <tr>
+    <td><strong>prev()</strong></td>
+    <td>Previous slide</td>
+  </tr>
+  <tr>
+    <td><strong>slide(<em>index</em>)</strong></td>
+    <td>Activate a specific slide by index</td>
+  </tr>
+  <tr>
+    <td><strong>on(<em>event, callback</em>)</strong></td>
+    <td>Attach <a href="#events">event handlers</a></td>
+  </tr>
+  <tr>
+    <td><strong>off(<em>event, callback</em>)</strong></td>
+    <td>Remove <a href="#events">event handlers</a></td>
+  </tr>
+  <tr>
+    <td><strong>parent</strong></td>
+    <td>The deck's parent element</td>
+  </tr>
+  <tr>
+    <td><strong>slides</strong></td>
+    <td>An array of slide elements</td>
+  </tr>
 </table>
+
+## Plugins
+
+If you need to extend the basic functionality in Bespoke.js, additional functionality can wrapped up as plugins.
+
+### Writing a Basic Plugin
+
+Plugins are simply functions that are called when presentations are created.
+
+They are passed a [deck instance](#deck-instance-properties) which allows you to interact with the deck's state, bind events and modify its elements.
+
+```js
+bespoke.plugins.myPlugin = function(deck) {
+  deck.on('activate', function(e) {
+    console.log('Activated slide ' + (e.index + 1) + ' of ' + slides.length);
+  });
+};
+```
+
+The plugin can now be provided to the second parameter of the `from(selector, [plugins])` method.
+
+```js
+// Using the plugin
+bespoke.horizontal.from('article', { myPlugin: true });
+```
+
+*Note: If the value provided is 'false' instead of 'true', your plugin won't run.*
+
+### Plugins with Options
+
+If your plugin needs some configurability, options can be passed through as the second parameter.
+
+*Note: The 'options' parameter is an empty object if no options are provided.*
+
+```js
+bespoke.plugins.myPlugin = function(deck, options) {
+  options.showTotal = options.showTotal || true;
+
+  deck.on('activate', function(e) {
+    console.log('Activated slide ' + (e.index + 1) +
+      (options.showTotal ? ' of ' + slides.length : ''));
+  });
+};
+
+// Using the plugin with options
+bespoke.from('article', {
+  myPlugin: {
+    showTotal: true
+  }
+});
+```
 
 ## Questions?
 
