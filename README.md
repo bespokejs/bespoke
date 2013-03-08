@@ -127,19 +127,39 @@ bespoke.slide(0);
 
 ### Events
 
-Attach event handlers to slide `activate` and `deactivate` events.
+Bespoke.js provides the following events which can be handled with the `on(event, callback)` method.
+
+<table>
+  <tr>
+    <td><strong>activate</strong></td>
+    <td>A slide has been activated</td>
+  </tr>
+  <tr>
+    <td><strong>deactivate</strong></td>
+    <td>A slide has been deactivated</td>
+  </tr>
+  <tr>
+    <td><strong>next</strong></td>
+    <td>The next slide has been requested</td>
+  </tr>
+  <tr>
+    <td><strong>prev</strong></td>
+    <td>The previous slide has been requested</td>
+  </tr>
+</table>
+
+Each event is passed an event object containing a reference to the current slide and its index.
+
+*Note: Returning 'false' from a 'next' or 'prev' event will prevent default functionality. This is useful for plugins that want to manage state within individual slides and need to intercept the standard navigation events.*
+
+For example:
 
 ```js
-bespoke.on('activate', function(e) {
-  e.slide; // Activated slide
-  e.index; // Index of activated slide
-});
-```
+bespoke.on('next', function(event) {
+  event.slide; // Activated slide
+  event.index; // Index of activated slide
 
-```js
-bespoke.on('deactivate', function(e) {
-  e.slide; // Deactivated slide
-  e.index; // Index of deactivated slide
+  return false; // Prevent default functionality
 });
 ```
 

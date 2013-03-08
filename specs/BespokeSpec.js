@@ -247,6 +247,32 @@
 							expect(callback.callCount).toBe(1);
 						});
 
+						it("should not activate next slide if an event handler returns false", function() {
+							var activateCallback = sinon.spy(),
+								returnFalse = function() { return false; };
+
+							deck.on("activate", activateCallback);
+							bespoke.on("next", returnFalse);
+							deck.next();
+
+							expect(activateCallback.called).toBe(false);
+
+							bespoke.off("next", returnFalse);
+						});
+
+						it("should activate next slide if event handler returns true", function() {
+							var activateCallback = sinon.spy(),
+								returnTrue = function() { return true; };
+
+							deck.on("activate", activateCallback);
+							bespoke.on("next", returnTrue);
+							deck.next();
+
+							expect(activateCallback.called).toBe(true);
+
+							bespoke.off("next", returnTrue);
+						});
+
 					});
 
 					describe("prev", function() {
@@ -254,10 +280,39 @@
 						it("should call handlers when previous slide is requested", function() {
 							var callback = sinon.spy();
 
+							deck.slide(1);
 							bespoke.on("prev", callback);
 							deck.prev();
 
 							expect(callback.callCount).toBe(1);
+						});
+
+						it("should not activate previous slide if an event handler returns false", function() {
+							var activateCallback = sinon.spy(),
+								returnFalse = function() { return false; };
+
+							deck.slide(1);
+							deck.on("activate", activateCallback);
+							bespoke.on("prev", returnFalse);
+							deck.prev();
+
+							expect(activateCallback.called).toBe(false);
+
+							bespoke.off("prev", returnFalse);
+						});
+
+						it("should activate previous slide if event handler returns true", function() {
+							var activateCallback = sinon.spy(),
+								returnTrue = function() { return true; };
+
+							deck.slide(1);
+							deck.on("activate", activateCallback);
+							bespoke.on("prev", returnTrue);
+							deck.prev();
+
+							expect(activateCallback.called).toBe(true);
+
+							bespoke.off("prev", returnTrue);
 						});
 
 					});
@@ -378,6 +433,16 @@
 							expect(callback.callCount).toBe(1);
 						});
 
+						it("should not call handler when next slide is requested while on last slide", function() {
+							var callback = sinon.spy();
+
+							deck.slide(deck.slides.length - 1);
+							deck.on("next", callback);
+							deck.next();
+
+							expect(callback.called).toBe(false);
+						});
+
 						it("should pass payload to 'next' handler when next slide is requested", function() {
 							var callback = sinon.spy(),
 								ACTIVE_SLIDE_INDEX = 0,
@@ -425,10 +490,20 @@
 						it("should call handler when previous slide is requested", function() {
 							var callback = sinon.spy();
 
+							deck.slide(1);
 							deck.on("prev", callback);
 							deck.prev();
 							
 							expect(callback.callCount).toBe(1);
+						});
+
+						it("should not call handler when previous slide is requested while on first slide", function() {
+							var callback = sinon.spy();
+
+							deck.on("prev", callback);
+							deck.prev();
+
+							expect(callback.called).toBe(false);
 						});
 
 						it("should pass payload to 'prev' handler when previous slide is requested", function() {

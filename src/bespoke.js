@@ -1,37 +1,11 @@
 (function(moduleName, window, document){
-	var decks = [],
-
-		bespokeListeners = {},
-
-		on = function(listeners, eventName, callback) {
-			(listeners[eventName] || (listeners[eventName] = [])).push(callback);
-		},
-
-		off = function(listeners, eventName, callback) {
-			(listeners[eventName] || []).filter(function(listener) {
-				return listener !== callback;
-			});
-		},
-
-		fire = function(listeners, eventName, payload) {
-			return (listeners[eventName] || [])
-				.concat((listeners !== bespokeListeners && bespokeListeners[eventName]) || [])
-				.reduce(function(isCancelled, callback) {
-					return callback(payload) !== false && isCancelled;
-				}, 1);
-		},
-
-		from = function(selector, selectedPlugins) {
+	var from = function(selector, selectedPlugins) {
 			var parent = document.querySelector(selector),
 				slides = [].slice.call(parent.children, 0),
 				activeSlide = slides[0],
 				deckListeners = {},
 
 				activate = function(index) {
-					if (!slides[index]) {
-						return;
-					}
-
 					fire(deckListeners, 'deactivate', {
 						slide: activeSlide,
 						index: slides.indexOf(activeSlide)
@@ -71,17 +45,21 @@
 				},
 
 				next = function() {
+					slides.indexOf(activeSlide) < slides.length - 1 &&
 					fire(deckListeners, 'next', {
 						slide: activeSlide,
 						index: slides.indexOf(activeSlide)
-					}) && activate(slides.indexOf(activeSlide) + 1);
+					}) &&
+					activate(slides.indexOf(activeSlide) + 1);
 				},
 
 				prev = function() {
+					slides.indexOf(activeSlide) > 0 &&
 					fire(deckListeners, 'prev', {
 						slide: activeSlide,
 						index: slides.indexOf(activeSlide)
-					}) && activate(slides.indexOf(activeSlide) - 1);
+					}) &&
+					activate(slides.indexOf(activeSlide) - 1);
 				},
 
 				deck = {
@@ -110,6 +88,53 @@
 			decks.push(deck);
 
 			return deck;
+		},
+
+		decks = [],
+
+		bespokeListeners = {},
+
+		on = function(listeners, eventName, callback) {
+			(listeners[eventName] || (listeners[eventName] = [])).push(callback);
+		},
+
+		off = function(listeners, eventName, callback) {
+			listeners[eventName] = (listeners[eventName] || []).filter(function(listener) {
+				return listener !== callback;
+			});
+		},
+
+		fire = function(listeners, eventName, payload) {
+			return (listeners[eventName] || [])
+				.concat((listeners !== bespokeListeners && bespokeListeners[eventName]) || [])
+				.reduce(function(notCancelled, callback) {
+					return callback(payload) !== false && notCancelled;
+				}, true);
+		},
+
+		addClass = function(el, cls) {
+			el.classList.add(moduleName + '-' + cls);
+		},
+
+		removeClass = function(el, cls) {
+			el.classList.remove(moduleName + '-' + cls);
+		},
+
+		callOnAllInstances = function(method) {
+			return function(arg) {
+				decks.map(function(deck) {
+					deck[method].call(null, arg);
+				});
+			};
+		},
+
+		bindPlugin = function(pluginName) {
+			return {
+				from: function(selector, selectedPlugins) {
+					(selectedPlugins = selectedPlugins || {})[pluginName] = true;
+					return from(selector, selectedPlugins);
+				}
+			};
 		},
 
 		makePluginForAxis = function(axis) {
@@ -152,31 +177,6 @@
 		plugins = {
 			horizontal: makePluginForAxis('X'),
 			vertical: makePluginForAxis('Y')
-		},
-
-		addClass = function(el, cls) {
-			el.classList.add(moduleName + '-' + cls);
-		},
-
-		removeClass = function(el, cls) {
-			el.classList.remove(moduleName + '-' + cls);
-		},
-
-		callOnAllInstances = function(method) {
-			return function(arg) {
-				decks.map(function(deck) {
-					deck[method].call(null, arg);
-				});
-			};
-		},
-
-		bindPlugin = function(pluginName) {
-			return {
-				from: function(selector, selectedPlugins) {
-					(selectedPlugins = selectedPlugins || {})[pluginName] = true;
-					return from(selector, selectedPlugins);
-				}
-			};
 		};
 
 	window[moduleName] = {
