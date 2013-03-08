@@ -150,7 +150,7 @@ Bespoke.js provides the following events which can be handled with the `on(event
 
 Each event is passed an event object containing a reference to the current slide and its index.
 
-*Note: Returning 'false' from a 'next' or 'prev' event will prevent default functionality. This is useful for plugins that want to manage state within individual slides and need to intercept the standard navigation events.*
+*Note: Returning 'false' from a 'next' or 'prev' event handler will prevent default functionality. This is useful for plugins that want to manage state within individual slides and need to intercept the standard navigation events.*
 
 For example:
 
@@ -265,6 +265,10 @@ bespoke.from('article', {
   }
 });
 ```
+
+## Browser Support
+
+Bespoke.js requires a modern browser with [ES5](http://www.ecma-international.org/publications/standards/Ecma-262.htm) support. If supporting old versions of IE is your thing, there's always [es5-shim](https://github.com/kriskowal/es5-shim) and [classList.js](https://github.com/eligrey/classList.js).
 
 ## Questions?
 
