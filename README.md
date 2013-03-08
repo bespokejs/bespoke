@@ -17,6 +17,8 @@ Download the [production version][min] or the [development version][max].
 [min]: https://raw.github.com/markdalgleish/bespoke.js/master/dist/bespoke.min.js
 [max]: https://raw.github.com/markdalgleish/bespoke.js/master/dist/bespoke.js
 
+Bespoke.js requires a modern browser with [ES5](http://www.ecma-international.org/publications/standards/Ecma-262.htm) support. If supporting old IE is your thing, there's always [es5-shim](https://github.com/kriskowal/es5-shim) and [classList.js](https://github.com/eligrey/classList.js).
+
 ## Getting Started
 
 To create a Bespoke.js presentation, follow these 3 simple steps:
@@ -265,10 +267,6 @@ bespoke.from('article', {
   }
 });
 ```
-
-## Browser Support
-
-Bespoke.js requires a modern browser with [ES5](http://www.ecma-international.org/publications/standards/Ecma-262.htm) support. If supporting old versions of IE is your thing, there's always [es5-shim](https://github.com/kriskowal/es5-shim) and [classList.js](https://github.com/eligrey/classList.js).
 
 ## Questions?
 
