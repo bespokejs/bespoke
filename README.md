@@ -21,11 +21,11 @@ Download the [production version][min] or the [development version][max].
 
 To create a Bespoke.js presentation, follow these 3 simple steps:
 
- * Create a new page with [required slide markup](#markup) and resources
- * Activate your presentation via the [JavaScript API](#javascript)
- * Create a custom style sheet, using the provided [Bespoke.js classes](#css) to power your CSS transitions
+ * Create a page with [required slide markup](#markup) and resources
+ * Activate your deck via the [JavaScript API](#javascript)
+ * Create a custom style sheet using the [Bespoke.js CSS classes](#css)
 
-Need to extend Bespoke.js? Want to re-use your extra functionality, or share it with others? [Write a plugin!](#plugins)
+Need to extend Bespoke.js? [Write a plugin!](#plugins)
 
 ## Basic Usage
 
@@ -197,7 +197,7 @@ The following properties are available on each instance:
 
 ## Plugins
 
-If you need to extend the basic functionality in Bespoke.js, additional functionality can wrapped up as plugins.
+If you need to extend the basic feature set in Bespoke.js, additional functionality can wrapped up as plugins.
 
 ### Writing a Basic Plugin
 

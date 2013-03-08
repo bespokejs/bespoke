@@ -187,80 +187,77 @@
 
 					describe("activate", function() {
 
-						it("shouldn't call handlers in the same tick", function() {
+						it("should call handlers when slide is activated", function() {
 							var callback = sinon.spy();
 							bespoke.on("activate", callback);
 							deck.next();
-							expect(callback.called).toBe(false);
-						});
-
-						it("should call handlers in a later tick when slide is activated", function() {
-							var callback;
-
-							runs(function() {
-								callback = sinon.spy();
-								bespoke.on("activate", callback);
-								deck.next();
-							});
-
-							waitsFor(function() {
-								return callback.called;
-							}, 100);
-
-							runs(function() {
-								expect(callback.called).toBe(true);
-							});
+							expect(callback.called).toBe(true);
 						});
 
 						it("should pass payload to 'slide' handler when slide is activated", function() {
-							var callback,
+							var callback = sinon.spy(),
 								SLIDE_INDEX = 0,
 								ACTIVE_SLIDE = deck.slides[SLIDE_INDEX];
 
-							runs(function() {
-								callback = sinon.spy();
-								bespoke.on("activate", callback);
-								deck.slide(SLIDE_INDEX);
-							});
+							bespoke.on("activate", callback);
+							deck.slide(SLIDE_INDEX);
 
-							waitsFor(function() {
-								return callback.called;
-							}, 100);
-
-							runs(function() {
-								expect(callback.calledWith({
-									slide: ACTIVE_SLIDE,
-									index: SLIDE_INDEX
-								})).toBe(true);
-							});
+							expect(callback.calledWith({
+								slide: ACTIVE_SLIDE,
+								index: SLIDE_INDEX
+							})).toBe(true);
 						});
 
 					});
 
 					describe("deactivate", function() {
 
+						it("should call handlers when slide is deactivated", function() {
+							var callback = sinon.spy();
+							bespoke.on("deactivate", callback);
+							deck.next();
+							expect(callback.called).toBe(true);
+						});
+
 						it("should pass payload to 'slide' handler once when slide is deactivated", function() {
-							var callback,
+							var callback = sinon.spy(),
 								SLIDE_INDEX = 0,
 								DEACTIVATED_SLIDE = deck.slides[SLIDE_INDEX];
 
-							runs(function() {
-								callback = sinon.spy();
-								bespoke.on("deactivate", callback);
-								deck.slide(1);
-							});
+							bespoke.on("deactivate", callback);
+							deck.slide(1);
 
-							waitsFor(function() {
-								return callback.called;
-							}, 100);
+							expect(callback.calledWith({
+								slide: DEACTIVATED_SLIDE,
+								index: SLIDE_INDEX
+							})).toBe(true);
+							expect(callback.callCount).toBe(1);
+						});
 
-							runs(function() {
-								expect(callback.calledWith({
-									slide: DEACTIVATED_SLIDE,
-									index: SLIDE_INDEX
-								})).toBe(true);
-								expect(callback.callCount).toBe(1);
-							});
+					});
+
+					describe("next", function() {
+
+						it("should call handlers when next slide is requested", function() {
+							var callback = sinon.spy();
+
+							bespoke.on("next", callback);
+							deck.next();
+
+							expect(callback.callCount).toBe(1);
+						});
+
+					});
+
+					describe("prev", function() {
+
+						it("should call handlers when previous slide is requested", function() {
+							var callback = sinon.spy();
+
+							bespoke.on("prev", callback);
+							deck.prev();
+
+							expect(callback.callCount).toBe(1);
 						});
 
 					});
@@ -321,80 +318,158 @@
 
 					describe("activate", function() {
 
-						it("shouldn't call handlers in the same tick", function() {
+						it("should call handler when slide is activated", function() {
 							var callback = sinon.spy();
 							deck.on("activate", callback);
 							deck.next();
-							expect(callback.called).toBe(false);
-						});
-
-						it("should call handler in a later tick when slide is activated", function() {
-							var callback;
-
-							runs(function() {
-								callback = sinon.spy();
-								deck.on("activate", callback);
-								deck.next();
-							});
-
-							waitsFor(function() {
-								return callback.called;
-							}, 100);
-
-							runs(function() {
-								expect(callback.called).toBe(true);
-							});
+							expect(callback.called).toBe(true);
 						});
 
 						it("should pass payload to 'activate' handler when slide is activated", function() {
-							var callback,
+							var callback = sinon.spy(),
 								SLIDE_INDEX = 0,
 								ACTIVATED_SLIDE = deck.slides[SLIDE_INDEX];
 
-							runs(function() {
-								callback = sinon.spy();
-								deck.on("activate", callback);
-								deck.slide(SLIDE_INDEX);
-							});
+							deck.on("activate", callback);
+							deck.slide(SLIDE_INDEX);
 
-							waitsFor(function() {
-								return callback.called;
-							}, 100);
-
-							runs(function() {
-								expect(callback.calledWith({
-									slide: ACTIVATED_SLIDE,
-									index: SLIDE_INDEX
-								})).toBe(true);
-							});
+							expect(callback.calledWith({
+								slide: ACTIVATED_SLIDE,
+								index: SLIDE_INDEX
+							})).toBe(true);
 						});
 
 					});
 
 					describe("deactivate", function() {
 
+						it("should call handler when slide is deactivated", function() {
+							var callback = sinon.spy();
+							deck.on("deactivate", callback);
+							deck.next();
+							expect(callback.called).toBe(true);
+						});
+
 						it("should pass payload to 'activate' handler once when slide is activated", function() {
-							var callback,
+							var callback = sinon.spy(),
 								SLIDE_INDEX = 0,
 								DEACTIVATED_SLIDE = deck.slides[SLIDE_INDEX];
 
-							runs(function() {
-								callback = sinon.spy();
-								deck.on("deactivate", callback);
-								deck.slide(1);
-							});
+							deck.on("deactivate", callback);
+							deck.slide(1);
 
-							waitsFor(function() {
-								return callback.called;
-							}, 100);
+							expect(callback.calledWith({
+								slide: DEACTIVATED_SLIDE,
+								index: SLIDE_INDEX
+							})).toBe(true);
+							expect(callback.callCount).toBe(1);
+						});
 
-							runs(function() {
-								expect(callback.calledWith({
-									slide: DEACTIVATED_SLIDE,
-									index: SLIDE_INDEX
-								})).toBe(true);
-								expect(callback.callCount).toBe(1);
+					});
+
+					describe("next", function() {
+
+						it("should call handler when next slide is requested", function() {
+							var callback = sinon.spy();
+
+							deck.on("next", callback);
+							deck.next();
+
+							expect(callback.callCount).toBe(1);
+						});
+
+						it("should pass payload to 'next' handler when next slide is requested", function() {
+							var callback = sinon.spy(),
+								ACTIVE_SLIDE_INDEX = 0,
+								ACTIVE_SLIDE = deck.slides[ACTIVE_SLIDE_INDEX];
+
+							deck.on("next", callback);
+							deck.slide(ACTIVE_SLIDE_INDEX);
+							deck.next();
+
+							expect(callback.calledWith({
+								slide: ACTIVE_SLIDE,
+								index: ACTIVE_SLIDE_INDEX
+							})).toBe(true);
+							expect(callback.callCount).toBe(1);
+						});
+
+						it("should not activate next slide if an event handler returns false", function() {
+							var activateCallback = sinon.spy();
+
+							deck.on("activate", activateCallback);
+							deck.on("next", function() {
+								return false;
 							});
+							deck.next();
+
+							expect(activateCallback.called).toBe(false);
+						});
+
+						it("should activate next slide if event handler returns true", function() {
+							var activateCallback = sinon.spy();
+
+							deck.on("activate", activateCallback);
+							deck.on("next", function() {
+								return true;
+							});
+							deck.next();
+
+							expect(activateCallback.called).toBe(true);
+						});
+
+					});
+
+					describe("prev", function() {
+
+						it("should call handler when previous slide is requested", function() {
+							var callback = sinon.spy();
+
+							deck.on("prev", callback);
+							deck.prev();
+							
+							expect(callback.callCount).toBe(1);
+						});
+
+						it("should pass payload to 'prev' handler when previous slide is requested", function() {
+							var callback = sinon.spy(),
+								ACTIVE_SLIDE_INDEX = 1,
+								ACTIVE_SLIDE = deck.slides[ACTIVE_SLIDE_INDEX];
+
+							bespoke.on("prev", callback);
+							deck.slide(ACTIVE_SLIDE_INDEX);
+							deck.prev();
+
+							expect(callback.calledWith({
+								slide: ACTIVE_SLIDE,
+								index: ACTIVE_SLIDE_INDEX
+							})).toBe(true);
+							expect(callback.callCount).toBe(1);
+						});
+
+						it("should not activate previous slide if an event handler returns false", function() {
+							var activateCallback = sinon.spy();
+
+							deck.on("activate", activateCallback);
+							deck.on("prev", function() {
+								return false;
+							});
+							deck.prev();
+
+							expect(activateCallback.called).toBe(false);
+						});
+
+						it("should activate previous slide if event handler returns true", function() {
+							var activateCallback = sinon.spy();
+
+							deck.slide(1);
+							deck.on("activate", activateCallback);
+							deck.on("prev", function() {
+								return true;
+							});
+							deck.prev();
+
+							expect(activateCallback.called).toBe(true);
 						});
 
 					});

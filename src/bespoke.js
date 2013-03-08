@@ -1,6 +1,4 @@
 (function(moduleName, window, document){
-	'use strict';
-
 	var decks = [],
 
 		bespokeListeners = {},
@@ -10,17 +8,17 @@
 		},
 
 		off = function(listeners, eventName, callback) {
-			(listeners[eventName] || []).reduce(function(listener) {
+			(listeners[eventName] || []).filter(function(listener) {
 				return listener !== callback;
 			});
 		},
 
 		fire = function(listeners, eventName, payload) {
-			(listeners[eventName] || [])
+			return (listeners[eventName] || [])
 				.concat((listeners !== bespokeListeners && bespokeListeners[eventName]) || [])
-				.map(function(callback) {
-					setTimeout(callback.bind(null, payload), 0);
-				});
+				.reduce(function(isCancelled, callback) {
+					return callback(payload) !== false && isCancelled;
+				}, 1);
 		},
 
 		from = function(selector, selectedPlugins) {
@@ -53,6 +51,9 @@
 				},
 
 				deactivate = function(slide, index) {
+					var offset = index - slides.indexOf(activeSlide),
+						offsetClass = offset > 0 ? 'after' : 'before';
+
 					[
 						'before',
 						'before-\\d+',
@@ -62,14 +63,7 @@
 						'inactive'
 					].map(removeClass.bind(null, slide));
 
-					if (slide === activeSlide) {
-						return;
-					}
-
-					var offset = index - slides.indexOf(activeSlide),
-						offsetClass = offset > 0 ? 'after' : 'before';
-
-					[
+					slide !== activeSlide && [
 						'inactive',
 						offsetClass,
 						offsetClass + '-' + Math.abs(offset)
@@ -77,11 +71,17 @@
 				},
 
 				next = function() {
-					activate(slides.indexOf(activeSlide) + 1);
+					fire(deckListeners, 'next', {
+						slide: activeSlide,
+						index: slides.indexOf(activeSlide)
+					}) && activate(slides.indexOf(activeSlide) + 1);
 				},
 
 				prev = function() {
-					activate(slides.indexOf(activeSlide) - 1);
+					fire(deckListeners, 'prev', {
+						slide: activeSlide,
+						index: slides.indexOf(activeSlide)
+					}) && activate(slides.indexOf(activeSlide) - 1);
 				},
 
 				deck = {
@@ -115,14 +115,7 @@
 		makePluginForAxis = function(axis) {
 			return function(deck) {
 				var startPosition,
-					delta,
-
-					singleTouch = function(fn) {
-						return function(e) {
-							e.preventDefault();
-							e.touches.length === 1 && fn(e.touches[0]['page' + axis]);
-						};
-					};
+					delta;
 
 				document.addEventListener('keydown', function(e) {
 					var key = e.which;
@@ -136,21 +129,22 @@
 					}
 				});
 
-				deck.parent.addEventListener('touchstart', singleTouch(function(position) {
-					startPosition = position;
-					delta = 0;
-				}));
+				deck.parent.addEventListener('touchstart', function(e) {
+					if (e.touches.length === 1) {
+						startPosition = e.touches[0]['page' + axis];
+						delta = 0;
+					}
+				});
 
-				deck.parent.addEventListener('touchmove', singleTouch(function(position) {
-					delta = position - startPosition;
-				}));
+				deck.parent.addEventListener('touchmove', function(e) {
+					if (e.touches.length === 1) {
+						e.preventDefault();
+						delta = e.touches[0]['page' + axis] - startPosition;
+					}
+				});
 
 				deck.parent.addEventListener('touchend', function() {
-					if (Math.abs(delta) < 50) {
-						return;
-					}
-
-					delta > 0 ? deck.prev() : deck.next();
+					Math.abs(delta) > 50 && (delta > 0 ? deck.prev() : deck.next());
 				});
 			};
 		},
@@ -160,24 +154,12 @@
 			vertical: makePluginForAxis('Y')
 		},
 
-		prefixClass = function(cls) {
-			return moduleName + '-' + cls;
-		},
-
 		addClass = function(el, cls) {
-			el.className += ' ' + prefixClass(cls);
+			el.classList.add(moduleName + '-' + cls);
 		},
 
 		removeClass = function(el, cls) {
-			cls = prefixClass(cls);
-
-			var classMatcher = new RegExp('(\\s|^)'+cls+'(\\s|$)', 'gi');
-
-			if (classMatcher.test(el.className)) {
-				el.className = el.className
-					.replace(classMatcher, ' ')
-					.replace(/^\s+|\s+$/g, '');
-			}
+			el.classList.remove(moduleName + '-' + cls);
 		},
 
 		callOnAllInstances = function(method) {
