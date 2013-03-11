@@ -1,5 +1,5 @@
 /*!
- * Bespoke.js v0.0.1-alpha-11
+ * Bespoke.js v0.0.1-alpha-13
  *
  * Copyright 2013, Mark Dalgleish
  * This content is released under the MIT license
@@ -23,13 +23,13 @@
 
 					slides.map(deactivate);
 
-					addClass(activeSlide, 'active');
-					removeClass(activeSlide, 'inactive');
-
 					fire(deckListeners, 'activate', {
 						slide: activeSlide,
 						index: index
 					});
+
+					addClass(activeSlide, 'active');
+					removeClass(activeSlide, 'inactive');
 				},
 
 				deactivate = function(slide, index) {

@@ -17,9 +17,8 @@ module.exports = function(grunt) {
         ' <%= _.pluck(pkg.licenses, "type").join(", ") %> license<%= pkg.licenses.length === 1 ? "" : "s" %>\n' +
         ' * <%= _.pluck(pkg.licenses, "url").join(", ") %>\n' +
         ' */',
-      microbanner: '/*! <%= pkg.title || pkg.name %> v<%= pkg.version %> | ' +
-        '(c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %> | ' +
-        '<%= pkg.homepage ? pkg.homepage + " | " : "" %>' +
+      microbanner: '/*! <%= pkg.title || pkg.name %> v<%= pkg.version %> ' +
+        '© <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>, ' +
         'Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
     },
     concat: {

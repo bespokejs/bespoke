@@ -15,13 +15,13 @@
 
 					slides.map(deactivate);
 
-					addClass(activeSlide, 'active');
-					removeClass(activeSlide, 'inactive');
-
 					fire(deckListeners, 'activate', {
 						slide: activeSlide,
 						index: index
 					});
+
+					addClass(activeSlide, 'active');
+					removeClass(activeSlide, 'inactive');
 				},
 
 				deactivate = function(slide, index) {
