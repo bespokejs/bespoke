@@ -62,7 +62,7 @@
 	}
 
 	function initSlideGestures() {
-		var touchTarget = document.getElementById('touch-target'),
+		var main = document.getElementById('main'),
 			startPosition,
 			delta,
 
@@ -92,9 +92,9 @@
 				delta > 0 ? deck.prev() : deck.next();
 			};
 
-		touchTarget.addEventListener('touchstart', touchstart);
-		touchTarget.addEventListener('touchmove', touchmove);
-		touchTarget.addEventListener('touchend', touchend);
+		main.addEventListener('touchstart', touchstart);
+		main.addEventListener('touchmove', touchmove);
+		main.addEventListener('touchend', touchend);
 	}
 
 	function initThemeGestures() {
