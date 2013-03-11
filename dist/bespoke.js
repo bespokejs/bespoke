@@ -6,7 +6,7 @@
  * http://mit-license.org/markdalgleish
  */
 
-(function(moduleName, window, document){
+(function(moduleName, window, document) {
 	var from = function(selector, selectedPlugins) {
 			var parent = document.querySelector(selector),
 				slides = [].slice.call(parent.children, 0),
@@ -36,20 +36,10 @@
 					var offset = index - slides.indexOf(activeSlide),
 						offsetClass = offset > 0 ? 'after' : 'before';
 
-					[
-						'before',
-						'before-\\d+',
-						'after',
-						'after-\\d+',
-						'active',
-						'inactive'
-					].map(removeClass.bind(null, slide));
+					['before(-\\d+)?', 'after(-\\d+)?', 'active', 'inactive'].map(removeClass.bind(null, slide));
 
-					slide !== activeSlide && [
-						'inactive',
-						offsetClass,
-						offsetClass + '-' + Math.abs(offset)
-					].map(addClass.bind(null, slide));
+					slide !== activeSlide &&
+						['inactive', offsetClass, offsetClass + '-' + Math.abs(offset)].map(addClass.bind(null, slide));
 				},
 
 				next = function() {
@@ -125,7 +115,9 @@
 		},
 
 		removeClass = function(el, cls) {
-			el.classList.remove(moduleName + '-' + cls);
+			el.className = el.className
+				.replace(new RegExp(moduleName + '-' + cls +'(\\s|$)', 'g'), ' ')
+				.replace(/^\s+|\s+$/g, '');
 		},
 
 		callOnAllInstances = function(method) {
