@@ -241,7 +241,7 @@ They are passed a [deck instance](#deck-instance-properties) which allows you to
 // Creating the plugin
 bespoke.plugins.myPlugin = function(deck) {
   deck.on('activate', function(e) {
-    console.log('Activated slide ' + (e.index + 1) + ' of ' + slides.length);
+    console.log('Activated slide ' + (e.index + 1) + ' of ' + deck.slides.length);
   });
 };
 ```
@@ -268,7 +268,7 @@ bespoke.plugins.myPlugin = function(deck, options) {
 
   deck.on('activate', function(e) {
     console.log('Activated slide ' + (e.index + 1) +
-      (options.showTotal ? ' of ' + slides.length : ''));
+      (options.showTotal ? ' of ' + deck.slides.length : ''));
   });
 };
 
