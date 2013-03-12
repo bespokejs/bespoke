@@ -1,5 +1,5 @@
 /*!
- * Bespoke.js v0.0.1-alpha-13
+ * Bespoke.js v0.0.1-alpha-14
  *
  * Copyright 2013, Mark Dalgleish
  * This content is released under the MIT license
@@ -106,7 +106,7 @@
 			return (listeners[eventName] || [])
 				.concat((listeners !== bespokeListeners && bespokeListeners[eventName]) || [])
 				.reduce(function(notCancelled, callback) {
-					return callback(payload) !== false && notCancelled;
+					return notCancelled && callback(payload) !== false;
 				}, true);
 		},
 

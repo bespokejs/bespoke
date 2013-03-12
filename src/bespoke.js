@@ -98,7 +98,7 @@
 			return (listeners[eventName] || [])
 				.concat((listeners !== bespokeListeners && bespokeListeners[eventName]) || [])
 				.reduce(function(notCancelled, callback) {
-					return callback(payload) !== false && notCancelled;
+					return notCancelled && callback(payload) !== false;
 				}, true);
 		},
 

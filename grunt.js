@@ -64,7 +64,6 @@ module.exports = function(grunt) {
         strict: false,
         maxcomplexity: 4,
         maxparams: 5,
-        maxlen: 120,
         maxdepth: 2
       },
       globals: {

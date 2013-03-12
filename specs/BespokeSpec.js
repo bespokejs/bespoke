@@ -260,6 +260,19 @@
 							bespoke.off("next", returnFalse);
 						});
 
+						it("should not call event handler if a deck event handler returns false", function() {
+							var nextCallback = sinon.spy(),
+								returnFalse = function() { return false; };
+
+							bespoke.on("next", nextCallback);
+							deck.on("next", returnFalse);
+							deck.next();
+
+							expect(nextCallback.called).toBe(false);
+
+							bespoke.off("next", returnFalse);
+						});
+
 						it("should activate next slide if event handler returns true", function() {
 							var activateCallback = sinon.spy(),
 								returnTrue = function() { return true; };
@@ -297,6 +310,20 @@
 							deck.prev();
 
 							expect(activateCallback.called).toBe(false);
+
+							bespoke.off("prev", returnFalse);
+						});
+
+						it("should not call event handler if a deck event handler returns false", function() {
+							var prevCallback = sinon.spy(),
+								returnFalse = function() { return false; };
+
+							deck.slide(1);
+							bespoke.on("prev", prevCallback);
+							deck.on("prev", returnFalse);
+							deck.prev();
+
+							expect(prevCallback.called).toBe(false);
 
 							bespoke.off("prev", returnFalse);
 						});
@@ -471,6 +498,18 @@
 							expect(activateCallback.called).toBe(false);
 						});
 
+						it("should not call subsequent 'next' handlers if an earlier event handler returns false", function() {
+							var nextCallback = sinon.spy();
+
+							deck.on("next", function() {
+								return false;
+							});
+							deck.on("next", nextCallback);
+							deck.next();
+
+							expect(nextCallback.called).toBe(false);
+						});
+
 						it("should activate next slide if event handler returns true", function() {
 							var activateCallback = sinon.spy();
 
@@ -532,6 +571,19 @@
 							deck.prev();
 
 							expect(activateCallback.called).toBe(false);
+						});
+
+						it("should not call subsequent 'prev' handlers if an earlier event handler returns false", function() {
+							var prevCallback = sinon.spy();
+
+							deck.slide(1);
+							deck.on("prev", function() {
+								return false;
+							});
+							deck.on("prev", prevCallback);
+							deck.prev();
+
+							expect(prevCallback.called).toBe(false);
 						});
 
 						it("should activate previous slide if event handler returns true", function() {

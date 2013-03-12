@@ -147,27 +147,48 @@ Bespoke.js provides the following events which can be handled with the `on(event
   </tr>
   <tr>
     <td><strong>next</strong></td>
-    <td>The next slide has been requested</td>
+    <td>The next slide has been requested. <em>Return 'false' to cancel event.</em></td>
   </tr>
   <tr>
     <td><strong>prev</strong></td>
-    <td>The previous slide has been requested</td>
+    <td>The previous slide has been requested. <em>Return 'false' to cancel event.</em></td>
   </tr>
 </table>
 
+##### Binding Events
+
 Each event is passed an event object containing a reference to the current slide and its index.
-
-*Note: Returning 'false' from a 'next' or 'prev' event handler will prevent default functionality. This is useful for plugins that want to manage state within individual slides and need to intercept the standard navigation events.*
-
-For example:
 
 ```js
 bespoke.on('next', function(event) {
   event.slide; // Activated slide
   event.index; // Index of activated slide
 
-  return false; // Prevent default functionality
+  // Prevent default functionality and stop propagation
+  return false;
 });
+```
+
+If you need more information about the presentation, you may need to retain a reference to the individual [deck instance](deck-instances).
+
+*Note: Returning 'false' from a 'next' or 'prev' event handler will prevent default functionality and stop the event from propagating to subsequent event handlers. This allows you to intercept the standard navigation events and manage state within individual slides, allowing [plugins](#plugins) for bullet lists, in-slide animations, etc.*
+
+##### Unbinding events
+
+Events handlers can be removed with the `off(event, callback)` method.
+
+*Note: To remove an event handler, you must retain a reference to the original function.*
+
+```js
+var myEventHandler = function() {
+  // Do something...
+};
+
+// Bind event
+bespoke.on('activate', myEventHandler);
+
+// Unbind event
+bespoke.off('activate', myEventHandler);
 ```
 
 ### Deck Instances
@@ -229,7 +250,7 @@ The following properties are available on each instance:
 
 ## Plugins
 
-If you need to extend the basic feature set in Bespoke.js, additional functionality can wrapped up as plugins.
+If you need to expand upon the core Bespoke.js feature set, additional functionality can be packaged up as plugins.
 
 ### Writing a Basic Plugin
 
