@@ -1,5 +1,5 @@
 /*!
- * Bespoke.js v0.0.1-alpha-14
+ * Bespoke.js v0.0.1-alpha-15
  *
  * Copyright 2013, Mark Dalgleish
  * This content is released under the MIT license
@@ -14,6 +14,10 @@
 				deckListeners = {},
 
 				activate = function(index) {
+					if (!slides[index]) {
+						return;
+					}
+
 					fire(deckListeners, 'deactivate', {
 						slide: activeSlide,
 						index: slides.indexOf(activeSlide)
@@ -43,21 +47,19 @@
 				},
 
 				next = function() {
-					slides.indexOf(activeSlide) < slides.length - 1 &&
 					fire(deckListeners, 'next', {
-						slide: activeSlide,
-						index: slides.indexOf(activeSlide)
-					}) &&
-					activate(slides.indexOf(activeSlide) + 1);
+							slide: activeSlide,
+							index: slides.indexOf(activeSlide)
+						}) &&
+						activate(slides.indexOf(activeSlide) + 1);
 				},
 
 				prev = function() {
-					slides.indexOf(activeSlide) > 0 &&
 					fire(deckListeners, 'prev', {
-						slide: activeSlide,
-						index: slides.indexOf(activeSlide)
-					}) &&
-					activate(slides.indexOf(activeSlide) - 1);
+							slide: activeSlide,
+							index: slides.indexOf(activeSlide)
+						}) &&
+						activate(slides.indexOf(activeSlide) - 1);
 				},
 
 				deck = {
@@ -155,14 +157,14 @@
 				});
 
 				deck.parent.addEventListener('touchstart', function(e) {
-					if (e.touches.length === 1) {
+					if (e.touches.length) {
 						startPosition = e.touches[0]['page' + axis];
 						delta = 0;
 					}
 				});
 
 				deck.parent.addEventListener('touchmove', function(e) {
-					if (e.touches.length === 1) {
+					if (e.touches.length) {
 						e.preventDefault();
 						delta = e.touches[0]['page' + axis] - startPosition;
 					}

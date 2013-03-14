@@ -460,14 +460,14 @@
 							expect(callback.callCount).toBe(1);
 						});
 
-						it("should not call handler when next slide is requested while on last slide", function() {
+						it("should call handler when next slide is requested while on last slide", function() {
 							var callback = sinon.spy();
 
 							deck.slide(deck.slides.length - 1);
 							deck.on("next", callback);
 							deck.next();
 
-							expect(callback.called).toBe(false);
+							expect(callback.called).toBe(true);
 						});
 
 						it("should pass payload to 'next' handler when next slide is requested", function() {
@@ -536,13 +536,13 @@
 							expect(callback.callCount).toBe(1);
 						});
 
-						it("should not call handler when previous slide is requested while on first slide", function() {
+						it("should call handler when previous slide is requested while on first slide", function() {
 							var callback = sinon.spy();
 
 							deck.on("prev", callback);
 							deck.prev();
 
-							expect(callback.called).toBe(false);
+							expect(callback.called).toBe(true);
 						});
 
 						it("should pass payload to 'prev' handler when previous slide is requested", function() {

@@ -147,11 +147,11 @@ Bespoke.js provides the following events which can be handled with the `on(event
   </tr>
   <tr>
     <td><strong>next</strong></td>
-    <td>The next slide has been requested. <em>Return 'false' to cancel event.</em></td>
+    <td>The next slide has been requested, even if last slide is active. <em>Return 'false' to cancel event.</em></td>
   </tr>
   <tr>
     <td><strong>prev</strong></td>
-    <td>The previous slide has been requested. <em>Return 'false' to cancel event.</em></td>
+    <td>The previous slide has been requested, even if first slide is active. <em>Return 'false' to cancel event.</em></td>
   </tr>
 </table>
 
