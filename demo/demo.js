@@ -50,7 +50,7 @@
 			});
 		}
 
-		document.addEventListener('keyup', function(e) {
+		document.addEventListener('keydown', function(e) {
 			var key = e.which;
 
 			key === 37 && deck.prev();
