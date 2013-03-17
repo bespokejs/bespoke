@@ -117,6 +117,8 @@ To create your own custom deck styles, Bespoke.js provides the necessary classes
    </tr>
 </table>
 
+If you've created an awesome theme you'd like me to share, [let me know](http://twitter.com/markdalgleish).
+
 ## Plugins
 
 The following plugins are available for Bespoke.js.
@@ -266,6 +268,8 @@ The following properties are available on each instance:
 ## Creating Plugins
 
 If you need to expand upon the core Bespoke.js feature set, additional functionality can be packaged up as plugins.
+
+If you'd like to learn by example, check out the [list of existing plugins](#plugins).
 
 ### Basic Plugins
 
