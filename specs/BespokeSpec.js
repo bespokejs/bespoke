@@ -658,6 +658,19 @@
 
 				});
 
+				describe("fire", function() {
+
+					it("should allow custom events to be triggered", function() {
+						var customEventHandler = sinon.spy(),
+							payload = { foo: 'bar' };
+
+						deck.on('custom-event', customEventHandler);
+						deck.fire('custom-event', payload);
+						expect(customEventHandler.calledWith(payload)).toBe(true);
+					});
+
+				});
+
 				describe("parent", function() {
 
 					it("should refer to the parent element", function() {

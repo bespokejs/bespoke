@@ -66,6 +66,7 @@
 				deck = {
 					on: on.bind(null, deckListeners),
 					off: off.bind(null, deckListeners),
+					fire: fire.bind(null, deckListeners),
 					slide: slide,
 					next: next,
 					prev: prev,

@@ -1,5 +1,5 @@
 /*!
- * Bespoke.js v0.0.1-alpha-18
+ * Bespoke.js v0.0.1-alpha-19
  *
  * Copyright 2013, Mark Dalgleish
  * This content is released under the MIT license
@@ -74,6 +74,7 @@
 				deck = {
 					on: on.bind(null, deckListeners),
 					off: off.bind(null, deckListeners),
+					fire: fire.bind(null, deckListeners),
 					slide: slide,
 					next: next,
 					prev: prev,

@@ -256,6 +256,10 @@ The following properties are available on each instance:
     <td>Remove <a href="#events">event handlers</a></td>
   </tr>
   <tr>
+    <td><strong>fire(<em>event[, payload]</em>)</strong></td>
+    <td>Fire custom events. <em>This method is primarily designed for plugin authors.</em></td>
+  </tr>
+  <tr>
     <td><strong>parent</strong></td>
     <td>The deck's parent element</td>
   </tr>
