@@ -1,5 +1,5 @@
 /*!
- * Bespoke.js v0.0.1-alpha-17
+ * Bespoke.js v0.0.1-alpha-18
  *
  * Copyright 2013, Mark Dalgleish
  * This content is released under the MIT license
@@ -199,8 +199,7 @@
 		vertical: bindPlugin('vertical'),
 		on: on.bind(null, bespokeListeners),
 		off: off.bind(null, bespokeListeners),
-		plugins: plugins,
-		decks: decks
+		plugins: plugins
 	};
 
 }('bespoke', this, document));

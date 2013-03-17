@@ -191,8 +191,7 @@
 		vertical: bindPlugin('vertical'),
 		on: on.bind(null, bespokeListeners),
 		off: off.bind(null, bespokeListeners),
-		plugins: plugins,
-		decks: decks
+		plugins: plugins
 	};
 
 }('bespoke', this, document));

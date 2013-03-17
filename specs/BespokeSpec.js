@@ -8,6 +8,7 @@
 			NO_OF_SLIDES = 10,
 			article,
 			slides,
+			decks = [],
 			deck;
 
 		beforeEach(function() {
@@ -21,7 +22,7 @@
 
 			document.body.appendChild(article);
 
-			deck = bespoke.from(PARENT_TAG);
+			decks.push((deck = bespoke.from(PARENT_TAG)));
 		});
 
 		afterEach(function() {
@@ -127,24 +128,16 @@
 
 			describe("global 'bespoke' object", function() {
 
-				describe("decks", function() {
-
-					it("should contain a reference to created decks", function() {
-						expect(deck).toBe(bespoke.decks[bespoke.decks.length - 1]);
-					});
-
-				});
-
 				describe("next", function() {
 
 					it("should call 'next' on all deck instances", function() {
-						bespoke.decks.forEach(function(deck) {
+						decks.forEach(function(deck) {
 							deck.next = sinon.spy();
 						});
 
 						bespoke.next();
 
-						bespoke.decks.forEach(function(deck) {
+						decks.forEach(function(deck) {
 							expect(deck.next.called).toBe(true);
 						});
 					});
@@ -154,13 +147,13 @@
 				describe("prev", function() {
 
 					it("should call 'prev' on all deck instances", function() {
-						bespoke.decks.forEach(function(deck) {
+						decks.forEach(function(deck) {
 							deck.prev = sinon.spy();
 						});
 
 						bespoke.prev();
 
-						bespoke.decks.forEach(function(deck) {
+						decks.forEach(function(deck) {
 							expect(deck.prev.called).toBe(true);
 						});
 					});
@@ -170,13 +163,13 @@
 				describe("slide", function() {
 
 					it("should call 'slide' on all deck instances", function() {
-						bespoke.decks.forEach(function(deck) {
+						decks.forEach(function(deck) {
 							deck.slide = sinon.spy();
 						});
 
 						bespoke.slide(0);
 
-						bespoke.decks.forEach(function(deck) {
+						decks.forEach(function(deck) {
 							expect(deck.slide.calledWith(0)).toBe(true);
 						});
 					});
