@@ -1,5 +1,5 @@
 /*!
- * Bespoke.js v0.0.1-alpha-15
+ * Bespoke.js v0.0.1-alpha-16
  *
  * Copyright 2013, Mark Dalgleish
  * This content is released under the MIT license
@@ -47,19 +47,21 @@
 				},
 
 				next = function() {
+					var nextSlideIndex = slides.indexOf(activeSlide) + 1;
+
 					fire(deckListeners, 'next', {
-							slide: activeSlide,
-							index: slides.indexOf(activeSlide)
-						}) &&
-						activate(slides.indexOf(activeSlide) + 1);
+						slide: activeSlide,
+						index: slides.indexOf(activeSlide)
+					}) && activate(nextSlideIndex);
 				},
 
 				prev = function() {
+					var prevSlideIndex = slides.indexOf(activeSlide) - 1;
+
 					fire(deckListeners, 'prev', {
-							slide: activeSlide,
-							index: slides.indexOf(activeSlide)
-						}) &&
-						activate(slides.indexOf(activeSlide) - 1);
+						slide: activeSlide,
+						index: slides.indexOf(activeSlide)
+					}) && activate(prevSlideIndex);
 				},
 
 				deck = {

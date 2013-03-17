@@ -39,19 +39,21 @@
 				},
 
 				next = function() {
+					var nextSlideIndex = slides.indexOf(activeSlide) + 1;
+
 					fire(deckListeners, 'next', {
-							slide: activeSlide,
-							index: slides.indexOf(activeSlide)
-						}) &&
-						activate(slides.indexOf(activeSlide) + 1);
+						slide: activeSlide,
+						index: slides.indexOf(activeSlide)
+					}) && activate(nextSlideIndex);
 				},
 
 				prev = function() {
+					var prevSlideIndex = slides.indexOf(activeSlide) - 1;
+
 					fire(deckListeners, 'prev', {
-							slide: activeSlide,
-							index: slides.indexOf(activeSlide)
-						}) &&
-						activate(slides.indexOf(activeSlide) - 1);
+						slide: activeSlide,
+						index: slides.indexOf(activeSlide)
+					}) && activate(prevSlideIndex);
 				},
 
 				deck = {

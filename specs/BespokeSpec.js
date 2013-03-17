@@ -372,6 +372,18 @@
 						expect(slides[8].className).toMatch(/bespoke-active(\s|$)/);
 					});
 
+					it("shouldn't activate the next slide if event handler activates an earlier slide while on last slide", function() {
+						var activateAnotherSlide = function() { deck.slide(5); };
+
+						deck.slide(deck.slides.length - 1);
+						deck.on("next", activateAnotherSlide);
+						deck.next();
+
+						expect(deck.slides[5].classList.contains('bespoke-active')).toBe(true);
+
+						deck.off("next", activateAnotherSlide);
+					});
+
 				});
 
 				describe("prev", function() {
@@ -392,6 +404,17 @@
 						deck.prev();
 						deck.next();
 						expect(slides[1].className).toMatch(/bespoke-active(\s|$)/);
+					});
+
+					it("shouldn't activate the previous slide if event handler activates a later slide while on first slide", function() {
+						var activateAnotherSlide = function() { deck.slide(5); };
+
+						deck.on("prev", activateAnotherSlide);
+						deck.prev();
+
+						expect(deck.slides[5].classList.contains('bespoke-active')).toBe(true);
+
+						deck.off("prev", activateAnotherSlide);
 					});
 
 				});
