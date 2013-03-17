@@ -10,6 +10,8 @@ Bespoke.js provides the foundation, then gets out of your way so you can focus o
 
 Using keyboard and touch events, Bespoke.js adds classes to your slides, while you provide the CSS transitions.
 
+With its robust plugin system, new functionality can be added to Bespoke.js easily.
+
 ## Download
 
 Download the [production version][min] or the [development version][max].
@@ -27,7 +29,7 @@ To create a Bespoke.js presentation, follow these 3 simple steps:
  * Activate your deck via the [JavaScript API](#javascript)
  * Create a custom style sheet using the [Bespoke.js classes](#css)
 
-Need to extend Bespoke.js? [Write a plugin!](#plugins)
+Need more functionality? [Use an existing plugin](#plugins), or [create a new one](#creating-plugins).
 
 ## Basic Usage
 
@@ -114,6 +116,15 @@ To create your own custom deck styles, Bespoke.js provides the necessary classes
     <td>All slides after the active slive, with <em>n</em> value incrementing</td>
    </tr>
 </table>
+
+## Plugins
+
+The following plugins are available for Bespoke.js.
+
+ - [bespoke-hash](https://github.com/markdalgleish/bespoke-hash) for hash routing.
+ - [bespoke-loop](https://github.com/markdalgleish/bespoke-loop) for looped presentations.
+
+If you'd like your plugin added to this list, [let me know](http://twitter.com/markdalgleish).
 
 ## Advanced Usage
 
@@ -248,11 +259,11 @@ The following properties are available on each instance:
   </tr>
 </table>
 
-## Plugins
+## Creating Plugins
 
 If you need to expand upon the core Bespoke.js feature set, additional functionality can be packaged up as plugins.
 
-### Writing a Basic Plugin
+### Basic Plugins
 
 Plugins are simply functions that are called when presentations are created.
 
