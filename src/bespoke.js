@@ -38,6 +38,13 @@
 						['inactive', offsetClass, offsetClass + '-' + Math.abs(offset)].map(addClass.bind(null, slide));
 				},
 
+				slide = function(index) {
+					fire(deckListeners, 'slide', {
+						slide: slides[index],
+						index: index
+					}) && activate(index);
+				},
+
 				next = function() {
 					var nextSlideIndex = slides.indexOf(activeSlide) + 1;
 
@@ -59,7 +66,7 @@
 				deck = {
 					on: on.bind(null, deckListeners),
 					off: off.bind(null, deckListeners),
-					slide: activate,
+					slide: slide,
 					next: next,
 					prev: prev,
 					parent: parent,

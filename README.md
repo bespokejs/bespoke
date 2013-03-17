@@ -158,11 +158,15 @@ Bespoke.js provides the following events which can be handled with the `on(event
   </tr>
   <tr>
     <td><strong>next</strong></td>
-    <td>The next slide has been requested, even if last slide is active. <em>Return 'false' to cancel event.</em></td>
+    <td>The next slide has been requested, even if last slide is active. <em>Return false to cancel event.</em></td>
   </tr>
   <tr>
     <td><strong>prev</strong></td>
-    <td>The previous slide has been requested, even if first slide is active. <em>Return 'false' to cancel event.</em></td>
+    <td>The previous slide has been requested, even if first slide is active. <em>Return false to cancel event.</em></td>
+  </tr>
+  <tr>
+    <td><strong>slide</strong></td>
+    <td>A specific slide has been requested. <em>Return false to cancel event.</em></td>
   </tr>
 </table>
 
@@ -182,7 +186,7 @@ bespoke.on('next', function(event) {
 
 If you need more information about the presentation, you may need to retain a reference to the individual [deck instance](deck-instances).
 
-*Note: Returning 'false' from a 'next' or 'prev' event handler will prevent default functionality and stop the event from propagating to subsequent event handlers. This allows you to intercept the standard navigation events and manage state within individual slides, allowing [plugins](#plugins) for bullet lists, in-slide animations, etc.*
+*Note: Returning false from a 'next', 'prev' or 'slide' event handler will prevent default functionality and stop the event from propagating to subsequent event handlers. This allows you to intercept the standard navigation events and manage state within individual slides, allowing [plugins](#plugins) for bullet lists, in-slide animations, etc.*
 
 ##### Unbinding events
 
@@ -278,14 +282,14 @@ bespoke.plugins.myPlugin = function(deck) {
 };
 ```
 
-The plugin can now be provided to the second parameter of the `from(selector, [plugins])` method.
+The plugin can now be provided to the second parameter of the `from(selector[, plugins])` method.
 
 ```js
 // Using the plugin
 bespoke.horizontal.from('article', { myPlugin: true });
 ```
 
-*Note: If the value provided is 'false' instead of 'true', your plugin won't run.*
+*Note: If the value provided is `false` instead of `true`, your plugin won't run.*
 
 ### Plugins with Options
 

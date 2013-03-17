@@ -70,6 +70,7 @@ module.exports = function(grunt) {
         bespoke: true,
         describe: true,
         it: true,
+        xit: true,
         expect: true,
         beforeEach: true,
         afterEach: true,

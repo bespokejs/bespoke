@@ -1,5 +1,5 @@
 /*!
- * Bespoke.js v0.0.1-alpha-16
+ * Bespoke.js v0.0.1-alpha-17
  *
  * Copyright 2013, Mark Dalgleish
  * This content is released under the MIT license
@@ -46,6 +46,13 @@
 						['inactive', offsetClass, offsetClass + '-' + Math.abs(offset)].map(addClass.bind(null, slide));
 				},
 
+				slide = function(index) {
+					fire(deckListeners, 'slide', {
+						slide: slides[index],
+						index: index
+					}) && activate(index);
+				},
+
 				next = function() {
 					var nextSlideIndex = slides.indexOf(activeSlide) + 1;
 
@@ -67,7 +74,7 @@
 				deck = {
 					on: on.bind(null, deckListeners),
 					off: off.bind(null, deckListeners),
-					slide: activate,
+					slide: slide,
 					next: next,
 					prev: prev,
 					parent: parent,

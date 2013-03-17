@@ -624,6 +624,45 @@
 
 					});
 
+					describe("slide", function() {
+
+						it("should call handler when specific slide is requested", function() {
+							var callback = sinon.spy();
+
+							deck.on("slide", callback);
+							deck.slide(1);
+
+							expect(callback.callCount).toBe(1);
+						});
+
+						it("should pass payload to 'slide' handler when specific slide is requested", function() {
+							var callback = sinon.spy(),
+								ACTIVE_SLIDE_INDEX = 1,
+								ACTIVE_SLIDE = deck.slides[ACTIVE_SLIDE_INDEX];
+
+							deck.on("slide", callback);
+							deck.slide(ACTIVE_SLIDE_INDEX);
+
+							expect(callback.calledWith({
+								slide: ACTIVE_SLIDE,
+								index: ACTIVE_SLIDE_INDEX
+							})).toBe(true);
+						});
+
+						it("should not activate requested slide if an event handler returns false", function() {
+							var activateCallback = sinon.spy();
+
+							deck.on("activate", activateCallback);
+							deck.on("slide", function() {
+								return false;
+							});
+							deck.slide(1);
+
+							expect(activateCallback.called).toBe(false);
+						});
+
+					});
+
 				});
 
 				describe("parent", function() {
