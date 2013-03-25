@@ -187,7 +187,7 @@
 							expect(callback.called).toBe(true);
 						});
 
-						it("should pass payload to 'slide' handler when slide is activated", function() {
+						it("should pass payload to 'activate' handler when slide is activated", function() {
 							var callback = sinon.spy(),
 								SLIDE_INDEX = 0,
 								ACTIVE_SLIDE = deck.slides[SLIDE_INDEX];
@@ -212,7 +212,7 @@
 							expect(callback.called).toBe(true);
 						});
 
-						it("should pass payload to 'slide' handler once when slide is deactivated", function() {
+						it("should pass payload to 'deactivate' handler once when slide is deactivated", function() {
 							var callback = sinon.spy(),
 								SLIDE_INDEX = 0,
 								DEACTIVATED_SLIDE = deck.slides[SLIDE_INDEX];
@@ -448,7 +448,7 @@
 							expect(callback.called).toBe(true);
 						});
 
-						it("should pass payload to 'activate' handler once when slide is activated", function() {
+						it("should pass payload to 'deactivate' handler once when slide is activated", function() {
 							var callback = sinon.spy(),
 								SLIDE_INDEX = 0,
 								DEACTIVATED_SLIDE = deck.slides[SLIDE_INDEX];
