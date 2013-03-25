@@ -21,6 +21,14 @@ Download the [production version][min] or the [development version][max].
 
 Bespoke.js requires a modern browser with [ES5 support](http://kangax.github.com/es5-compat-table/). If supporting old IE is your thing, there's always [es5-shim](https://github.com/kriskowal/es5-shim) and [classList.js](https://github.com/eligrey/classList.js).
 
+### Bower
+
+Bespoke.js can be installed from [Bower](http://twitter.github.com/bower/) using the following command:
+
+```bash
+$ bower install bespoke.js
+```
+
 ## Getting Started
 
 To create a Bespoke.js presentation, follow these 3 simple steps:
