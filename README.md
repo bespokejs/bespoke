@@ -29,6 +29,16 @@ Bespoke.js can be installed from [Bower](http://twitter.github.com/bower/) using
 $ bower install bespoke.js
 ```
 
+## Demo
+
+[View the demo](http://markdalgleish.com/projects/bespoke.js) at the official [Bespoke.js project page](http://markdalgleish.com/projects/bespoke.js).
+
+### Presentations
+
+ - [Rapid Web App Dev With Yeoman](http://mjt01.github.com/slides-yeoman/) by [Michael Taranto](http://twitter.com/michaeltaranto)
+
+Made a presentation with Bespoke.js? [Let me know](http://twitter.com/markdalgleish).
+
 ## Getting Started
 
 To create a Bespoke.js presentation, follow these 3 simple steps:
