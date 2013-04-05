@@ -35,6 +35,7 @@ $ bower install bespoke.js
 
 ### Presentations
 
+ - [DIY Presentations With Bespoke.js](http://markdalgleish.com/presentations/bespoke.js/) by [Mark Dalgleish](http://twitter.com/markdalgleish)
  - [Rapid Web App Dev With Yeoman](http://mjt01.github.com/slides-yeoman/) by [Michael Taranto](http://twitter.com/michaeltaranto)
 
 Made a presentation with Bespoke.js? [Let me know](http://twitter.com/markdalgleish).
