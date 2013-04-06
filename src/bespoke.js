@@ -119,9 +119,7 @@
 		},
 
 		removeClass = function(el, cls) {
-			el.className = el.className
-				.replace(new RegExp(moduleName + '-' + cls +'(\\s|$)', 'g'), ' ')
-				.replace(/^\s+|\s+$/g, '');
+			el.classList.remove(moduleName + '-' + cls);
 		},
 
 		callOnAllInstances = function(method) {
