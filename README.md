@@ -142,10 +142,10 @@ If you've created an awesome theme you'd like me to share, [let me know](http://
 
 The following plugins are available for Bespoke.js.
 
- - [bespoke-vcr](https://github.com/markdalgleish/bespoke-vcr) for recording and playback.
  - [bespoke-bullets](https://github.com/markdalgleish/bespoke-bullets) for animated bullet lists.
  - [bespoke-hash](https://github.com/markdalgleish/bespoke-hash) for hash routing.
  - [bespoke-loop](https://github.com/markdalgleish/bespoke-loop) for looped presentations.
+ - [bespoke-vcr](https://github.com/markdalgleish/bespoke-vcr) for recording and playback.
  - [bespoke-spotlight](https://github.com/mobz/bespoke-spotlight) by [@mobz](http://twitter.com/mobz), for quick-searching slide content.
 
 If you'd like your plugin added to this list, [let me know](http://twitter.com/markdalgleish).
