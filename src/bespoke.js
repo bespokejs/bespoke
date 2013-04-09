@@ -74,8 +74,6 @@
 					slides: slides
 				};
 
-			activate(0);
-
 			addClass(parent, 'parent');
 			
 			slides.map(function(slide) {
@@ -86,6 +84,8 @@
 				var config = selectedPlugins[pluginName];
 				config && plugins[pluginName](deck, config === true ? {} : config);
 			});
+
+			activate(0);
 
 			decks.push(deck);
 

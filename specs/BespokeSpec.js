@@ -791,14 +791,21 @@
 
 					describe("custom", function() {
 
-						var testPlugin;
+						var testPlugin,
+							onActivate;
 
 						beforeEach(function() {
 							bespoke.plugins.testPlugin = testPlugin = sinon.spy();
+							
+							bespoke.plugins.onActivatePlugin = function(deck) {
+								onActivate = sinon.spy();
+								deck.on('activate', onActivate);
+							};
 						});
 
 						afterEach(function() {
 							delete bespoke.plugins.testPlugin;
+							delete bespoke.plugins.onActivatePlugin;
 						});
 
 						it("should pass the deck instance as the first parameter", function() {
@@ -819,6 +826,11 @@
 						it("should not run the plugin if option is 'false'", function() {
 							bespoke.from("article", { testPlugin: false });
 							expect(testPlugin.called).toBe(false);
+						});
+
+						it("should call any 'activate' event handlers immediately", function() {
+							bespoke.from("article", { onActivatePlugin: true });
+							expect(onActivate.called).toBe(true);
 						});
 
 					});

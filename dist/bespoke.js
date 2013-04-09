@@ -1,5 +1,5 @@
 /*!
- * Bespoke.js v0.1.0
+ * Bespoke.js v0.1.1
  *
  * Copyright 2013, Mark Dalgleish
  * This content is released under the MIT license
@@ -82,8 +82,6 @@
 					slides: slides
 				};
 
-			activate(0);
-
 			addClass(parent, 'parent');
 			
 			slides.map(function(slide) {
@@ -94,6 +92,8 @@
 				var config = selectedPlugins[pluginName];
 				config && plugins[pluginName](deck, config === true ? {} : config);
 			});
+
+			activate(0);
 
 			decks.push(deck);
 
