@@ -170,48 +170,57 @@ bespoke.slide(0);
 
 ### Events
 
-Bespoke.js provides the following events which can be handled with the `on(event, callback)` method.
-
-<table>
-  <tr>
-    <td><strong>activate</strong></td>
-    <td>A slide has been activated</td>
-  </tr>
-  <tr>
-    <td><strong>deactivate</strong></td>
-    <td>A slide has been deactivated</td>
-  </tr>
-  <tr>
-    <td><strong>next</strong></td>
-    <td>The next slide has been requested, even if last slide is active. <em>Return false to cancel event.</em></td>
-  </tr>
-  <tr>
-    <td><strong>prev</strong></td>
-    <td>The previous slide has been requested, even if first slide is active. <em>Return false to cancel event.</em></td>
-  </tr>
-  <tr>
-    <td><strong>slide</strong></td>
-    <td>A specific slide has been requested. <em>Return false to cancel event.</em></td>
-  </tr>
-</table>
-
 ##### Binding Events
 
-Each event is passed an event object containing a reference to the current slide and its index.
+Each event is passed an event object containing a reference to the relevant slide and its index.
 
 ```js
-bespoke.on('next', function(event) {
-  event.slide; // Activated slide
-  event.index; // Index of activated slide
+bespoke.on(eventName, function(event) {
+  event.slide; // Relevant slide
+  event.index; // Index of relevant slide
 
-  // Prevent default functionality and stop propagation
+  // Prevent default functionality (for user interaction events only)
   return false;
 });
 ```
 
-If you need more information about the presentation, you may need to retain a reference to the individual [deck instance](deck-instances).
+If you need more detail about the deck in your event handlers, you may need to retain a reference to the individual [deck instance](deck-instances).
 
-*Note: Returning false from a 'next', 'prev' or 'slide' event handler will prevent default functionality and stop the event from propagating to subsequent event handlers. This allows you to intercept the standard navigation events and manage state within individual slides, allowing [plugins](#plugins) for bullet lists, in-slide animations, etc.*
+##### Standard Events
+
+In most cases, you will only need to use these standard events.
+
+<table>
+  <tr>
+    <td><strong>activate</strong></td>
+    <td>A slide has been activated. <strong>event.slide</strong> is the <em>activated</em> slide.</td>
+  </tr>
+  <tr>
+    <td><strong>deactivate</strong></td>
+    <td>A slide has been deactivated. <strong>event.slide</strong> is the <em>deactivated</em> slide.</td>
+  </tr>
+</table>
+
+##### User Interaction Events
+
+These events are fired when the user has interacted with the presentation, but *before* their interaction has had any effect.
+
+This allows you to intercept the default behaviour by returning `false` from the event handler.
+
+<table>
+  <tr>
+    <td><strong>next</strong></td>
+    <td>The next slide has been requested, even if last slide is active. <strong>event.slide</strong> is the <em>current</em> slide.</td>
+  </tr>
+  <tr>
+    <td><strong>prev</strong></td>
+    <td>The previous slide has been requested, even if first slide is active. <strong>event.slide</strong> is the <em>current</em> slide.</td>
+  </tr>
+  <tr>
+    <td><strong>slide</strong></td>
+    <td>A specific slide has been requested. <strong>event.slide</strong> is the <em>requested</em> slide.</td>
+  </tr>
+</table>
 
 ##### Unbinding events
 
