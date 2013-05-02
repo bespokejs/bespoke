@@ -345,7 +345,7 @@ If your plugin needs some configurability, options can be passed through as the 
 ```js
 // Creating the plugin with options
 bespoke.plugins.myPlugin = function(deck, options) {
-  options.showTotal = options.showTotal || true;
+  options.showTotal = options.showTotal !== undefined ? options.showTotal || true;
 
   deck.on('activate', function(e) {
     console.log('Activated slide ' + (e.index + 1) +
