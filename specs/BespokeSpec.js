@@ -377,6 +377,16 @@
 						deck.off("next", activateAnotherSlide);
 					});
 
+					it("should merge the custom user payload with the event object", function() {
+						var event;
+						deck.on("next", function(e) {
+							event = e;
+						});
+						deck.next({ foo: "bar" });
+
+						expect(event.foo).toBe("bar");
+					});
+
 				});
 
 				describe("prev", function() {
@@ -410,6 +420,16 @@
 						deck.off("prev", activateAnotherSlide);
 					});
 
+					it("should merge the custom user payload with the event object", function() {
+						var event;
+						deck.on("prev", function(e) {
+							event = e;
+						});
+						deck.prev({ foo: "bar" });
+
+						expect(event.foo).toBe("bar");
+					});
+
 				});
 
 				describe("on", function() {
@@ -437,6 +457,37 @@
 							})).toBe(true);
 						});
 
+						it("should pass merged payload to 'activate' handler when next slide is activated with user payload", function() {
+							var event;
+							deck.on("activate", function(e) {
+								event = e;
+							});
+							deck.next({ foo: "bar" });
+
+							expect(event.foo).toBe("bar");
+						});
+
+						it("should pass merged payload to 'activate' handler when previous slide is activated with user payload", function() {
+							var event;
+							deck.slide(1);
+							deck.on("activate", function(e) {
+								event = e;
+							});
+							deck.prev({ foo: "bar" });
+
+							expect(event.foo).toBe("bar");
+						});
+
+						it("should pass merged payload to 'deactivate' handler when specific slide is activated with user payload", function() {
+							var event;
+							deck.on("activate", function(e) {
+								event = e;
+							});
+							deck.slide(1, { foo: "bar" });
+
+							expect(event.foo).toBe("bar");
+						});
+
 					});
 
 					describe("deactivate", function() {
@@ -461,6 +512,37 @@
 								index: SLIDE_INDEX
 							})).toBe(true);
 							expect(callback.callCount).toBe(1);
+						});
+
+						it("should pass merged payload to 'deactivate' handler when next slide is activated with user payload", function() {
+							var event;
+							deck.on("deactivate", function(e) {
+								event = e;
+							});
+							deck.next({ foo: "bar" });
+
+							expect(event.foo).toBe("bar");
+						});
+
+						it("should pass merged payload to 'deactivate' handler when previous slide is activated with user payload", function() {
+							var event;
+							deck.slide(1);
+							deck.on("deactivate", function(e) {
+								event = e;
+							});
+							deck.prev({ foo: "bar" });
+
+							expect(event.foo).toBe("bar");
+						});
+
+						it("should pass merged payload to 'deactivate' handler when specific slide is activated with user payload", function() {
+							var event;
+							deck.on("deactivate", function(e) {
+								event = e;
+							});
+							deck.slide(1, { foo: "bar" });
+
+							expect(event.foo).toBe("bar");
 						});
 
 					});
@@ -652,6 +734,16 @@
 							deck.slide(1);
 
 							expect(activateCallback.called).toBe(false);
+						});
+
+						it("should merge the custom user payload with the event object", function() {
+							var event;
+							deck.on("slide", function(e) {
+								event = e;
+							});
+							deck.slide(0, { foo: "bar" });
+
+							expect(event.foo).toBe("bar");
 						});
 
 					});
