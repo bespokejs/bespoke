@@ -127,7 +127,7 @@ To create your own custom deck styles, Bespoke.js provides the necessary classes
    </tr>
    <tr>
     <td><b>bespoke-before-<em>n</em></b></td>
-    <td>All slides before the active slive, with <em>n</em> value incrementing</td>
+    <td>All slides before the active slide, with <em>n</em> value incrementing</td>
    </tr>
    <tr>
     <td><b>bespoke-after</b></td>
@@ -135,7 +135,7 @@ To create your own custom deck styles, Bespoke.js provides the necessary classes
    </tr>
    <tr>
     <td><b>bespoke-after-<em>n</em></b></td>
-    <td>All slides after the active slive, with <em>n</em> value incrementing</td>
+    <td>All slides after the active slide, with <em>n</em> value incrementing</td>
    </tr>
 </table>
 
