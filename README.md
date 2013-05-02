@@ -267,20 +267,22 @@ The global `bespoke` API interacts with all deck instances. For example, calling
 
 ##### Deck Instance Properties
 
-The following properties are available on each instance:
+The following properties are available on each instance.
+
+*Note: The optional [`eventData`](#custom-event-data) parameter is an object that will be merged with the `event` object in subsequent [event handlers](#events).*
 
 <table>
   <tr>
-    <td><strong>next()</strong></td>
-    <td>Next slide</td>
+    <td><strong>next(<em>[eventData]</em>)</strong></td>
+    <td>Next slide.</td>
   </tr>
   <tr>
-    <td><strong>prev()</strong></td>
-    <td>Previous slide</td>
+    <td><strong>prev(<em>[eventData]</em>)</strong></td>
+    <td>Previous slide.</td>
   </tr>
   <tr>
-    <td><strong>slide(<em>index</em>)</strong></td>
-    <td>Activate a specific slide by index</td>
+    <td><strong>slide(<em>index[, eventData]</em>)</strong></td>
+    <td>Activate a specific slide by index.</td>
   </tr>
   <tr>
     <td><strong>on(<em>event, callback</em>)</strong></td>
@@ -291,7 +293,7 @@ The following properties are available on each instance:
     <td>Remove <a href="#events">event handlers</a></td>
   </tr>
   <tr>
-    <td><strong>fire(<em>event[, payload]</em>)</strong></td>
+    <td><strong>fire(<em>event[, eventData]</em>)</strong></td>
     <td>Fire custom events. <em>This method is primarily designed for plugin authors.</em></td>
   </tr>
   <tr>
@@ -357,6 +359,32 @@ bespoke.from('article', {
     showTotal: true
   }
 });
+```
+
+### Custom Event Data
+
+Additional event data can be supplied to `next`, `prev` and `slide`, which is merged with the final `event` object in subsequent event handlers.
+
+This functionality is particularly useful if you need to differentiate between events caused by your plugin, and those caused by your end users or other plugins.
+
+```js
+bespoke.plugins.myPlugin = function(deck) {
+
+  // Differentiating our plugin's events
+  deck.on('activate', function(event) {
+    if (event.foo === 'bar') {
+      // Triggered by my plugin...
+    } else {
+      // Triggered by end user, or another plugin...
+    }
+  });
+
+  // Providing custom event data
+  deck.next({
+    foo: 'bar'
+  });
+
+};
 ```
 
 ## Questions?
