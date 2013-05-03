@@ -147,6 +147,7 @@ The following plugins are available for Bespoke.js.
 
  - [bespoke-bullets](https://github.com/markdalgleish/bespoke-bullets) for animated bullet lists.
  - [bespoke-hash](https://github.com/markdalgleish/bespoke-hash) for hash routing.
+ - [bespoke-state](https://github.com/markdalgleish/bespoke-state) for slide-specific deck styles.
  - [bespoke-loop](https://github.com/markdalgleish/bespoke-loop) for looped presentations.
  - [bespoke-vcr](https://github.com/markdalgleish/bespoke-vcr) for recording and playback.
  - [bespoke-spotlight](https://github.com/mobz/bespoke-spotlight) by [@mobz](http://twitter.com/mobz), for quick-searching slide content.
