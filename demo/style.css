@@ -249,6 +249,9 @@ section.bespoke-active {
 	opacity: 1;
 	z-index: 1;
 }
+section.bespoke-inactive {
+	pointer-events: none;
+}
 
 @media only screen and (max-width: 768px) {
 	body {
