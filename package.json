@@ -11,16 +11,20 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "grunt jasmine"
+    "test": "grunt"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/markdalgleish/bespoke.js.git"
   },
   "devDependencies": {
-    "grunt": "~0.3.17",
-    "grunt-jasmine-runner": "~0.6.0",
-    "temporary": "0.0.5"
+    "grunt": "~0.4.1",
+    "grunt-contrib-watch": "~0.4.4",
+    "grunt-contrib-clean": "~0.4.1",
+    "grunt-contrib-jshint": "~0.5.4",
+    "grunt-contrib-jasmine": "~0.4.2",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.2.2"
   },
   "licenses": [
     {

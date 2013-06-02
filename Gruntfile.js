@@ -2,11 +2,9 @@
 module.exports = function(grunt) {
   'use strict';
 
-  grunt.loadNpmTasks('grunt-jasmine-runner');
-
   // Project configuration.
   grunt.initConfig({
-    pkg: '<json:package.json>',
+    pkg: grunt.file.readJSON('package.json'),
     meta: {
       banner: '/*!\n' +
         ' * <%= pkg.title || pkg.name %> v<%= pkg.version %>\n' +
@@ -16,35 +14,47 @@ module.exports = function(grunt) {
         ' * This content is released under the' +
         ' <%= _.pluck(pkg.licenses, "type").join(", ") %> license<%= pkg.licenses.length === 1 ? "" : "s" %>\n' +
         ' * <%= _.pluck(pkg.licenses, "url").join(", ") %>\n' +
-        ' */',
+        ' */\n\n',
       microbanner: '/*! <%= pkg.title || pkg.name %> v<%= pkg.version %> ' +
         '© <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>, ' +
-        'Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
+        'Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n'
+    },
+    clean: {
+      files: ['dist']
     },
     concat: {
+      options: {
+        banner: '<%= meta.banner %>',
+        stripBanners: true
+      },
       dist: {
-        src: ['<banner:meta.banner>', '<file_strip_banner:src/<%= pkg.name %>.js>'],
+        src: ['src/<%= pkg.name %>.js'],
         dest: 'dist/<%= pkg.name %>.js'
       }
     },
-    min: {
+    uglify: {
+      options: {
+        banner: '<%= meta.microbanner %>',
+        report: 'gzip'
+      },
       dist: {
-        src: ['<banner:meta.microbanner>', '<config:concat.dist.dest>'],
-        dest: 'dist/<%= pkg.name %>.min.js'
+        files: {
+          'dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+        }
       }
     },
     jasmine: {
       src: ['libs/**/*.js', 'src/**/*.js'],
-      specs: 'specs/**/*Spec.js'
-    },
-    lint: {
-      files: ['grunt.js', 'src/**/*.js', 'specs/**/*.js', 'demo/**/*.js']
+      options: {
+        specs: 'specs/**/*Spec.js'
+      }
     },
     watch: {
-      files: '<config:lint.files>',
+      files: '<%= jshint.src %>',
       tasks: 'lint jasmine'
     },
     jshint: {
+      src: ['Gruntfile.js', 'src/**/*.js', 'specs/**/*.js', 'demo/**/*.js'],
       options: {
         curly: true,
         eqeqeq: true,
@@ -60,29 +70,35 @@ module.exports = function(grunt) {
         browser: true,
         trailing: true,
         unused: true,
-        es5: true,
         strict: false,
         maxcomplexity: 4,
         maxparams: 5,
-        maxdepth: 2
-      },
-      globals: {
-        bespoke: true,
-        describe: true,
-        it: true,
-        xit: true,
-        expect: true,
-        beforeEach: true,
-        afterEach: true,
-        runs: true,
-        waitsFor: true,
-        sinon: true
+        maxdepth: 2,
+        globals: {
+          bespoke: true,
+          describe: true,
+          it: true,
+          xit: true,
+          expect: true,
+          beforeEach: true,
+          afterEach: true,
+          runs: true,
+          waitsFor: true,
+          sinon: true
+        }
       }
-    },
-    uglify: {}
+    }
   });
 
+  // Grunt plugins
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+
   // Default task.
-  grunt.registerTask('default', 'lint jasmine concat min');
+  grunt.registerTask('default', ['clean', 'jshint', 'jasmine', 'concat', 'uglify']);
 
 };
