@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "grunt": "~0.4.1",
+    "grunt-cli": "~0.1.9",
     "grunt-contrib-watch": "~0.4.4",
     "grunt-contrib-clean": "~0.4.1",
     "grunt-contrib-jshint": "~0.5.4",
