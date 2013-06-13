@@ -34,13 +34,11 @@ module.exports = function(grunt) {
     },
     uglify: {
       options: {
-        banner: '<%= meta.microbanner %>',
-        report: 'gzip'
+        banner: '<%= meta.microbanner %>'
       },
       dist: {
-        files: {
-          'dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
-        }
+        src: ['<%= concat.dist.dest %>'],
+        dest: 'dist/<%= pkg.name %>.min.js'
       }
     },
     jasmine: {
@@ -87,6 +85,13 @@ module.exports = function(grunt) {
           sinon: true
         }
       }
+    },
+    micro: {
+      src: '<%= uglify.dist.dest %>',
+      options: {
+        limit: 1024,
+        gzip: true
+      }
     }
   });
 
@@ -97,8 +102,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-micro');
 
   // Default task.
-  grunt.registerTask('default', ['clean', 'jshint', 'jasmine', 'concat', 'uglify']);
+  grunt.registerTask('default', ['clean', 'jshint', 'jasmine', 'concat', 'uglify', 'micro']);
 
 };
