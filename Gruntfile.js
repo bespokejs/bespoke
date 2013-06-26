@@ -49,7 +49,7 @@ module.exports = function(grunt) {
     },
     watch: {
       files: '<%= jshint.src %>',
-      tasks: 'lint jasmine'
+      tasks: ['default']
     },
     jshint: {
       src: ['Gruntfile.js', 'src/**/*.js', 'specs/**/*.js', 'demo/**/*.js'],
