@@ -75,7 +75,7 @@
 				};
 
 			addClass(parent, 'parent');
-			
+
 			slides.map(function(slide) {
 				addClass(slide, 'slide');
 			});
