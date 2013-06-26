@@ -141,13 +141,17 @@
 				document.addEventListener('keydown', function(e) {
 					var key = e.which;
 
-					if (axis === 'X') {
-						key === 37 && deck.prev();
-						(key === 32 || key === 39) && deck.next();
-					} else {
-						key === 38 && deck.prev();
-						(key === 32 || key === 40) && deck.next();
-					}
+					(
+						key === 34 || // PAGE DOWN
+						key === 32 || // SPACE
+						axis === 'X' && key === 39 || // RIGHT
+						axis === 'Y' && key === 40 // BOTTOM
+					) && deck.next();
+					(
+						key === 33 || // PAGE UP
+						axis === 'X' && key === 37 || // LEFT
+						axis === 'Y' && key === 38 // TOP
+					) && deck.prev();
 				});
 
 				deck.parent.addEventListener('touchstart', function(e) {
