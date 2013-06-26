@@ -127,7 +127,7 @@
 		callOnAllInstances = function(method) {
 			return function(arg) {
 				decks.map(function(deck) {
-					deck[method].call(null, arg);
+					deck[method](arg);
 				});
 			};
 		},
