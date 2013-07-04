@@ -11,20 +11,20 @@
 			var parent = document.querySelector(selector),
 				slides = [].slice.call(parent.children, 0),
 				activeSlide = slides[0],
-				deckListeners = {},
+				listeners = {},
 
 				activate = function(index, customData) {
 					if (!slides[index]) {
 						return;
 					}
 
-					fire(deckListeners, 'deactivate', createEventData(activeSlide, customData));
+					fire('deactivate', createEventData(activeSlide, customData));
 
 					activeSlide = slides[index];
 
 					slides.map(deactivate);
 
-					fire(deckListeners, 'activate', createEventData(activeSlide, customData));
+					fire('activate', createEventData(activeSlide, customData));
 
 					addClass(activeSlide, 'active');
 					removeClass(activeSlide, 'inactive');
@@ -41,19 +41,36 @@
 				},
 
 				slide = function(index, customData) {
-					fire(deckListeners, 'slide', createEventData(slides[index], customData)) && activate(index, customData);
+					fire('slide', createEventData(slides[index], customData)) && activate(index, customData);
 				},
 
 				next = function(customData) {
 					var nextSlideIndex = slides.indexOf(activeSlide) + 1;
 
-					fire(deckListeners, 'next', createEventData(activeSlide, customData)) && activate(nextSlideIndex, customData);
+					fire('next', createEventData(activeSlide, customData)) && activate(nextSlideIndex, customData);
 				},
 
 				prev = function(customData) {
 					var prevSlideIndex = slides.indexOf(activeSlide) - 1;
 
-					fire(deckListeners, 'prev', createEventData(activeSlide, customData)) && activate(prevSlideIndex, customData);
+					fire('prev', createEventData(activeSlide, customData)) && activate(prevSlideIndex, customData);
+				},
+
+				on = function(eventName, callback) {
+					(listeners[eventName] || (listeners[eventName] = [])).push(callback);
+				},
+
+				off = function(eventName, callback) {
+					listeners[eventName] = (listeners[eventName] || []).filter(function(listener) {
+						return listener !== callback;
+					});
+				},
+
+				fire = function(eventName, eventData) {
+					return (listeners[eventName] || [])
+						.reduce(function(notCancelled, callback) {
+							return notCancelled && callback(eventData) !== false;
+						}, true);
 				},
 
 				createEventData = function(slide, eventData) {
@@ -64,9 +81,9 @@
 				},
 
 				deck = {
-					on: on.bind(null, deckListeners),
-					off: off.bind(null, deckListeners),
-					fire: fire.bind(null, deckListeners),
+					on: on,
+					off: off,
+					fire: fire,
 					slide: slide,
 					next: next,
 					prev: prev,
@@ -93,26 +110,6 @@
 		},
 
 		decks = [],
-
-		bespokeListeners = {},
-
-		on = function(listeners, eventName, callback) {
-			(listeners[eventName] || (listeners[eventName] = [])).push(callback);
-		},
-
-		off = function(listeners, eventName, callback) {
-			listeners[eventName] = (listeners[eventName] || []).filter(function(listener) {
-				return listener !== callback;
-			});
-		},
-
-		fire = function(listeners, eventName, eventData) {
-			return (listeners[eventName] || [])
-				.concat((listeners !== bespokeListeners && bespokeListeners[eventName]) || [])
-				.reduce(function(notCancelled, callback) {
-					return notCancelled && callback(eventData) !== false;
-				}, true);
-		},
 
 		addClass = function(el, cls) {
 			el.classList.add(moduleName + '-' + cls);
@@ -194,8 +191,6 @@
 		prev: callOnAllInstances('prev'),
 		horizontal: bindPlugin('horizontal'),
 		vertical: bindPlugin('vertical'),
-		on: on.bind(null, bespokeListeners),
-		off: off.bind(null, bespokeListeners),
 		plugins: plugins
 	};
 

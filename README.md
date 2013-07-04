@@ -179,78 +179,6 @@ bespoke.prev();
 bespoke.slide(0);
 ```
 
-### Events
-
-##### Binding Events
-
-Each event is passed an event object containing a reference to the relevant slide and its index.
-
-```js
-bespoke.on(eventName, function(event) {
-  event.slide; // Relevant slide
-  event.index; // Index of relevant slide
-
-  // Prevent default functionality (for user interaction events only)
-  return false;
-});
-```
-
-If you need more detail about the deck in your event handlers, you may need to retain a reference to the individual [deck instance](deck-instances).
-
-##### Standard Events
-
-In most cases, you will only need to use these standard events.
-
-<table>
-  <tr>
-    <td><strong>activate</strong></td>
-    <td>A slide has been activated. <strong>event.slide</strong> is the <em>activated</em> slide.</td>
-  </tr>
-  <tr>
-    <td><strong>deactivate</strong></td>
-    <td>A slide has been deactivated. <strong>event.slide</strong> is the <em>deactivated</em> slide.</td>
-  </tr>
-</table>
-
-##### User Interaction Events
-
-These events are fired when the user has interacted with the presentation, but *before* their interaction has had any effect.
-
-This allows you to intercept the default behaviour by returning `false` from the event handler.
-
-<table>
-  <tr>
-    <td><strong>next</strong></td>
-    <td>The next slide has been requested, even if last slide is active. <strong>event.slide</strong> is the <em>current</em> slide.</td>
-  </tr>
-  <tr>
-    <td><strong>prev</strong></td>
-    <td>The previous slide has been requested, even if first slide is active. <strong>event.slide</strong> is the <em>current</em> slide.</td>
-  </tr>
-  <tr>
-    <td><strong>slide</strong></td>
-    <td>A specific slide has been requested. <strong>event.slide</strong> is the <em>requested</em> slide.</td>
-  </tr>
-</table>
-
-##### Unbinding events
-
-Events handlers can be removed with the `off(event, callback)` method.
-
-*Note: To remove an event handler, you must retain a reference to the original function.*
-
-```js
-var myEventHandler = function() {
-  // Do something...
-};
-
-// Bind event
-bespoke.on('activate', myEventHandler);
-
-// Unbind event
-bespoke.off('activate', myEventHandler);
-```
-
 ### Deck Instances
 
 ##### Creating Deck Instances
@@ -313,6 +241,76 @@ The following properties are available on each instance.
     <td>An array of slide elements</td>
   </tr>
 </table>
+
+### Events
+
+##### Binding Events
+
+Events are bound via the [deck instance](deck-instances). Each event is passed an event object containing a reference to the relevant slide and its index.
+
+```js
+deck.on(eventName, function(event) {
+  event.slide; // Relevant slide
+  event.index; // Index of relevant slide
+
+  // Prevent default functionality (for user interaction events only)
+  return false;
+});
+```
+
+##### Standard Events
+
+In most cases, you will only need to use these standard events.
+
+<table>
+  <tr>
+    <td><strong>activate</strong></td>
+    <td>A slide has been activated. <strong>event.slide</strong> is the <em>activated</em> slide.</td>
+  </tr>
+  <tr>
+    <td><strong>deactivate</strong></td>
+    <td>A slide has been deactivated. <strong>event.slide</strong> is the <em>deactivated</em> slide.</td>
+  </tr>
+</table>
+
+##### User Interaction Events
+
+These events are fired when the user has interacted with the presentation, but *before* their interaction has had any effect.
+
+This allows you to intercept the default behaviour by returning `false` from the event handler.
+
+<table>
+  <tr>
+    <td><strong>next</strong></td>
+    <td>The next slide has been requested, even if last slide is active. <strong>event.slide</strong> is the <em>current</em> slide.</td>
+  </tr>
+  <tr>
+    <td><strong>prev</strong></td>
+    <td>The previous slide has been requested, even if first slide is active. <strong>event.slide</strong> is the <em>current</em> slide.</td>
+  </tr>
+  <tr>
+    <td><strong>slide</strong></td>
+    <td>A specific slide has been requested. <strong>event.slide</strong> is the <em>requested</em> slide.</td>
+  </tr>
+</table>
+
+##### Unbinding events
+
+Events handlers can be removed with the `off(event, callback)` method.
+
+*Note: To remove an event handler, you must retain a reference to the original function.*
+
+```js
+var myEventHandler = function() {
+  // Do something...
+};
+
+// Bind event
+deck.on('activate', myEventHandler);
+
+// Unbind event
+deck.off('activate', myEventHandler);
+```
 
 ## Creating Plugins
 
