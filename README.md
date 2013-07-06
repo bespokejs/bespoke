@@ -296,20 +296,15 @@ This allows you to intercept the default behaviour by returning `false` from the
 
 ##### Unbinding events
 
-Events handlers can be removed with the `off(event, callback)` method.
-
-*Note: To remove an event handler, you must retain a reference to the original function.*
+When binding events, the `on` method returns a function that can be used to remove the event handler.
 
 ```js
-var myEventHandler = function() {
-  // Do something...
-};
-
-// Bind event
-deck.on('activate', myEventHandler);
+var off = deck.on('activate', function() {
+  // ...
+});
 
 // Unbind event
-deck.off('activate', myEventHandler);
+off();
 ```
 
 ## Creating Plugins

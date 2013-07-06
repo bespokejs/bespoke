@@ -50,12 +50,12 @@
 
 				on = function(eventName, callback) {
 					(listeners[eventName] || (listeners[eventName] = [])).push(callback);
-				},
 
-				off = function(eventName, callback) {
-					listeners[eventName] = (listeners[eventName] || []).filter(function(listener) {
-						return listener !== callback;
-					});
+					return function() {
+						listeners[eventName] = listeners[eventName].filter(function(listener) {
+							return listener !== callback;
+						});
+					};
 				},
 
 				fire = function(eventName, eventData) {
@@ -74,7 +74,6 @@
 
 				deck = {
 					on: on,
-					off: off,
 					fire: fire,
 					slide: slide,
 					next: next,

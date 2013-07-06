@@ -206,12 +206,12 @@
 						var activateAnotherSlide = function() { deck.slide(5); };
 
 						deck.slide(deck.slides.length - 1);
-						deck.on("next", activateAnotherSlide);
+						var off = deck.on("next", activateAnotherSlide);
 						deck.next();
 
 						expect(deck.slides[5].classList.contains('bespoke-active')).toBe(true);
 
-						deck.off("next", activateAnotherSlide);
+						off();
 					});
 
 					it("should merge the custom user payload with the event object", function() {
@@ -249,12 +249,12 @@
 					it("shouldn't activate the previous slide if event handler activates a later slide while on first slide", function() {
 						var activateAnotherSlide = function() { deck.slide(5); };
 
-						deck.on("prev", activateAnotherSlide);
+						var off = deck.on("prev", activateAnotherSlide);
 						deck.prev();
 
 						expect(deck.slides[5].classList.contains('bespoke-active')).toBe(true);
 
-						deck.off("prev", activateAnotherSlide);
+						off();
 					});
 
 					it("should merge the custom user payload with the event object", function() {
@@ -270,6 +270,16 @@
 				});
 
 				describe("on", function() {
+
+					it("should return a function to unbind the event", function() {
+						var callback = sinon.spy();
+						var off = deck.on("foo", callback);
+						deck.fire("foo");
+						expect(callback.callCount).toBe(1);
+						off();
+						deck.fire("foo");
+						expect(callback.callCount).toBe(1);
+					});
 
 					describe("activate", function() {
 
