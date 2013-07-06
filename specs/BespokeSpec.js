@@ -752,19 +752,14 @@
 							expect(testPlugin.calledWith(deck)).toBe(true);
 						});
 
-						it("should pass a blank object as the second parameter if option is 'true'", function() {
+						it("should pass 'true' as the second parameter if option is 'true'", function() {
 							var deck = bespoke.from("article", { testPlugin: true });
-							expect(testPlugin.calledWith(deck, {})).toBe(true);
+							expect(testPlugin.calledWith(deck, true)).toBe(true);
 						});
 
 						it("should pass the options hash as the second parameter", function() {
 							var deck = bespoke.from("article", { testPlugin: { foo: 'bar' } });
 							expect(testPlugin.calledWith(deck, { foo: 'bar' })).toBe(true);
-						});
-
-						it("should not run the plugin if option is 'false'", function() {
-							bespoke.from("article", { testPlugin: false });
-							expect(testPlugin.called).toBe(false);
 						});
 
 						it("should call any 'activate' event handlers immediately", function() {

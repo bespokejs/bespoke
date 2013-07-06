@@ -97,8 +97,7 @@
 			});
 
 			Object.keys(selectedPlugins || {}).map(function(pluginName) {
-				var config = selectedPlugins[pluginName];
-				config && plugins[pluginName](deck, config === true ? {} : config);
+				plugins[pluginName](deck, selectedPlugins[pluginName]);
 			});
 
 			activate(0);

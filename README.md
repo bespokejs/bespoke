@@ -335,22 +335,18 @@ The plugin can now be provided to the second parameter of the `from(selector[, p
 bespoke.horizontal.from('article', { myPlugin: true });
 ```
 
-*Note: If the value provided is `false` instead of `true`, your plugin won't run.*
-
 ### Plugins with Options
 
 If your plugin needs some configurability, options can be passed through as the second parameter.
 
-*Note: The 'options' parameter is an empty object if no options are provided.*
-
 ```js
 // Creating the plugin with options
 bespoke.plugins.myPlugin = function(deck, options) {
-  options.showTotal = options.showTotal !== undefined ? options.showTotal || true;
+  var showTotal = options && options.showTotal;
 
   deck.on('activate', function(e) {
     console.log('Activated slide ' + (e.index + 1) +
-      (options.showTotal ? ' of ' + deck.slides.length : ''));
+      (showTotal ? ' of ' + deck.slides.length : ''));
   });
 };
 
