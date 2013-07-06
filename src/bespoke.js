@@ -28,7 +28,7 @@
 
 					['before(-\\d+)?', 'after(-\\d+)?', 'active', 'inactive'].map(removeClass.bind(null, slide));
 
-					slide !== activeSlide &&
+					slide != activeSlide &&
 						['inactive', offsetClass, offsetClass + '-' + Math.abs(offset)].map(addClass.bind(null, slide));
 				},
 
@@ -53,7 +53,7 @@
 
 					return function() {
 						listeners[eventName] = listeners[eventName].filter(function(listener) {
-							return listener !== callback;
+							return listener != callback;
 						});
 					};
 				},
@@ -137,15 +137,15 @@
 					var key = e.which;
 
 					(
-						key === 34 || // PAGE DOWN
-						key === 32 || // SPACE
-						axis === 'X' && key === 39 || // RIGHT
-						axis === 'Y' && key === 40 // BOTTOM
+						key == 34 || // PAGE DOWN
+						key == 32 || // SPACE
+						axis == 'X' && key == 39 || // RIGHT
+						axis == 'Y' && key == 40 // BOTTOM
 					) && deck.next();
 					(
-						key === 33 || // PAGE UP
-						axis === 'X' && key === 37 || // LEFT
-						axis === 'Y' && key === 38 // TOP
+						key == 33 || // PAGE UP
+						axis == 'X' && key == 37 || // LEFT
+						axis == 'Y' && key == 38 // TOP
 					) && deck.prev();
 				});
 
