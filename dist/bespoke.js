@@ -158,14 +158,14 @@
 				});
 
 				deck.parent.addEventListener('touchstart', function(e) {
-					if (e.touches.length) {
+					if (e.touches.length == 1) {
 						startPosition = e.touches[0]['page' + axis];
 						delta = 0;
 					}
 				});
 
 				deck.parent.addEventListener('touchmove', function(e) {
-					if (e.touches.length) {
+					if (e.touches.length == 1) {
 						e.preventDefault();
 						delta = e.touches[0]['page' + axis] - startPosition;
 					}
