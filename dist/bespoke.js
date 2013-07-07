@@ -90,9 +90,9 @@
 				addClass(slide, 'slide');
 			});
 
-			Object.keys(selectedPlugins || {}).map(function(pluginName) {
+			for (var pluginName in selectedPlugins) {
 				plugins[pluginName](deck, selectedPlugins[pluginName]);
-			});
+			}
 
 			activate(0);
 
