@@ -102,7 +102,7 @@
 		removeClass = function(el, cls) {
 			el.className = el.className
 				.replace(RegExp(moduleName + '-' + cls +'(\\s|$)', 'g'), ' ')
-				.replace(/^\s+|\s+$/g, '');
+				.trim();
 		},
 
 		callOnAllInstances = function(method) {
