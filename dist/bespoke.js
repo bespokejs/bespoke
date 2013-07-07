@@ -34,10 +34,10 @@
 					var offset = index - slides.indexOf(activeSlide),
 						offsetClass = offset > 0 ? 'after' : 'before';
 
-					['before(-\\d+)?', 'after(-\\d+)?', 'active', 'inactive'].map(removeClass.bind(null, slide));
+					['before(-\\d+)?', 'after(-\\d+)?', 'active', 'inactive'].map(removeClass.bind(0, slide));
 
 					slide != activeSlide &&
-						['inactive', offsetClass, offsetClass + '-' + Math.abs(offset)].map(addClass.bind(null, slide));
+						['inactive', offsetClass, offsetClass + '-' + Math.abs(offset)].map(addClass.bind(0, slide));
 				},
 
 				slide = function(index, customData) {
