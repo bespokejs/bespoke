@@ -36,16 +36,10 @@
 					fire('slide', createEventData(slides[index], customData)) && activate(index, customData);
 				},
 
-				next = function(customData) {
-					var nextSlideIndex = slides.indexOf(activeSlide) + 1;
+				step = function(offset, customData) {
+					var slideIndex = slides.indexOf(activeSlide) + offset;
 
-					fire('next', createEventData(activeSlide, customData)) && activate(nextSlideIndex, customData);
-				},
-
-				prev = function(customData) {
-					var prevSlideIndex = slides.indexOf(activeSlide) - 1;
-
-					fire('prev', createEventData(activeSlide, customData)) && activate(prevSlideIndex, customData);
+					fire(offset > 0 ? 'next' : 'prev', createEventData(activeSlide, customData)) && activate(slideIndex, customData);
 				},
 
 				on = function(eventName, callback) {
@@ -76,8 +70,8 @@
 					on: on,
 					fire: fire,
 					slide: slide,
-					next: next,
-					prev: prev,
+					next: step.bind(0, 1),
+					prev: step.bind(0, -1),
 					parent: parent,
 					slides: slides
 				};
