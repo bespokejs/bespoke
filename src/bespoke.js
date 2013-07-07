@@ -105,7 +105,7 @@
 				.trim();
 		},
 
-		callOnAllInstances = function(method) {
+		callOnAllDecks = function(method) {
 			return function(arg) {
 				decks.map(function(deck) {
 					deck[method](arg);
@@ -168,9 +168,9 @@
 
 	window[moduleName] = {
 		from: from,
-		slide: callOnAllInstances('slide'),
-		next: callOnAllInstances('next'),
-		prev: callOnAllInstances('prev'),
+		slide: callOnAllDecks('slide'),
+		next: callOnAllDecks('next'),
+		prev: callOnAllDecks('prev'),
 		horizontal: bindPlugin('horizontal'),
 		vertical: bindPlugin('vertical'),
 		plugins: plugins
