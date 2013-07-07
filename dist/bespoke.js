@@ -136,18 +136,16 @@
 					delta;
 
 				document.addEventListener('keydown', function(e) {
-					var key = e.which;
-
 					(
-						key == 34 || // PAGE DOWN
-						key == 32 || // SPACE
-						axis == 'X' && key == 39 || // RIGHT
-						axis == 'Y' && key == 40 // BOTTOM
+						e.which == 34 || // PAGE DOWN
+						e.which == 32 || // SPACE
+						axis == 'X' && e.which == 39 || // RIGHT
+						axis == 'Y' && e.which == 40 // BOTTOM
 					) && deck.next();
 					(
-						key == 33 || // PAGE UP
-						axis == 'X' && key == 37 || // LEFT
-						axis == 'Y' && key == 38 // TOP
+						e.which == 33 || // PAGE UP
+						axis == 'X' && e.which == 37 || // LEFT
+						axis == 'Y' && e.which == 38 // TOP
 					) && deck.prev();
 				});
 
