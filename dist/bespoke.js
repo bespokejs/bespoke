@@ -6,7 +6,7 @@
  * http://mit-license.org/markdalgleish
  */
 
-(function(moduleName, window, document) {
+(function(moduleName, window) {
 	var from = function(selector, selectedPlugins) {
 			var parent = document.querySelector(selector),
 				slides = [].slice.call(parent.children, 0),
@@ -186,4 +186,4 @@
 		plugins: plugins
 	};
 
-}('bespoke', this, document));
+}('bespoke', this));
