@@ -63,7 +63,7 @@
 				fire = function(eventName, eventData) {
 					return (listeners[eventName] || [])
 						.reduce(function(notCancelled, callback) {
-							return notCancelled && callback(eventData);
+							return notCancelled && callback(eventData) !== false;
 						}, true);
 				},
 

@@ -281,6 +281,16 @@
 						expect(callback.callCount).toBe(1);
 					});
 
+					it("should allow multiple events to be bound", function() {
+						var callback1 = sinon.spy(),
+							callback2 = sinon.spy();
+						deck.on("bar", callback1);
+						deck.on("bar", callback2);
+						deck.fire("bar");
+						expect(callback1.called).toBe(true);
+						expect(callback2.called).toBe(true);
+					});
+
 					describe("activate", function() {
 
 						it("should call handler when slide is activated", function() {
