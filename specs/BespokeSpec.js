@@ -78,7 +78,7 @@
 
 				it("should add a 'bespoke-before' class to all slides before active slide", function() {
 					deck.slide(5);
-					
+
 					var beforeSlides = slides.slice(0, 4);
 
 					beforeSlides.forEach(function(slide) {
@@ -88,7 +88,7 @@
 
 				it("should not add a 'bespoke-before' class to all slides after active slide", function() {
 					deck.slide(5);
-					
+
 					var notBeforeSlides = slides.slice(5, 9);
 
 					notBeforeSlides.forEach(function(slide) {
@@ -102,7 +102,7 @@
 
 				it("should add a 'bespoke-after' class to all slides after active slide", function() {
 					deck.slide(5);
-					
+
 					var afterSlides = slides.slice(6);
 
 					afterSlides.forEach(function(slide) {
@@ -112,7 +112,7 @@
 
 				it("should not add a 'bespoke-after' class to all slides before active slide", function() {
 					deck.slide(5);
-					
+
 					var notAfterSlides = slides.slice(0, 5);
 
 					notAfterSlides.forEach(function(slide) {
@@ -487,7 +487,7 @@
 							deck.slide(1);
 							deck.on("prev", callback);
 							deck.prev();
-							
+
 							expect(callback.callCount).toBe(1);
 						});
 
@@ -671,9 +671,9 @@
 
 							it("should allow custom plugins to be specified", function() {
 								bespoke.plugins.testPlugin = sinon.spy();
-								
+
 								var deck = bespoke.horizontal.from("article", { testPlugin: true });
-								
+
 								expect(horizontal.calledWith(deck)).toBe(true);
 								expect(bespoke.plugins.testPlugin.calledWith(deck)).toBe(true);
 
@@ -682,9 +682,9 @@
 
 							it("should allow custom plugins to be specified with options", function() {
 								bespoke.plugins.testPlugin = sinon.spy();
-								
+
 								var deck = bespoke.horizontal.from("article", { testPlugin: { foo: 'bar' } });
-								
+
 								expect(horizontal.calledWith(deck)).toBe(true);
 								expect(bespoke.plugins.testPlugin.calledWith(deck, { foo: 'bar' })).toBe(true);
 
@@ -714,9 +714,9 @@
 
 							it("should allow custom plugins to be specified", function() {
 								bespoke.plugins.testPlugin = sinon.spy();
-								
+
 								var deck = bespoke.vertical.from("article", { testPlugin: true });
-								
+
 								expect(vertical.calledWith(deck)).toBe(true);
 								expect(bespoke.plugins.testPlugin.calledWith(deck)).toBe(true);
 
@@ -725,9 +725,9 @@
 
 							it("should allow custom plugins to be specified with options", function() {
 								bespoke.plugins.testPlugin = sinon.spy();
-								
+
 								var deck = bespoke.vertical.from("article", { testPlugin: { foo: 'bar' } });
-								
+
 								expect(vertical.calledWith(deck)).toBe(true);
 								expect(bespoke.plugins.testPlugin.calledWith(deck, { foo: 'bar' })).toBe(true);
 
@@ -745,7 +745,7 @@
 
 						beforeEach(function() {
 							bespoke.plugins.testPlugin = testPlugin = sinon.spy();
-							
+
 							bespoke.plugins.onActivatePlugin = function(deck) {
 								onActivate = sinon.spy();
 								deck.on('activate', onActivate);
