@@ -233,10 +233,6 @@ The following properties are available on each instance.
     <td>Attach <a href="#events">event handlers</a></td>
   </tr>
   <tr>
-    <td><strong>off(<em>event, callback</em>)</strong></td>
-    <td>Remove <a href="#events">event handlers</a></td>
-  </tr>
-  <tr>
     <td><strong>fire(<em>event[, eventData]</em>)</strong></td>
     <td>Fire custom events. <em>This method is primarily designed for plugin authors.</em></td>
   </tr>
