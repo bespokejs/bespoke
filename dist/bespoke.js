@@ -7,8 +7,8 @@
  */
 
 (function(moduleName, window) {
-	var from = function(selector, selectedPlugins) {
-			var parent = document.querySelector(selector),
+	var from = function(selectorOrElement, selectedPlugins) {
+			var parent = selectorOrElement.blur ? selectorOrElement : document.querySelector(selectorOrElement),
 				slides = [].slice.call(parent.children, 0),
 				activeSlide = slides[0],
 				listeners = {},
@@ -123,9 +123,9 @@
 
 		bindPlugin = function(pluginName) {
 			return {
-				from: function(selector, selectedPlugins) {
+				from: function(selectorOrElement, selectedPlugins) {
 					(selectedPlugins = selectedPlugins || {})[pluginName] = true;
-					return from(selector, selectedPlugins);
+					return from(selectorOrElement, selectedPlugins);
 				}
 			};
 		},

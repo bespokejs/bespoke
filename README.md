@@ -100,7 +100,7 @@ bespoke.vertical.from('article');
 bespoke.from('article');
 ```
 
-### CSS 
+### CSS
 
 To create your own custom deck styles, Bespoke.js provides the necessary classes to your elements.
 
@@ -163,6 +163,14 @@ All official plugins can be installed from Bower, e.g. `$ bower install bespoke-
 If you'd like your plugin added to this list, [let me know](http://twitter.com/markdalgleish).
 
 ## Advanced Usage
+
+### From HTMLElement
+
+If you already have a reference to a DOM node, you can pass it directly to the `from` method.
+
+```js
+bespoke.horizontal.from(element);
+```
 
 ### Control API
 
