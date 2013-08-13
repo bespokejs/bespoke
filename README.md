@@ -19,7 +19,7 @@ Download the [production version][min] or the [development version][max].
 [min]: https://raw.github.com/markdalgleish/bespoke.js/master/dist/bespoke.min.js
 [max]: https://raw.github.com/markdalgleish/bespoke.js/master/dist/bespoke.js
 
-Bespoke.js requires a modern browser with [ES5 support](http://kangax.github.com/es5-compat-table/). If supporting old IE is your thing, there's always [es5-shim](https://github.com/kriskowal/es5-shim) and [classList.js](https://github.com/eligrey/classList.js).
+Bespoke.js requires a modern browser with [ES5 support](http://kangax.github.com/es5-compat-table/).
 
 ### Bower
 
