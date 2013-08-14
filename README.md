@@ -12,6 +12,8 @@ Using keyboard and touch events, Bespoke.js adds classes to your slides, while y
 
 With its robust plugin system, new functionality can be added to Bespoke.js easily.
 
+Want a boilerplate presentation? Use the official [Bespoke.js Yeoman Generator](https://github.com/markdalgleish/generator-bespoke).
+
 ## Download
 
 Download the [production version][min] or the [development version][max].
@@ -46,7 +48,29 @@ Made a presentation with Bespoke.js? [Let me know](http://twitter.com/markdalgle
 
 ## Getting Started
 
-To create a Bespoke.js presentation, follow these 3 simple steps:
+The simplest way to get started is by using [generator-bespoke](https://github.com/markdalgleish/generator-bespoke), a generator for [Yeoman](http://yeoman.io) that scaffolds a boilerplate presentation.
+
+The generated project includes a [Grunt](http://gruntjs.com) build system, a preview server with [LiveReload](http://livereload.com), static asset compilation ([Jade](http://jade-lang.com), [Stylus](http://learnboost.github.io/stylus) and [CoffeeScript](http://coffeescript.org)), and a [GitHub Pages](http://pages.github.com) deployment task.
+
+Assuming you have [Node.js](http://nodejs.org) installed:
+
+```bash
+$ npm install -g yeoman generator-bespoke grunt-cli
+$ mkdir my-presentation && cd $_
+$ yo bespoke
+```
+
+In your newly scaffolded project, you can use the following Grunt tasks:
+
+ * Preview server: ```$ grunt server```
+ * Deploy to GitHub Pages: ```$ grunt deploy```
+ * Compile assets to 'public': ```$ grunt```
+
+For more detailed instructions, check out the [generator-bespoke](https://github.com/markdalgleish/generator-bespoke) repo.
+
+### The old fashioned way
+
+To create a Bespoke.js presentation by hand, follow these 3 simple steps:
 
  * Create a page with [required slide markup](#markup) and resources
  * Activate your deck via the [JavaScript API](#javascript)
