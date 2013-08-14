@@ -50,8 +50,6 @@ Made a presentation with Bespoke.js? [Let me know](http://twitter.com/markdalgle
 
 The simplest way to get started is by using [generator-bespoke](https://github.com/markdalgleish/generator-bespoke), a generator for [Yeoman](http://yeoman.io) that scaffolds a boilerplate presentation.
 
-The generated project includes a [Grunt](http://gruntjs.com) build system, a preview server with [LiveReload](http://livereload.com), static asset compilation ([Jade](http://jade-lang.com), [Stylus](http://learnboost.github.io/stylus) and [CoffeeScript](http://coffeescript.org)), and a [GitHub Pages](http://pages.github.com) deployment task.
-
 Assuming you have [Node.js](http://nodejs.org) installed:
 
 ```bash
@@ -60,11 +58,13 @@ $ mkdir my-presentation && cd $_
 $ yo bespoke
 ```
 
+The generated project includes a [Grunt](http://gruntjs.com) build system, a preview server with [LiveReload](http://livereload.com), static asset compilation ([Jade](http://jade-lang.com), [Stylus](http://learnboost.github.io/stylus) and [CoffeeScript](http://coffeescript.org)), and a [GitHub Pages](http://pages.github.com) deployment task.
+
 In your newly scaffolded project, you can use the following Grunt tasks:
 
- * Preview server: ```$ grunt server```
- * Deploy to GitHub Pages: ```$ grunt deploy```
- * Compile assets to 'public': ```$ grunt```
+ * ```$ grunt server``` to run a preview server with LiveReload.
+ * ```$ grunt deploy``` to deploy to GitHub Pages.
+ * ```$ grunt``` to compile static assets to 'public'.
 
 For more detailed instructions, check out the [generator-bespoke](https://github.com/markdalgleish/generator-bespoke) repo.
 
