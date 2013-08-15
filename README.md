@@ -54,7 +54,7 @@ The simplest way to get started is by using [generator-bespoke](https://github.c
 Assuming you have [Node.js](http://nodejs.org) installed:
 
 ```bash
-$ npm install -g yeoman generator-bespoke grunt-cli
+$ npm install -g yo generator-bespoke
 $ mkdir my-presentation && cd $_
 $ yo bespoke
 ```
