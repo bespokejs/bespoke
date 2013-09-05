@@ -176,4 +176,4 @@
 		plugins: plugins
 	};
 
-}('bespoke', this));
+}('bespoke', window));
