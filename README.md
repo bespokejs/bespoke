@@ -12,24 +12,16 @@ Using keyboard and touch events, Bespoke.js adds classes to your slides, while y
 
 With its robust plugin system, new functionality can be added to Bespoke.js easily.
 
-Want a boilerplate presentation? Use the official [Bespoke.js Yeoman Generator](https://github.com/markdalgleish/generator-bespoke).
-
 ## Download
 
-Download the [production version][min] or the [development version][max].
+Download the [production version][min] or the [development version][max]. Alternatively, you can download Bespoke.js with a [package manager](#package-managers).
 
 [min]: https://raw.github.com/markdalgleish/bespoke.js/master/dist/bespoke.min.js
 [max]: https://raw.github.com/markdalgleish/bespoke.js/master/dist/bespoke.js
 
+Want a boilerplate presentation? Use the official [Bespoke.js Yeoman Generator](https://github.com/markdalgleish/generator-bespoke).
+
 Bespoke.js requires a modern browser with [ES5 support](http://kangax.github.com/es5-compat-table/).
-
-### Bower
-
-Bespoke.js can be installed from [Bower](http://twitter.github.com/bower/) using the following command:
-
-```bash
-$ bower install bespoke.js
-```
 
 ## Demo
 
@@ -174,7 +166,7 @@ The following plugins are available for Bespoke.js.
 
 ### Official Plugins
 
-All official plugins can be installed from Bower, e.g. `$ bower install bespoke-bullets`
+All official plugins can be installed from Bower or npm, e.g. `$ bower install bespoke-bullets` or `$ npm install bespoke-hash`
 
  - [bespoke-bullets](https://github.com/markdalgleish/bespoke-bullets) for animated bullet lists.
  - [bespoke-hash](https://github.com/markdalgleish/bespoke-hash) for hash routing.
@@ -413,6 +405,40 @@ bespoke.plugins.myPlugin = function(deck) {
   });
 
 };
+```
+
+
+## Package managers
+
+### Bower
+
+Bespoke.js can be installed from [Bower](http://twitter.github.com/bower/) using the following command:
+
+```bash
+$ bower install bespoke.js
+```
+
+### npm
+
+Bespoke.js can be installed from [npm](http://npmjs.org/) using the following command:
+
+```bash
+$ npm install bespoke
+```
+
+The Bespoke.js npm package is designed for use with [browserify](http://browserify.org/).
+
+For example, a presentation using [bespoke-bullets](https://github.com/markdalgleish/bespoke-bullets) and [bespoke-hash](https://github.com/markdalgleish/bespoke-hash) would look like this:
+
+```js
+require('bespoke');
+require('bespoke-bullets');
+require('bespoke-hash');
+
+bespoke.horizontal.from('article', {
+  bullets: 'li',
+  hash: true
+});
 ```
 
 ## Questions?
