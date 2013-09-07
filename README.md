@@ -14,7 +14,7 @@ With its robust plugin system, new functionality can be added to Bespoke.js easi
 
 ## Download
 
-Download the [production version][min] or the [development version][max]. Alternatively, you can download Bespoke.js with a [package manager](#package-managers).
+Download the [production version][min] or the [development version][max], or use a [package manager](#package-managers).
 
 [min]: https://raw.github.com/markdalgleish/bespoke.js/master/dist/bespoke.min.js
 [max]: https://raw.github.com/markdalgleish/bespoke.js/master/dist/bespoke.js
