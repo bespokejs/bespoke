@@ -335,6 +335,8 @@ off();
 
 If you need to expand upon the core Bespoke.js feature set, additional functionality can be packaged up as plugins.
 
+Want a boilerplate plugin? Use the official [Bespoke.js Plugin Generator](https://github.com/markdalgleish/generator-bespokeplugin).
+
 If you'd like to learn by example, check out the [list of existing plugins](#plugins).
 
 ### Basic Plugins
