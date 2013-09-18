@@ -170,6 +170,7 @@ The following plugins are available for Bespoke.js.
 All official plugins can be installed from Bower or npm, e.g. `$ bower install bespoke-bullets` or `$ npm install bespoke-hash`
 
  - [bespoke-bullets](https://github.com/markdalgleish/bespoke-bullets) for animated bullet lists.
+ - [bespoke-scale](https://github.com/markdalgleish/bespoke-scale) for responsive slide scaling.
  - [bespoke-hash](https://github.com/markdalgleish/bespoke-hash) for hash routing.
  - [bespoke-state](https://github.com/markdalgleish/bespoke-state) for slide-specific deck styles.
  - [bespoke-loop](https://github.com/markdalgleish/bespoke-loop) for looped presentations.
