@@ -37,6 +37,7 @@ Bespoke.js requires a modern browser with [ES5 support](http://kangax.github.com
  - [Projects vs Products](http://joho.github.io/wdyk/) by [John Barton](http://twitter.com/johnbarton)
  - [Learn You The Node.js For Much Win](http://r.va.gg/presentations/campjs-learn-you-node/) by [Rod Vagg](http://twitter.com/rvagg)
  - [A Real Database Rethink](http://r.va.gg/presentations/nodeconfeu.2013) by [Rod Vagg](http://twitter.com/rvagg)
+ - [Feature Flags with Directives](http://mjt01.github.io/slides-feature-flags/) by [Michael Taranto](http://twitter.com/michaeltaranto)
  - [Introduction to hapi](http://wolfe.id.au/presentations/hapi/) by [Mark Wolfe](http://twitter.com/wolfeidau)
 
 Made a presentation with Bespoke.js? [Let me know](http://twitter.com/markdalgleish).
