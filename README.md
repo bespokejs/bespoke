@@ -175,6 +175,7 @@ All official plugins can be installed from Bower or npm, e.g. `$ bower install b
  - [bespoke-scale](https://github.com/markdalgleish/bespoke-scale) for responsive slide scaling.
  - [bespoke-hash](https://github.com/markdalgleish/bespoke-hash) for hash routing.
  - [bespoke-state](https://github.com/markdalgleish/bespoke-state) for slide-specific deck styles.
+ - [bespoke-progress](https://github.com/markdalgleish/bespoke-progress) for progress bars.
  - [bespoke-loop](https://github.com/markdalgleish/bespoke-loop) for looped presentations.
  - [bespoke-vcr](https://github.com/markdalgleish/bespoke-vcr) for recording and playback.
 
