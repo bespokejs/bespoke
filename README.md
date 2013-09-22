@@ -21,7 +21,7 @@ Download the [production version][min] or the [development version][max], or use
 
 Want a boilerplate presentation? Use the official [Bespoke.js Yeoman Generator](https://github.com/markdalgleish/generator-bespoke).
 
-Bespoke.js requires a modern browser with [ES5 support](http://kangax.github.com/es5-compat-table/).
+Bespoke.js requires a modern browser with [ES5](http://kangax.github.com/es5-compat-table/) ([shim](https://github.com/kriskowal/es5-shim/)) and [classList](http://caniuse.com/classlist) ([shim](https://github.com/eligrey/classList.js)) support.
 
 ## Demo
 
