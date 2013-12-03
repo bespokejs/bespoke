@@ -251,6 +251,7 @@ section.bespoke-active {
 }
 section.bespoke-inactive {
 	pointer-events: none;
+	z-index: 0;
 }
 
 @media only screen and (max-width: 768px) {
