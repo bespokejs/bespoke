@@ -182,6 +182,7 @@ All official plugins can be installed from Bower or npm, e.g. `$ bower install b
 
 ### Third-Party Plugins
 
+ - [bespoke-fx](https://github.com/ebow/bespoke-fx) by [@tdhc](http://twitter.com/tdhc), for configurable slide transitions.
  - [bespoke-dir](https://github.com/ryanseddon/bespoke-dir) by [@ryanseddon](http://twitter.com/ryanseddon), for direction-based deck classes.
  - [bespoke-spotlight](https://github.com/mobz/bespoke-spotlight) by [@mobz](http://twitter.com/mobz), for quick-searching slide content.
  - [bespoke-blackout](https://github.com/originell/bespoke-blackout) by [@originell](http://twitter.com/originell), for temporarily blacking out the screen.
