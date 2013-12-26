@@ -283,7 +283,7 @@ deck.on(eventName, function(event) {
   event.slide; // Relevant slide
   event.index; // Index of relevant slide
 
-  // Prevent default functionality (for user interaction events only)
+  // Prevent default functionality (for deck interaction events only)
   return false;
 });
 ```
@@ -303,9 +303,9 @@ In most cases, you will only need to use these standard events.
   </tr>
 </table>
 
-##### User Interaction Events
+##### Deck Interaction Events
 
-These events are fired when the user has interacted with the presentation, but *before* their interaction has had any effect.
+These events are fired when the deck has been interacted with, but *before* the interaction has had any effect.
 
 This allows you to intercept the default behaviour by returning `false` from the event handler.
 
