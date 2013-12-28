@@ -8,7 +8,7 @@ Less than 1KB minified and gzipped, with no dependencies.
 
 Boilerplate presentations can be quickly scaffolded with [Bespoke.js Generator](https://github.com/markdalgleish/generator-bespoke).
 
-Bespoke.js features a rich [plugin ecosystem](#plugins), and writing new plugins is easy with [Bespoke.js Plugin Generator](https://github.com/markdalgleish/generator-bespokeplugin).
+Bespoke.js features a rich [plugin ecosystem](#plugins), and creating plugins is easy with [Bespoke.js Plugin Generator](https://github.com/markdalgleish/generator-bespokeplugin).
 
 ## Download
 
