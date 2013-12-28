@@ -95,6 +95,8 @@
 
 		decks = [],
 
+		plugins = {},
+
 		addClass = function(el, cls) {
 			el.classList.add(moduleName + '-' + cls);
 		},
@@ -111,59 +113,6 @@
 					deck[method](arg);
 				});
 			};
-		},
-
-		bindPlugin = function(pluginName) {
-			return {
-				from: function(selectorOrElement, selectedPlugins) {
-					(selectedPlugins = selectedPlugins || {})[pluginName] = true;
-					return from(selectorOrElement, selectedPlugins);
-				}
-			};
-		},
-
-		makePluginForAxis = function(axis) {
-			return function(deck) {
-				var startPosition,
-					delta;
-
-				document.addEventListener('keydown', function(e) {
-					(
-						e.which == 34 || // PAGE DOWN
-						e.which == 32 || // SPACE
-						axis == 'X' && e.which == 39 || // RIGHT
-						axis == 'Y' && e.which == 40 // BOTTOM
-					) && deck.next();
-					(
-						e.which == 33 || // PAGE UP
-						axis == 'X' && e.which == 37 || // LEFT
-						axis == 'Y' && e.which == 38 // TOP
-					) && deck.prev();
-				});
-
-				deck.parent.addEventListener('touchstart', function(e) {
-					if (e.touches.length == 1) {
-						startPosition = e.touches[0]['page' + axis];
-						delta = 0;
-					}
-				});
-
-				deck.parent.addEventListener('touchmove', function(e) {
-					if (e.touches.length == 1) {
-						e.preventDefault();
-						delta = e.touches[0]['page' + axis] - startPosition;
-					}
-				});
-
-				deck.parent.addEventListener('touchend', function() {
-					Math.abs(delta) > 50 && (delta > 0 ? deck.prev() : deck.next());
-				});
-			};
-		},
-
-		plugins = {
-			horizontal: makePluginForAxis('X'),
-			vertical: makePluginForAxis('Y')
 		};
 
 	window[moduleName] = {
@@ -171,8 +120,6 @@
 		slide: callOnAllDecks('slide'),
 		next: callOnAllDecks('next'),
 		prev: callOnAllDecks('prev'),
-		horizontal: bindPlugin('horizontal'),
-		vertical: bindPlugin('vertical'),
 		plugins: plugins
 	};
 

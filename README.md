@@ -6,11 +6,9 @@
 
 Less than 1KB minified and gzipped, with no dependencies.
 
-Bespoke.js provides the foundation, then gets out of your way so you can focus on uniquely crafting your own personal deck style.
+Boilerplate presentations can be quickly scaffolded with [Bespoke.js Generator](https://github.com/markdalgleish/generator-bespoke).
 
-Using keyboard and touch events, Bespoke.js adds classes to your slides, while you provide the CSS transitions.
-
-With its robust plugin system, new functionality can be added to Bespoke.js easily.
+Bespoke.js features a rich [plugin ecosystem](#plugins), and writing new plugins is easy with [Bespoke.js Plugin Generator](https://github.com/markdalgleish/generator-bespokeplugin).
 
 ## Download
 
@@ -96,31 +94,17 @@ The tags you use are completely optional. Once a parent element is selected, the
 
 ### JavaScript
 
-Decks are created by selecting the parent element with the `from(selector)` method, with optional 'horizontal' or 'vertical' event handlers.
-
-##### Horizontal Deck
-
-Uses space bar, horizontal arrows and swipes for navigation.
+Decks are created by selecting the parent element with the `from(selector, plugins)` method
 
 ```js
-bespoke.horizontal.from('article');
+var deck = bespoke.from('article', {
+  // Plugins:
+  keys: true,
+  touch: true
+});
 ```
 
-##### Vertical Deck
-
-Uses space bar, vertical arrows and swipes for navigation.
-
-```js
-bespoke.vertical.from('article');
-```
-
-##### Minimal Deck
-
-*For the absolute purist only.* Minimal decks provide a [simple control API](#control-api) with *zero default event handlers*. Key presses and swipes have no effect, it's up to you to implement your own interactions from scratch.
-
-```js
-bespoke.from('article');
-```
+Please note that since this example uses plugins, it will throw an error unless you include [bespoke-keys](https://github.com/markdalgleish/bespoke-keys) and [bespoke-touch](https://github.com/markdalgleish/bespoke-touch).
 
 ### CSS
 
@@ -171,6 +155,8 @@ The following plugins are available for Bespoke.js.
 
 All official plugins can be installed from Bower or npm, e.g. `$ bower install bespoke-bullets` or `$ npm install bespoke-hash`
 
+ - [bespoke-keys](https://github.com/markdalgleish/bespoke-bullets) for keyboard interaction.
+ - [bespoke-touch](https://github.com/markdalgleish/bespoke-touch) for touch interaction.
  - [bespoke-bullets](https://github.com/markdalgleish/bespoke-bullets) for animated bullet lists.
  - [bespoke-scale](https://github.com/markdalgleish/bespoke-scale) for responsive slide scaling.
  - [bespoke-hash](https://github.com/markdalgleish/bespoke-hash) for hash routing.
@@ -196,12 +182,12 @@ If you'd like your plugin added to this list, [let me know](http://twitter.com/m
 If you already have a reference to a DOM node, you can pass it directly to the `from` method.
 
 ```js
-bespoke.horizontal.from(element);
+bespoke.from(element);
 ```
 
 ### Control API
 
-Programmatically control your presentation, or implement a custom interface when using a [minimal deck](#minimal-deck).
+Programmatically control your presentation.
 
 ```js
 // Next slide
@@ -222,13 +208,13 @@ Individual deck instances can be created and controlled separately.
 
 ```js
 // First deck instance
-var one = bespoke.horizontal.from('#deck-one');
+var one = bespoke.from('#deck-one');
 one.next();
 one.prev();
 one.slide(0);
 
 // Second deck instance
-var two = bespoke.horizontal.from('#deck-two');
+var two = bespoke.from('#deck-two');
 two.next();
 two.prev();
 two.slide(0);
@@ -365,7 +351,7 @@ The plugin can now be provided to the second parameter of the `from(selector[, p
 
 ```js
 // Using the plugin
-bespoke.horizontal.from('article', { myPlugin: true });
+bespoke.from('article', { myPlugin: true });
 ```
 
 ### Plugins with Options
@@ -438,16 +424,16 @@ $ npm install bespoke
 
 The Bespoke.js npm package is designed for use with [browserify](http://browserify.org/).
 
-For example, a presentation using [bespoke-bullets](https://github.com/markdalgleish/bespoke-bullets) and [bespoke-hash](https://github.com/markdalgleish/bespoke-hash) would look like this:
+For example, a presentation using [bespoke-keys](https://github.com/markdalgleish/bespoke-keys) and [bespoke-touch](https://github.com/markdalgleish/bespoke-touch) would look like this:
 
 ```js
 require('bespoke');
-require('bespoke-bullets');
-require('bespoke-hash');
+require('bespoke-keys');
+require('bespoke-touch');
 
-bespoke.horizontal.from('article', {
-  bullets: 'li',
-  hash: true
+bespoke.from('article', {
+  keys: true,
+  touch: true
 });
 ```
 
