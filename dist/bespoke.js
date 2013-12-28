@@ -91,7 +91,7 @@
 			});
 
 			for (var pluginName in selectedPlugins) {
-				plugins[pluginName](deck, selectedPlugins[pluginName]);
+				selectedPlugins[pluginName] !== false && plugins[pluginName](deck, selectedPlugins[pluginName]);
 			}
 
 			activate(0);

@@ -354,6 +354,8 @@ The plugin can now be provided to the second parameter of the `from(selector[, p
 bespoke.from('article', { myPlugin: true });
 ```
 
+*Note: Your plugin won't run if the option value provided is `false`.*
+
 ### Plugins with Options
 
 If your plugin needs some configurability, options can be passed through as the second parameter.

@@ -691,6 +691,11 @@
 									expect(testPlugin.calledWith(deck, { foo: 'bar' })).toBe(true);
 								});
 
+								it("should not run the plugin if option is 'false'", function() {
+									bespoke.from("article", { testPlugin: false });
+									expect(testPlugin.called).toBe(false);
+								});
+
 								it("should call any 'activate' event handlers immediately", function() {
 									bespoke.from("article", { onActivatePlugin: true });
 									expect(onActivate.called).toBe(true);
