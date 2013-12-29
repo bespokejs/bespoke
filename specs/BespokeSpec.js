@@ -701,6 +701,20 @@
 									expect(onActivate.called).toBe(true);
 								});
 
+								it("should throw an error if a plugin isn't found", function() {
+									var createDeckWithMissingPlugin = function() {
+										bespoke.from("article", { foobar: true });
+									};
+									expect(createDeckWithMissingPlugin).toThrow("Missing plugin: bespoke-foobar");
+								});
+
+								it("should throw an error if a plugin isn't found even if the plugin is disabled", function() {
+									var createDeckWithMissingDisabledPlugin = function() {
+										bespoke.from("article", { foobar: false });
+									};
+									expect(createDeckWithMissingDisabledPlugin).toThrow("Missing plugin: bespoke-foobar");
+								});
+
 							});
 
 						});

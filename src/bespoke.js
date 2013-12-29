@@ -83,6 +83,9 @@
 			});
 
 			for (var pluginName in selectedPlugins) {
+				if (!plugins[pluginName]) {
+					throw Error('Missing plugin: ' + moduleName + '-' + pluginName);
+				}
 				selectedPlugins[pluginName] !== false && plugins[pluginName](deck, selectedPlugins[pluginName]);
 			}
 
