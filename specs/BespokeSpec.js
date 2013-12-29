@@ -567,6 +567,14 @@
 
 							describe("slide", function() {
 
+								it("should return the current slide index when called without arguments", function() {
+									deck.slide(1);
+									expect(deck.slide()).toBe(1);
+
+									deck.slide(2);
+									expect(deck.slide()).toBe(2);
+								});
+
 								it("should call handler when specific slide is requested", function() {
 									var callback = sinon.spy();
 

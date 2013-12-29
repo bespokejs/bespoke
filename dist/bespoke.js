@@ -41,7 +41,11 @@
 				},
 
 				slide = function(index, customData) {
-					fire('slide', createEventData(slides[index], customData)) && activate(index, customData);
+					if (arguments.length) {
+						fire('slide', createEventData(slides[index], customData)) && activate(index, customData);
+					} else {
+						return slides.indexOf(activeSlide);
+					}
 				},
 
 				step = function(offset, customData) {

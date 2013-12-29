@@ -198,6 +198,9 @@ bespoke.prev();
 
 // Go to a specific slide
 bespoke.slide(0);
+
+// Get the current slide index
+bespoke.slide();
 ```
 
 ### Deck Instances
@@ -238,8 +241,8 @@ The following properties are available on each instance.
     <td>Previous slide.</td>
   </tr>
   <tr>
-    <td><strong>slide(<em>index[, eventData]</em>)</strong></td>
-    <td>Activate a specific slide by index.</td>
+    <td><strong>slide([<em>index[, eventData]]</em>)</strong></td>
+    <td>Get or set the active slide index.</td>
   </tr>
   <tr>
     <td><strong>on(<em>event, callback</em>)</strong></td>
