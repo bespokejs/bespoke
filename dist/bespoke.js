@@ -9,7 +9,7 @@
 (function(moduleName, window) {
 	var from = function(selectorOrElement, selectedPlugins) {
 			var parent = selectorOrElement.blur ? selectorOrElement : document.querySelector(selectorOrElement),
-				slides = [].slice.call(parent.children, 0),
+				slides = [].slice.call(parent.children),
 				activeSlide = slides[0],
 				listeners = {},
 
