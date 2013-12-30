@@ -6,9 +6,9 @@
 
 [Bespoke.js](http://markdalgleish.com/projects/bespoke.js) is a super minimal (<1KB), modular presentation framework designed for modern browsers.
 
-The core library sets up the presentation, provides a simple [control API](Control API), manages [events](#events) and adds [classes](#CSS) to the slides to allow CSS transitions.
+The core library [sets up the presentation](#JavaScript), handles [plugins](#plugins), provides a simple [control API](Control API), manages [events](#events) and adds [classes](#CSS) to the slides to allow CSS transitions.
 
-Everything else, from [keyboard](https://github.com/markdalgleish/bespoke-keys) and [touch](https://github.com/markdalgleish/bespoke-touch) interactions to [bullet lists](https://github.com/markdalgleish/bespoke-bullets) and [hash routing](https://github.com/markdalgleish/bespoke-hash), is implemented as a [plugin](#plugins). If you need any extra functionality, you can easily join the plugin ecosystem with [Bespoke.js Plugin Generator](https://github.com/markdalgleish/generator-bespokeplugin).
+Any other functionality, from [keyboard](https://github.com/markdalgleish/bespoke-keys) and [touch](https://github.com/markdalgleish/bespoke-touch) interactions to [bullet lists](https://github.com/markdalgleish/bespoke-bullets) and [hash routing](https://github.com/markdalgleish/bespoke-hash), is implemented as a [plugin](#plugins). Joining the Bespoke.js plugin ecosystem is simple with [Bespoke.js Plugin Generator](https://github.com/markdalgleish/generator-bespokeplugin).
 
 ## Getting Started
 
@@ -17,19 +17,17 @@ The recommended way to get started is with [Bespoke.js Generator](https://github
 Assuming you have [Node.js](http://nodejs.org) installed, in a blank directory:
 
 ```bash
-$ npm install -g yo generator-bespoke
+$ npm install -g generator-bespoke
 $ yo bespoke
 ```
 
-You'll now be asked a series of questions which will result in a custom boilerplate project.
-
-The generated project includes a [Grunt](http://gruntjs.com) build system, a preview server with [LiveReload](http://livereload.com), static asset compilation ([Jade](http://jade-lang.com), [Stylus](http://learnboost.github.io/stylus) and [CoffeeScript](http://coffeescript.org)), and a [GitHub Pages](http://pages.github.com) deployment task.
-
-In your newly scaffolded project, you can use the following Grunt tasks:
+In your newly scaffolded project, you can use the following [Grunt](http://gruntjs.com) tasks:
 
  * ```$ grunt server``` to run a preview server with LiveReload.
  * ```$ grunt deploy``` to deploy to GitHub Pages.
  * ```$ grunt``` to compile static assets to 'public'.
+
+For more detailed instructions, check out the [Bespoke.js Generator](https://github.com/markdalgleish/generator-bespoke) repo.
 
 ## Basic Usage
 
