@@ -22,14 +22,14 @@
 					removeClass(activeSlide, 'inactive');
 				},
 
-				deactivate = function(slide, index) {
+				deactivate = function(el, index) {
 					var offset = index - slides.indexOf(activeSlide),
 						offsetClass = offset > 0 ? 'after' : 'before';
 
-					['before(-\\d+)?', 'after(-\\d+)?', 'active', 'inactive'].map(removeClass.bind(null, slide));
+					['before(-\\d+)?', 'after(-\\d+)?', 'active', 'inactive'].map(removeClass.bind(null, el));
 
-					slide !== activeSlide &&
-						['inactive', offsetClass, offsetClass + '-' + Math.abs(offset)].map(addClass.bind(null, slide));
+					el !== activeSlide &&
+						['inactive', offsetClass, offsetClass + '-' + Math.abs(offset)].map(addClass.bind(null, el));
 				},
 
 				slide = function(index, customData) {
@@ -63,10 +63,10 @@
 						}, true);
 				},
 
-				createEventData = function(slide, eventData) {
+				createEventData = function(el, eventData) {
 					eventData = eventData || {};
-					eventData.index = slides.indexOf(slide);
-					eventData.slide = slide;
+					eventData.index = slides.indexOf(el);
+					eventData.slide = el;
 					return eventData;
 				},
 
@@ -82,8 +82,8 @@
 
 			addClass(parent, 'parent');
 
-			slides.map(function(slide) {
-				addClass(slide, 'slide');
+			slides.map(function(el) {
+				addClass(el, 'slide');
 			});
 
 			for (var pluginName in selectedPlugins) {
