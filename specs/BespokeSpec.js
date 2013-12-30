@@ -151,6 +151,20 @@
 								});
 							});
 
+							it("should call 'next' with custom event data on all deck instances", function() {
+								var customEventData = { foo: 'bar' };
+
+								decks.forEach(function(deck) {
+									deck.next = sinon.spy();
+								});
+
+								bespoke.next(customEventData);
+
+								decks.forEach(function(deck) {
+									expect(deck.next.calledWith(customEventData)).toBe(true);
+								});
+							});
+
 						});
 
 						describe("prev", function() {
@@ -167,6 +181,20 @@
 								});
 							});
 
+							it("should call 'prev' with custom event data on all deck instances", function() {
+								var customEventData = { foo: 'bar' };
+
+								decks.forEach(function(deck) {
+									deck.prev = sinon.spy();
+								});
+
+								bespoke.prev(customEventData);
+
+								decks.forEach(function(deck) {
+									expect(deck.prev.calledWith(customEventData)).toBe(true);
+								});
+							});
+
 						});
 
 						describe("slide", function() {
@@ -180,6 +208,20 @@
 
 								decks.forEach(function(deck) {
 									expect(deck.slide.calledWith(0)).toBe(true);
+								});
+							});
+
+							it("should call 'slide' with custom event data on all deck instances", function() {
+								var customEventData = { foo: 'bar' };
+
+								decks.forEach(function(deck) {
+									deck.slide = sinon.spy();
+								});
+
+								bespoke.slide(0, customEventData);
+
+								decks.forEach(function(deck) {
+									expect(deck.slide.calledWith(0, customEventData)).toBe(true);
 								});
 							});
 
