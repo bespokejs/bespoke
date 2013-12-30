@@ -26,10 +26,10 @@
 					var offset = index - slides.indexOf(activeSlide),
 						offsetClass = offset > 0 ? 'after' : 'before';
 
-					['before(-\\d+)?', 'after(-\\d+)?', 'active', 'inactive'].map(removeClass.bind(0, slide));
+					['before(-\\d+)?', 'after(-\\d+)?', 'active', 'inactive'].map(removeClass.bind(null, slide));
 
 					slide != activeSlide &&
-						['inactive', offsetClass, offsetClass + '-' + Math.abs(offset)].map(addClass.bind(0, slide));
+						['inactive', offsetClass, offsetClass + '-' + Math.abs(offset)].map(addClass.bind(null, slide));
 				},
 
 				slide = function(index, customData) {
@@ -74,8 +74,8 @@
 					on: on,
 					fire: fire,
 					slide: slide,
-					next: step.bind(0, 1),
-					prev: step.bind(0, -1),
+					next: step.bind(null, 1),
+					prev: step.bind(null, -1),
 					parent: parent,
 					slides: slides
 				};
@@ -118,7 +118,7 @@
 			return function() {
 				var args = arguments;
 				return decks.reduce(function(lastDeck, deck) {
-					return deck[method].apply(0, args);
+					return deck[method].apply(null, args);
 				}, undefined);
 			};
 		};
