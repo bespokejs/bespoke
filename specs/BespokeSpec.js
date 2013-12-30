@@ -183,6 +183,11 @@
 								});
 							});
 
+							it("should return the active slide index for the most recent deck", function() {
+								deck.slide(3);
+								expect(bespoke.slide()).toBe(3);
+							});
+
 						});
 
 					});

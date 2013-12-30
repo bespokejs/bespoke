@@ -123,10 +123,11 @@
 		},
 
 		callOnAllDecks = function(method) {
-			return function(arg) {
-				decks.map(function(deck) {
-					deck[method](arg);
-				});
+			return function() {
+				var args = arguments;
+				return decks.reduce(function(lastDeck, deck) {
+					return deck[method].apply(0, args);
+				}, undefined);
 			};
 		};
 
