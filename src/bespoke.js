@@ -28,7 +28,7 @@
 
 					['before(-\\d+)?', 'after(-\\d+)?', 'active', 'inactive'].map(removeClass.bind(null, slide));
 
-					slide != activeSlide &&
+					slide !== activeSlide &&
 						['inactive', offsetClass, offsetClass + '-' + Math.abs(offset)].map(addClass.bind(null, slide));
 				},
 
@@ -51,7 +51,7 @@
 
 					return function() {
 						listeners[eventName] = listeners[eventName].filter(function(listener) {
-							return listener != callback;
+							return listener !== callback;
 						});
 					};
 				},
