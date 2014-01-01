@@ -1,7 +1,7 @@
 (function(moduleName, window) {
 	var from = function(selectorOrElement, selectedPlugins) {
 			var parent = selectorOrElement.nodeType === 1 ? selectorOrElement : document.querySelector(selectorOrElement),
-				slides = [].slice.call(parent.children),
+				slides = [].filter.call(parent.children, function(el) { return el.nodeName !== 'SCRIPT'; }),
 				activeSlide = slides[0],
 				listeners = {},
 

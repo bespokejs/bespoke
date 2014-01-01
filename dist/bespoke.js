@@ -1,7 +1,7 @@
 /*!
  * Bespoke.js v0.3.1
  *
- * Copyright 2013, Mark Dalgleish
+ * Copyright 2014, Mark Dalgleish
  * This content is released under the MIT license
  * http://mit-license.org/markdalgleish
  */
@@ -9,7 +9,7 @@
 (function(moduleName, window) {
 	var from = function(selectorOrElement, selectedPlugins) {
 			var parent = selectorOrElement.nodeType === 1 ? selectorOrElement : document.querySelector(selectorOrElement),
-				slides = [].slice.call(parent.children),
+				slides = [].filter.call(parent.children, function(el) { return el.nodeName !== 'SCRIPT'; }),
 				activeSlide = slides[0],
 				listeners = {},
 
