@@ -386,6 +386,4 @@ Contact me on GitHub or Twitter: [@markdalgleish](http://twitter.com/markdalglei
 
 ## License
 
-Copyright 2013, Mark Dalgleish  
-This content is released under the MIT license  
-http://markdalgleish.mit-license.org
+[MIT License](http://markdalgleish.mit-license.org)
