@@ -75,6 +75,7 @@ module.exports = function(grunt) {
         globals: {
           bespoke: true,
           describe: true,
+          xdescribe: true,
           it: true,
           xit: true,
           expect: true,
