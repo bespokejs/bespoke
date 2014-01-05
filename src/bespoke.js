@@ -117,9 +117,9 @@
 		callOnAllDecks = function(method) {
 			return function() {
 				var args = arguments;
-				return decks.reduce(function(lastDeck, deck) {
-					return deck[method].apply(null, args);
-				}, undefined);
+				decks.map(function(deck) {
+					deck[method].apply(null, args);
+				});
 			};
 		};
 

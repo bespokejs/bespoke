@@ -199,7 +199,7 @@
 
 						});
 
-						describe("slide", function() {
+						xdescribe("slide", function() {
 
 							it("should call 'slide' on all deck instances", function() {
 								decks.forEach(function(deck) {
@@ -225,11 +225,6 @@
 								decks.forEach(function(deck) {
 									expect(deck.slide.calledWith(0, customEventData)).toBe(true);
 								});
-							});
-
-							it("should return the active slide index for the most recent deck", function() {
-								deck.slide(3);
-								expect(bespoke.slide()).toBe(3);
 							});
 
 						});
