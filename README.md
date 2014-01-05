@@ -4,15 +4,15 @@
 
 ### DIY Presentation Micro-Framework
 
-[Bespoke.js](http://markdalgleish.com/projects/bespoke.js) is a super minimal (<1KB), modular presentation framework designed for modern browsers.
+[Bespoke.js](http://markdalgleish.com/projects/bespoke.js) is a super minimal (<1KB min'd and gzipped), modular presentation library for modern browsers.
 
-The core library [sets up the presentation](#JavaScript), handles [plugins](#plugins), provides a simple [control API](Control API), manages [events](#events) and adds [classes](#CSS) to the slides to allow CSS transitions.
+The core library [sets up the presentation](#javascript), handles [plugins](#plugins), provides a simple [control API](Control API), manages [events](#events) and adds [classes](#CSS) to the slides to allow CSS transitions.
 
 Any other functionality, from [keyboard](https://github.com/markdalgleish/bespoke-keys) and [touch](https://github.com/markdalgleish/bespoke-touch) interactions to [bullet lists](https://github.com/markdalgleish/bespoke-bullets) and [hash routing](https://github.com/markdalgleish/bespoke-hash), is implemented as a [plugin](#plugins). Joining the Bespoke.js plugin ecosystem is simple with [Bespoke.js Plugin Generator](https://github.com/markdalgleish/generator-bespokeplugin).
 
 ## Getting Started
 
-The recommended way to get started is with [Bespoke.js Generator](https://github.com/markdalgleish/generator-bespoke), a [Yeoman](http://yeoman.io) generator that scaffolds a boilerplate presentation.
+Due to the highly modular nature of Bespoke.js, the recommended way to get started is with [Bespoke.js Generator](https://github.com/markdalgleish/generator-bespoke), a [Yeoman](http://yeoman.io) generator that scaffolds a boilerplate presentation.
 
 Assuming you have [Node.js](http://nodejs.org) installed, in a blank directory:
 
