@@ -86,6 +86,9 @@ deck.prev();
 
 // Go to a specific slide
 deck.slide(0);
+
+// Get the active slide index
+deck.slide(); // 0
 ```
 
 ### CSS
