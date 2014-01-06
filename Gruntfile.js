@@ -73,6 +73,7 @@ module.exports = function(grunt) {
         maxparams: 5,
         maxdepth: 2,
         globals: {
+          console: true,
           bespoke: true,
           describe: true,
           xdescribe: true,

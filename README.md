@@ -4,15 +4,15 @@
 
 ### DIY Presentation Micro-Framework
 
-[Bespoke.js](http://markdalgleish.com/projects/bespoke.js) is a super minimal (<1KB min'd and gzipped), modular presentation library for modern browsers.
+[Bespoke.js](http://markdalgleish.com/projects/bespoke.js) is a super minimal (<1KB min'd and gzipped), modular presentation library for modern browsers, designed to foster a rich [plugin ecosystem](#plugins).
 
-The core library [sets up the presentation](#javascript), handles [plugins](#plugins), provides a simple [control API](Control API), manages [events](#events) and adds [classes](#CSS) to the slides to allow CSS transitions.
+The core library [sets up the presentation](#javascript), provides a simple [control API](#control-api), manages [events](#events) and adds [classes](#CSS) to the slides to allow CSS transitions.
 
 Any other functionality, from [keyboard](https://github.com/markdalgleish/bespoke-keys) and [touch](https://github.com/markdalgleish/bespoke-touch) interactions to [bullet lists](https://github.com/markdalgleish/bespoke-bullets) and [hash routing](https://github.com/markdalgleish/bespoke-hash), is implemented as a [plugin](#plugins). Joining the Bespoke.js plugin ecosystem is simple with [Bespoke.js Plugin Generator](https://github.com/markdalgleish/generator-bespokeplugin).
 
 ## Creating a Presentation
 
-Due to the highly modular nature of Bespoke.js, the recommended way to get started is with [Bespoke.js Generator](https://github.com/markdalgleish/generator-bespoke), a [Yeoman](http://yeoman.io) generator that scaffolds a boilerplate presentation.
+Due to the highly modular nature of Bespoke.js, the quickest way to get started is with [Bespoke.js Generator](https://github.com/markdalgleish/generator-bespoke), a [Yeoman](http://yeoman.io) generator that scaffolds a boilerplate presentation with a [Grunt](http://gruntjs.com) build system.
 
 Assuming you have [Node.js](http://nodejs.org) installed, in a blank directory:
 
@@ -21,7 +21,7 @@ $ npm install -g generator-bespoke
 $ yo bespoke
 ```
 
-In your newly scaffolded project, you can use the following [Grunt](http://gruntjs.com) tasks:
+In your newly scaffolded project, you can use the following Grunt tasks:
 
  * ```$ grunt server``` to run a preview server with LiveReload.
  * ```$ grunt deploy``` to deploy to GitHub Pages.
@@ -38,18 +38,20 @@ If you'd prefer to craft a new presentation from scratch, you can install Bespok
 
 ### Markup
 
-The tags you use are completely optional, but the following is a good starting point:
+It's completely up to you which tags you use, but the following is a good starting point:
 
 ```html
 <link rel="stylesheet" href="path/to/my/theme.css">
 
-<article>
+<article id="presentation">
   <section>Slide 1</section>
   <section>Slide 2</section>
   <section>Slide 3</section>
 </article>
 
 <script src="bespoke.min.js"></script>
+<script src="bespoke-keys.min.js"></script>
+<script src="bespoke-touch.min.js"></script>
 <script src="path/to/my/script.js"></script>
 ```
 
@@ -128,9 +130,9 @@ To create your own custom deck styles, Bespoke.js provides the necessary classes
 
 ### Official Plugins
 
-All official plugins can be installed from Bower or npm, e.g. `$ bower install bespoke-bullets` or `$ npm install bespoke-hash`
+All official plugins can be installed from Bower or npm, e.g. `$ bower install bespoke-keys` or `$ npm install bespoke-touch`
 
- - [bespoke-keys](https://github.com/markdalgleish/bespoke-bullets) for keyboard interaction.
+ - [bespoke-keys](https://github.com/markdalgleish/bespoke-keys) for keyboard interaction.
  - [bespoke-touch](https://github.com/markdalgleish/bespoke-touch) for touch interaction.
  - [bespoke-bullets](https://github.com/markdalgleish/bespoke-bullets) for animated bullet lists.
  - [bespoke-scale](https://github.com/markdalgleish/bespoke-scale) for responsive slide scaling.
