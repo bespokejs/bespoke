@@ -1,5 +1,5 @@
 /*!
- * Bespoke.js v0.3.1
+ * Bespoke.js v0.4.0
  *
  * Copyright 2014, Mark Dalgleish
  * This content is released under the MIT license
