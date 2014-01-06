@@ -199,7 +199,7 @@
 
 						});
 
-						xdescribe("slide", function() {
+						describe("slide", function() {
 
 							it("should call 'slide' on all deck instances", function() {
 								decks.forEach(function(deck) {
