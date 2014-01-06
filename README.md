@@ -128,6 +128,18 @@ To create your own custom deck styles, Bespoke.js provides the necessary classes
 
 ## Plugins
 
+### Using Plugins
+
+Plugins are specified when instantiating your presentation, like so:
+
+```js
+var deck = bespoke.from('#presentation', {
+  // Plugins:
+  keys: true,
+  touch: true
+});
+```
+
 ### Official Plugins
 
 All official plugins can be installed from Bower or npm, e.g. `$ bower install bespoke-keys` or `$ npm install bespoke-touch`
