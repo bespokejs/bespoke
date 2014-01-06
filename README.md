@@ -10,7 +10,7 @@ The core library [sets up the presentation](#javascript), handles [plugins](#plu
 
 Any other functionality, from [keyboard](https://github.com/markdalgleish/bespoke-keys) and [touch](https://github.com/markdalgleish/bespoke-touch) interactions to [bullet lists](https://github.com/markdalgleish/bespoke-bullets) and [hash routing](https://github.com/markdalgleish/bespoke-hash), is implemented as a [plugin](#plugins). Joining the Bespoke.js plugin ecosystem is simple with [Bespoke.js Plugin Generator](https://github.com/markdalgleish/generator-bespokeplugin).
 
-## Getting Started
+## Creating a Presentation
 
 Due to the highly modular nature of Bespoke.js, the recommended way to get started is with [Bespoke.js Generator](https://github.com/markdalgleish/generator-bespoke), a [Yeoman](http://yeoman.io) generator that scaffolds a boilerplate presentation.
 
@@ -29,18 +29,12 @@ In your newly scaffolded project, you can use the following [Grunt](http://grunt
 
 For more detailed instructions, check out the [Bespoke.js Generator](https://github.com/markdalgleish/generator-bespoke) repo.
 
-## Basic Usage
-
-### Download
-
-Bower: `$ bower install bespoke.js`
-
-npm: `$ npm install bespoke`
-
-Or, manually download either the [production version][min] or the [development version][max].
+If you'd prefer to craft a new presentation from scratch, you can install Bespoke.js from [Bower](http://bower.io) with `bower install bespoke.js`, from [npm](http://npmjs.org) with `npm install bespoke`, or manually download either the [production version][min] or the [development version][max]. The Bespoke.js core is extremely lightweight, so you'll probably want to include some [plugins](#plugins).
 
 [min]: https://raw.github.com/markdalgleish/bespoke.js/master/dist/bespoke.min.js
 [max]: https://raw.github.com/markdalgleish/bespoke.js/master/dist/bespoke.js
+
+## Basic Usage
 
 ### Markup
 
