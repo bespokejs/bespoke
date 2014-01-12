@@ -157,10 +157,10 @@ All official plugins can be installed from Bower or npm, e.g. `$ bower install b
 
 ### Third-Party Plugins
 
- - [bespoke-fx](https://github.com/ebow/bespoke-fx) by [@tdhc](http://twitter.com/tdhc), for configurable slide transitions.
- - [bespoke-dir](https://github.com/ryanseddon/bespoke-dir) by [@ryanseddon](http://twitter.com/ryanseddon), for direction-based deck classes.
- - [bespoke-spotlight](https://github.com/mobz/bespoke-spotlight) by [@mobz](http://twitter.com/mobz), for quick-searching slide content.
- - [bespoke-blackout](https://github.com/originell/bespoke-blackout) by [@originell](http://twitter.com/originell), for temporarily blacking out the screen.
+ - [bespoke-fx](https://github.com/ebow/bespoke-fx) by [@ebow](https://github.com/ebow), for configurable slide transitions.
+ - [bespoke-dir](https://github.com/ryanseddon/bespoke-dir) by [@ryanseddon](https://github.com/ryanseddon), for direction-based deck classes.
+ - [bespoke-spotlight](https://github.com/mobz/bespoke-spotlight) by [@mobz](https://github.com/mobz), for quick-searching slide content.
+ - [bespoke-blackout](https://github.com/originell/bespoke-blackout) by [@originell](https://github.com/originell), for temporarily blacking out the screen.
  - [bespoke-secondary](https://github.com/joelpurra/bespoke-secondary) by [@joelpurra](https://github.com/joelpurra), for slide notes in a secondary window.
  - [bespoke-advanced](https://github.com/joelpurra/bespoke-advanced) by [@joelpurra](https://github.com/joelpurra), to automatically advance slides on a timer.
  - [bespoke-jumpy](https://github.com/joelpurra/bespoke-jumpy) by [@joelpurra](https://github.com/joelpurra), for keyboard shortcuts to jump straight to specific slides.
