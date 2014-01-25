@@ -392,6 +392,7 @@ bespoke.plugins.myPlugin = function(deck) {
  - [A Real Database Rethink](http://r.va.gg/presentations/nodeconfeu.2013) by [Rod Vagg](http://twitter.com/rvagg)
  - [Feature Flags with Directives](http://mjt01.github.io/slides-feature-flags/) by [Michael Taranto](http://twitter.com/michaeltaranto)
  - [Introduction to hapi](http://wolfe.id.au/presentations/hapi/) by [Mark Wolfe](http://twitter.com/wolfeidau)
+ - [How to Cook a Graph Database in a Night](http://nodejsconfit.levelgraph.io) by [Matteo Collina](http://twitter.com/matteocollina)
 
 Made a presentation with Bespoke.js? [Let me know](http://twitter.com/markdalgleish).
 
