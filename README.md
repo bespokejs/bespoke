@@ -1,4 +1,4 @@
-[![Build Status](https://secure.travis-ci.org/markdalgleish/bespoke.js.png)](http://travis-ci.org/markdalgleish/bespoke.js)
+[![Build Status](https://secure.travis-ci.org/markdalgleish/bespoke.js.png)](http://travis-ci.org/markdalgleish/bespoke.js) [![Coverage Status](https://coveralls.io/repos/markdalgleish/bespoke.js/badge.png)](https://coveralls.io/r/markdalgleish/bespoke.js)
 
 # Bespoke.js
 

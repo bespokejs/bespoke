@@ -20,7 +20,8 @@ module.exports = function(grunt) {
         'Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n'
     },
     clean: {
-      files: ['dist']
+      dist: ['dist'],
+      coverage: ['test/coverage']
     },
     concat: {
       options: {
@@ -41,10 +42,28 @@ module.exports = function(grunt) {
         dest: 'dist/<%= pkg.name %>.min.js'
       }
     },
-    jasmine: {
-      src: ['libs/**/*.js', 'src/**/*.js'],
+    karma: {
+      unit: {
+        configFile: 'karma.conf.js',
+        singleRun: true
+      }
+    },
+    coverage: {
       options: {
-        specs: 'specs/**/*Spec.js'
+        thresholds: {
+          'statements': 100,
+          'branches': 100,
+          'lines': 100,
+          'functions': 100
+        },
+        dir: 'coverage',
+        root: 'test'
+      }
+    },
+    coveralls: {
+      options: {
+        debug: true,
+        coverage_dir: 'test/coverage'
       }
     },
     watch: {
@@ -101,12 +120,15 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-istanbul-coverage');
+  grunt.loadNpmTasks('grunt-karma-coveralls');
   grunt.loadNpmTasks('grunt-micro');
 
   // Default task.
-  grunt.registerTask('default', ['clean', 'jshint', 'jasmine', 'concat', 'uglify', 'micro']);
+  grunt.registerTask('default', ['clean:dist', 'jshint', 'test', 'concat', 'uglify', 'micro']);
+  grunt.registerTask('test', ['clean:coverage', 'karma', 'coverage']);
 
 };
