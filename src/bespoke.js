@@ -131,4 +131,7 @@
 		plugins: plugins
 	};
 
+	if ((typeof module === 'object') && module && (typeof module.exports === 'object') && module.exports) {
+		module.exports = window[moduleName];
+	}
 }('bespoke', window));
