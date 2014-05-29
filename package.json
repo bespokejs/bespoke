@@ -36,17 +36,18 @@
     "requirejs": "~2.1.10",
     "karma-requirejs": "~0.2.1",
     "karma-coffee-preprocessor": "~0.1.2",
-    "karma-phantomjs-launcher": "~0.1.2",
+    "karma-phantomjs-launcher": "~0.1.4",
     "karma": "~0.10.9",
     "karma-coverage": "~0.1.5",
     "jshint-stylish": "~0.1.5",
     "lodash": "~2.4.1",
     "browserify": "~4.1.5",
-    "karma-commonjs": "0.0.7",
     "vinyl-source-stream": "~0.1.1",
     "gulp-streamify": "0.0.5",
     "gulp-micro": "~0.1.2",
-    "gulp-gzip": "0.0.8"
+    "gulp-gzip": "0.0.8",
+    "function-bind": "~0.1.0",
+    "karma-browserify": "~0.2.1"
   },
   "licenses": [
     {

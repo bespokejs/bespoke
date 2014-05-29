@@ -19,6 +19,7 @@ gulp.task('dev', ['build', 'watch']);
 
 gulp.task('watch', function() {
 	gulp.watch('src/**/*.js', ['karma', 'build']);
+	gulp.watch('test/spec/**/*.js', ['karma']);
 });
 
 gulp.task('clean', function() {
@@ -33,7 +34,7 @@ gulp.task('jshint', function() {
 });
 
 gulp.task('karma', ['clean'], function() {
-	return gulp.src(['libs/**/*.js', 'src/**/*', 'test/spec/*Spec.js'])
+	return gulp.src(['test/spec/*Spec.js'])
 		.pipe(karma({ configFile: 'karma.conf.js' }));
 });
 

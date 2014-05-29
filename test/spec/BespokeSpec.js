@@ -1,6 +1,8 @@
 (function() {
 	"use strict";
 
+	Function.prototype.bind = require('function-bind');
+
 	var bespoke = require('../../src/bespoke.js');
 
 	describe("bespoke", function() {
@@ -145,13 +147,13 @@
 
 							it("should call 'next' on all deck instances", function() {
 								decks.forEach(function(deck) {
-									deck.next = sinon.spy();
+									deck.next = jasmine.createSpy('next');
 								});
 
 								bespoke.next();
 
 								decks.forEach(function(deck) {
-									expect(deck.next.called).toBe(true);
+									expect(deck.next).toHaveBeenCalled();
 								});
 							});
 
@@ -159,13 +161,13 @@
 								var customEventData = { foo: 'bar' };
 
 								decks.forEach(function(deck) {
-									deck.next = sinon.spy();
+									deck.next = jasmine.createSpy('next');
 								});
 
 								bespoke.next(customEventData);
 
 								decks.forEach(function(deck) {
-									expect(deck.next.calledWith(customEventData)).toBe(true);
+									expect(deck.next).toHaveBeenCalledWith(customEventData);
 								});
 							});
 
@@ -175,13 +177,13 @@
 
 							it("should call 'prev' on all deck instances", function() {
 								decks.forEach(function(deck) {
-									deck.prev = sinon.spy();
+									deck.prev = jasmine.createSpy('prev');
 								});
 
 								bespoke.prev();
 
 								decks.forEach(function(deck) {
-									expect(deck.prev.called).toBe(true);
+									expect(deck.prev).toHaveBeenCalled();
 								});
 							});
 
@@ -189,13 +191,13 @@
 								var customEventData = { foo: 'bar' };
 
 								decks.forEach(function(deck) {
-									deck.prev = sinon.spy();
+									deck.prev = jasmine.createSpy('prev');
 								});
 
 								bespoke.prev(customEventData);
 
 								decks.forEach(function(deck) {
-									expect(deck.prev.calledWith(customEventData)).toBe(true);
+									expect(deck.prev).toHaveBeenCalledWith(customEventData);
 								});
 							});
 
@@ -205,13 +207,13 @@
 
 							it("should call 'slide' on all deck instances", function() {
 								decks.forEach(function(deck) {
-									deck.slide = sinon.spy();
+									deck.slide = jasmine.createSpy('slide');
 								});
 
 								bespoke.slide(0);
 
 								decks.forEach(function(deck) {
-									expect(deck.slide.calledWith(0)).toBe(true);
+									expect(deck.slide).toHaveBeenCalledWith(0);
 								});
 							});
 
@@ -219,13 +221,13 @@
 								var customEventData = { foo: 'bar' };
 
 								decks.forEach(function(deck) {
-									deck.slide = sinon.spy();
+									deck.slide = jasmine.createSpy('slide');
 								});
 
 								bespoke.slide(0, customEventData);
 
 								decks.forEach(function(deck) {
-									expect(deck.slide.calledWith(0, customEventData)).toBe(true);
+									expect(deck.slide).toHaveBeenCalledWith(0, customEventData);
 								});
 							});
 
@@ -327,7 +329,7 @@
 						describe("on", function() {
 
 							it("should return a function to unbind the event", function() {
-								var callback = sinon.spy();
+								var callback = jasmine.createSpy('callback');
 								var off = deck.on("foo", callback);
 								deck.fire("foo");
 								expect(callback.callCount).toBe(1);
@@ -337,36 +339,36 @@
 							});
 
 							it("should allow multiple events to be bound", function() {
-								var callback1 = sinon.spy(),
-									callback2 = sinon.spy();
+								var callback1 = jasmine.createSpy('callback1'),
+									callback2 = jasmine.createSpy('callback2');
 								deck.on("bar", callback1);
 								deck.on("bar", callback2);
 								deck.fire("bar");
-								expect(callback1.called).toBe(true);
-								expect(callback2.called).toBe(true);
+								expect(callback1).toHaveBeenCalled();
+								expect(callback2).toHaveBeenCalled();
 							});
 
 							describe("activate", function() {
 
 								it("should call handler when slide is activated", function() {
-									var callback = sinon.spy();
+									var callback = jasmine.createSpy('callback');
 									deck.on("activate", callback);
 									deck.next();
-									expect(callback.called).toBe(true);
+									expect(callback).toHaveBeenCalled();
 								});
 
 								it("should pass payload to 'activate' handler when slide is activated", function() {
-									var callback = sinon.spy(),
+									var callback = jasmine.createSpy('callback'),
 										SLIDE_INDEX = 0,
 										ACTIVATED_SLIDE = deck.slides[SLIDE_INDEX];
 
 									deck.on("activate", callback);
 									deck.slide(SLIDE_INDEX);
 
-									expect(callback.calledWith({
+									expect(callback).toHaveBeenCalledWith({
 										slide: ACTIVATED_SLIDE,
 										index: SLIDE_INDEX
-									})).toBe(true);
+									});
 								});
 
 								it("should pass merged payload to 'activate' handler when next slide is activated with user payload", function() {
@@ -405,24 +407,24 @@
 							describe("deactivate", function() {
 
 								it("should call handler when slide is deactivated", function() {
-									var callback = sinon.spy();
+									var callback = jasmine.createSpy('callback');
 									deck.on("deactivate", callback);
 									deck.next();
-									expect(callback.called).toBe(true);
+									expect(callback).toHaveBeenCalled();
 								});
 
 								it("should pass payload to 'deactivate' handler once when slide is activated", function() {
-									var callback = sinon.spy(),
+									var callback = jasmine.createSpy('callback'),
 										SLIDE_INDEX = 0,
 										DEACTIVATED_SLIDE = deck.slides[SLIDE_INDEX];
 
 									deck.on("deactivate", callback);
 									deck.slide(1);
 
-									expect(callback.calledWith({
+									expect(callback).toHaveBeenCalledWith({
 										slide: DEACTIVATED_SLIDE,
 										index: SLIDE_INDEX
-									})).toBe(true);
+									});
 									expect(callback.callCount).toBe(1);
 								});
 
@@ -462,7 +464,7 @@
 							describe("next", function() {
 
 								it("should call handler when next slide is requested", function() {
-									var callback = sinon.spy();
+									var callback = jasmine.createSpy('callback');
 
 									deck.on("next", callback);
 									deck.next();
@@ -471,17 +473,17 @@
 								});
 
 								it("should call handler when next slide is requested while on last slide", function() {
-									var callback = sinon.spy();
+									var callback = jasmine.createSpy('callback');
 
 									deck.slide(deck.slides.length - 1);
 									deck.on("next", callback);
 									deck.next();
 
-									expect(callback.called).toBe(true);
+									expect(callback).toHaveBeenCalled();
 								});
 
 								it("should pass payload to 'next' handler when next slide is requested", function() {
-									var callback = sinon.spy(),
+									var callback = jasmine.createSpy('callback'),
 										ACTIVE_SLIDE_INDEX = 0,
 										ACTIVE_SLIDE = deck.slides[ACTIVE_SLIDE_INDEX];
 
@@ -489,15 +491,15 @@
 									deck.slide(ACTIVE_SLIDE_INDEX);
 									deck.next();
 
-									expect(callback.calledWith({
+									expect(callback).toHaveBeenCalledWith({
 										slide: ACTIVE_SLIDE,
 										index: ACTIVE_SLIDE_INDEX
-									})).toBe(true);
+									});
 									expect(callback.callCount).toBe(1);
 								});
 
 								it("should not activate next slide if an event handler returns false", function() {
-									var activateCallback = sinon.spy();
+									var activateCallback = jasmine.createSpy('activateCallback');
 
 									deck.on("activate", activateCallback);
 									deck.on("next", function() {
@@ -505,11 +507,11 @@
 									});
 									deck.next();
 
-									expect(activateCallback.called).toBe(false);
+									expect(activateCallback).not.toHaveBeenCalled();
 								});
 
 								it("should not call subsequent 'next' handlers if an earlier event handler returns false", function() {
-									var nextCallback = sinon.spy();
+									var nextCallback = jasmine.createSpy('nextCallback');
 
 									deck.on("next", function() {
 										return false;
@@ -517,11 +519,11 @@
 									deck.on("next", nextCallback);
 									deck.next();
 
-									expect(nextCallback.called).toBe(false);
+									expect(nextCallback).not.toHaveBeenCalled();
 								});
 
 								it("should activate next slide if event handler returns true", function() {
-									var activateCallback = sinon.spy();
+									var activateCallback = jasmine.createSpy('activateCallback');
 
 									deck.on("activate", activateCallback);
 									deck.on("next", function() {
@@ -529,7 +531,7 @@
 									});
 									deck.next();
 
-									expect(activateCallback.called).toBe(true);
+									expect(activateCallback).toHaveBeenCalled();
 								});
 
 							});
@@ -537,7 +539,7 @@
 							describe("prev", function() {
 
 								it("should call handler when previous slide is requested", function() {
-									var callback = sinon.spy();
+									var callback = jasmine.createSpy('callback');
 
 									deck.slide(1);
 									deck.on("prev", callback);
@@ -547,16 +549,16 @@
 								});
 
 								it("should call handler when previous slide is requested while on first slide", function() {
-									var callback = sinon.spy();
+									var callback = jasmine.createSpy('callback');
 
 									deck.on("prev", callback);
 									deck.prev();
 
-									expect(callback.called).toBe(true);
+									expect(callback).toHaveBeenCalled();
 								});
 
 								it("should pass payload to 'prev' handler when previous slide is requested", function() {
-									var callback = sinon.spy(),
+									var callback = jasmine.createSpy('callback'),
 										ACTIVE_SLIDE_INDEX = 1,
 										ACTIVE_SLIDE = deck.slides[ACTIVE_SLIDE_INDEX];
 
@@ -564,15 +566,15 @@
 									deck.slide(ACTIVE_SLIDE_INDEX);
 									deck.prev();
 
-									expect(callback.calledWith({
+									expect(callback).toHaveBeenCalledWith({
 										slide: ACTIVE_SLIDE,
 										index: ACTIVE_SLIDE_INDEX
-									})).toBe(true);
+									});
 									expect(callback.callCount).toBe(1);
 								});
 
 								it("should not activate previous slide if an event handler returns false", function() {
-									var activateCallback = sinon.spy();
+									var activateCallback = jasmine.createSpy('activateCallback');
 
 									deck.on("activate", activateCallback);
 									deck.on("prev", function() {
@@ -580,11 +582,11 @@
 									});
 									deck.prev();
 
-									expect(activateCallback.called).toBe(false);
+									expect(activateCallback).not.toHaveBeenCalled();
 								});
 
 								it("should not call subsequent 'prev' handlers if an earlier event handler returns false", function() {
-									var prevCallback = sinon.spy();
+									var prevCallback = jasmine.createSpy('prevCallback');
 
 									deck.slide(1);
 									deck.on("prev", function() {
@@ -593,11 +595,11 @@
 									deck.on("prev", prevCallback);
 									deck.prev();
 
-									expect(prevCallback.called).toBe(false);
+									expect(prevCallback).not.toHaveBeenCalled();
 								});
 
 								it("should activate previous slide if event handler returns true", function() {
-									var activateCallback = sinon.spy();
+									var activateCallback = jasmine.createSpy('activateCallback');
 
 									deck.slide(1);
 									deck.on("activate", activateCallback);
@@ -606,7 +608,7 @@
 									});
 									deck.prev();
 
-									expect(activateCallback.called).toBe(true);
+									expect(activateCallback).toHaveBeenCalled();
 								});
 
 							});
@@ -622,7 +624,7 @@
 								});
 
 								it("should call handler when specific slide is requested", function() {
-									var callback = sinon.spy();
+									var callback = jasmine.createSpy('callback');
 
 									deck.on("slide", callback);
 									deck.slide(1);
@@ -631,21 +633,21 @@
 								});
 
 								it("should pass payload to 'slide' handler when specific slide is requested", function() {
-									var callback = sinon.spy(),
+									var callback = jasmine.createSpy('callback'),
 										ACTIVE_SLIDE_INDEX = 1,
 										ACTIVE_SLIDE = deck.slides[ACTIVE_SLIDE_INDEX];
 
 									deck.on("slide", callback);
 									deck.slide(ACTIVE_SLIDE_INDEX);
 
-									expect(callback.calledWith({
+									expect(callback).toHaveBeenCalledWith({
 										slide: ACTIVE_SLIDE,
 										index: ACTIVE_SLIDE_INDEX
-									})).toBe(true);
+									});
 								});
 
 								it("should not activate requested slide if an event handler returns false", function() {
-									var activateCallback = sinon.spy();
+									var activateCallback = jasmine.createSpy('activateCallback');
 
 									deck.on("activate", activateCallback);
 									deck.on("slide", function() {
@@ -653,7 +655,7 @@
 									});
 									deck.slide(1);
 
-									expect(activateCallback.called).toBe(false);
+									expect(activateCallback).not.toHaveBeenCalled();
 								});
 
 								it("should merge the custom user payload with the event object", function() {
@@ -673,12 +675,12 @@
 						describe("fire", function() {
 
 							it("should allow custom events to be triggered", function() {
-								var customEventHandler = sinon.spy(),
+								var customEventHandler = jasmine.createSpy('customEventHandler'),
 									payload = { foo: 'bar' };
 
 								deck.on('custom-event', customEventHandler);
 								deck.fire('custom-event', payload);
-								expect(customEventHandler.calledWith(payload)).toBe(true);
+								expect(customEventHandler).toHaveBeenCalledWith(payload);
 							});
 
 						});

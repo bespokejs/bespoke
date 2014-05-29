@@ -7,11 +7,9 @@ module.exports = function(config) {
     basePath: '',
 
     // testing framework to use (jasmine/mocha/qunit/...)
-    frameworks: ['jasmine', 'commonjs'],
+    frameworks: ['jasmine', 'browserify'],
 
     files: [
-      'libs/**/*.js',
-      'src/**/*.js',
       'test/spec/*Spec.js'
     ],
 
@@ -19,7 +17,7 @@ module.exports = function(config) {
 
     preprocessors: {
       'src/**/*.js': 'coverage',
-      '{src,test}/**/*.js': 'commonjs'
+      'test/**/*.js': 'browserify'
     },
 
     reporters: ['progress', 'coverage'],
