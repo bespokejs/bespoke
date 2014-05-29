@@ -1,6 +1,6 @@
 {
   "name": "bespoke.js",
-  "version": "0.4.0",
+  "version": "1.0.0-beta",
   "main": "./dist/bespoke.js",
   "ignore": [
     "**/.*"
