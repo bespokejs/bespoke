@@ -27,7 +27,7 @@ gulp.task('clean', function() {
 });
 
 gulp.task('jshint', function() {
-	return gulp.src(['gulpfile.js', 'src/**/*.js', 'specs/**/*.js', 'demo/**/*.js'])
+	return gulp.src(['gulpfile.js', 'src/**/*.js', 'specs/**/*.js'])
 			.pipe(jshint('.jshintrc'))
 			.pipe(jshint.reporter('jshint-stylish'));
 });
