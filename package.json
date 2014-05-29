@@ -14,7 +14,7 @@
     "test": "gulp",
     "coveralls": "gulp coveralls"
   },
-  "main": "./dist/bespoke.js",
+  "main": "./src/bespoke.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/markdalgleish/bespoke.js.git"
@@ -23,7 +23,7 @@
     "gulp": "~3.5.1",
     "gulp-clean": "~0.2.4",
     "gulp-header": "~1.0.2",
-    "gulp-uglify": "~0.2.0",
+    "gulp-uglify": "~0.3.0",
     "gulp-rename": "~0.2.2",
     "gulp-jshint": "~1.3.4",
     "gulp-karma": "0.0.2",
@@ -40,7 +40,13 @@
     "karma": "~0.10.9",
     "karma-coverage": "~0.1.5",
     "jshint-stylish": "~0.1.5",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "browserify": "~4.1.5",
+    "karma-commonjs": "0.0.7",
+    "vinyl-source-stream": "~0.1.1",
+    "gulp-streamify": "0.0.5",
+    "gulp-micro": "~0.1.2",
+    "gulp-gzip": "0.0.8"
   },
   "licenses": [
     {

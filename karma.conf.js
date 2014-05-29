@@ -7,7 +7,7 @@ module.exports = function(config) {
     basePath: '',
 
     // testing framework to use (jasmine/mocha/qunit/...)
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'commonjs'],
 
     files: [
       'libs/**/*.js',
@@ -18,7 +18,8 @@ module.exports = function(config) {
     exclude: [],
 
     preprocessors: {
-      'src/**/*.js': 'coverage'
+      'src/**/*.js': 'coverage',
+      '{src,test}/**/*.js': 'commonjs'
     },
 
     reporters: ['progress', 'coverage'],

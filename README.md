@@ -4,7 +4,7 @@
 
 ### DIY Presentation Micro-Framework
 
-[Bespoke.js](http://markdalgleish.com/projects/bespoke.js) is a super minimal (<1KB min'd and gzipped), modular presentation library for modern browsers, designed to foster a rich [plugin ecosystem](#plugins).
+[Bespoke.js](http://markdalgleish.com/projects/bespoke.js) is a super minimal (1KB min'd and gzipped), modular presentation library for modern browsers, designed to foster a rich [plugin ecosystem](#plugins).
 
 The core library [sets up the presentation](#javascript), provides a simple [control API](#control-api), manages [events](#events) and adds [classes](#CSS) to the slides to allow CSS transitions.
 
@@ -29,50 +29,35 @@ In your newly scaffolded project, you can use the following Grunt tasks:
 
 For more detailed instructions, check out the [Bespoke.js Generator](https://github.com/markdalgleish/generator-bespoke) repo.
 
-If you'd prefer to craft a new presentation from scratch, you can install Bespoke.js from [Bower](http://bower.io) with `bower install bespoke.js`, from [npm](http://npmjs.org) with `npm install bespoke`, or manually download either the [production version][min] or the [development version][max]. The Bespoke.js core is extremely lightweight, so you'll probably want to include some [plugins](#plugins).
+If you'd prefer to craft a new presentation from scratch, you can install Bespoke.js from [npm](http://npmjs.org) with `npm install bespoke`, [Bower](http://bower.io) with `bower install bespoke.js`, or manually download either the [production version][min] or the [development version][max]. The Bespoke.js core is extremely lightweight, so you'll probably want to include some [plugins](#plugins).
 
 [min]: https://raw.github.com/markdalgleish/bespoke.js/master/dist/bespoke.min.js
 [max]: https://raw.github.com/markdalgleish/bespoke.js/master/dist/bespoke.js
 
 ## Basic Usage
 
+### Loading Bespoke
+
+Bespoke.js is shipped in a [UMD format](https://github.com/umdjs/umd), meaning that `bespoke` and its plugins are available as CommonJS/AMD modules or browser globals.
+
 ### Markup
 
 It's completely up to you which tags you use, but the following is a good starting point:
 
 ```html
-<link rel="stylesheet" href="path/to/my/theme.css">
-
 <article id="presentation">
   <section>Slide 1</section>
   <section>Slide 2</section>
   <section>Slide 3</section>
 </article>
-
-<script src="bespoke.min.js"></script>
-<script src="bespoke-keys.min.js"></script>
-<script src="bespoke-touch.min.js"></script>
-<script src="path/to/my/script.js"></script>
 ```
 
-### JavaScript
+#### JavaScript
 
-Decks are created by selecting the parent element with the `from(selector[, plugins])` method. Once a parent element is selected, the child elements become slides.
-
-```js
-var deck = bespoke.from('#presentation', {
-  // Plugins:
-  keys: true,
-  touch: true
-});
-```
-
-#### Control API
-
-Programmatically control the state of the presentation.
+To create a new presentation, Bespoke.js provides the `from(selector[, plugins])` method, which takes a selector or element reference and an array of [plugins](#plugins), and returns a [deck instance](#deck-instances).
 
 ```js
-var deck = bespoke.from('#presentation');
+var deck = bespoke.from('#presentation', [plugins]);
 
 // Next slide
 deck.next();
@@ -128,21 +113,9 @@ To create your own custom deck styles, Bespoke.js provides the necessary classes
 
 ## Plugins
 
-### Using Plugins
-
-Plugins are specified when instantiating your presentation, like so:
-
-```js
-var deck = bespoke.from('#presentation', {
-  // Plugins:
-  keys: true,
-  touch: true
-});
-```
-
 ### Official Plugins
 
-All official plugins can be installed from Bower or npm, e.g. `$ bower install bespoke-keys` or `$ npm install bespoke-touch`
+All official plugins can be installed from npm or Bower, e.g. `$ npm install bespoke-keys` or `$ bower install bespoke-touch`
 
  - [bespoke-keys](https://github.com/markdalgleish/bespoke-keys) for keyboard interaction.
  - [bespoke-touch](https://github.com/markdalgleish/bespoke-touch) for touch interaction.
@@ -168,6 +141,32 @@ All official plugins can be installed from Bower or npm, e.g. `$ bower install b
 
 If you'd like your plugin added to this list, [let me know](http://twitter.com/markdalgleish).
 
+### Using Plugins
+
+All official plugins are provided in a [UMD format](https://github.com/umdjs/umd), meaning they are available as CommonJS/AMD modules or browser globals.
+
+For example, if you're using CommonJS modules via [browserify](http://browserify.org/) or [webpack](http://webpack.github.io/), it would look something like this:
+
+```js
+var bespoke = require('bespoke'),
+  keys = require('bespoke-keys'),
+  touch = require('bespoke-touch');
+
+var deck = bespoke.from('#presentation', [
+  keys()
+  touch()
+]);
+```
+
+If you're using browser globals, all official plugins are added to the `bespoke.plugins` object, for example:
+
+```js
+var deck = bespoke.from('#presentation', [
+  bespoke.plugins.keys(),
+  bespoke.plugins.touch()
+]);
+```
+
 ## Advanced Usage
 
 ### From HTMLElement
@@ -180,27 +179,7 @@ bespoke.from(element);
 
 ### Deck Instances
 
-##### Creating Deck Instances
-
-Individual deck instances can be created and controlled separately.
-
-```js
-// First deck instance
-var one = bespoke.from('#deck-one');
-one.next();
-one.prev();
-one.slide(0);
-
-// Second deck instance
-var two = bespoke.from('#deck-two');
-two.next();
-two.prev();
-two.slide(0);
-```
-
-##### Deck Instance Properties
-
-The following properties are available on each instance.
+Deck instances are provided to plugins and returned when instantiating a presentation. The following properties are available on each instance.
 
 *Note: The optional [`eventData`](#custom-event-data) parameter is an object that will be merged with the `event` object in subsequent [event handlers](#events).*
 
@@ -308,49 +287,51 @@ If you'd like to learn by example, check out the [list of existing plugins](#plu
 
 ### Basic Plugins
 
-Plugins are simply functions that are called when presentations are created.
+Plugins are simply functions that are called when presentations are created. They are passed a [deck instance](#deck-instances) which allows you to interact with the deck's state, bind events and modify its elements.
 
-They are passed a [deck instance](#deck-instance-properties) which allows you to interact with the deck's state, bind events and modify its elements.
+To be consistent with the suite of official Bespoke.js plugins, it is highly recommended that you implement your plugin as a function that takes configuration and returns a plugin function.
 
 ```js
 // Creating the plugin
-bespoke.plugins.myPlugin = function(deck) {
-  deck.on('activate', function(e) {
-    console.log('Activated slide ' + (e.index + 1) + ' of ' + deck.slides.length);
-  });
+var myPlugin = function() {
+  return function() {
+    deck.on('activate', function(e) {
+      console.log('Activated slide ' + (e.index + 1) + ' of ' + deck.slides.length);
+    });
+  }
 };
 ```
 
-The plugin can now be provided to the second parameter of the `from(selector[, plugins])` method.
+The plugin can now be provided in the plugins array when using the `from(selector[, plugins])` method.
 
 ```js
 // Using the plugin
-bespoke.from('#presentation', { myPlugin: true });
+bespoke.from('#presentation', [
+  myPlugin()
+]);
 ```
-
-*Note: Your plugin won't run if the option value provided is `false`.*
 
 ### Plugins with Options
 
-If your plugin needs some configurability, options can be passed through as the second parameter.
+If your plugin needs some configurability, your plugin factory function can take options and return a configured plugin function.
 
 ```js
 // Creating the plugin with options
-bespoke.plugins.myPlugin = function(deck, options) {
-  var showTotal = options && options.showTotal;
+var myPlugin = function(options) {
+  return function(deck) {
+    var showTotal = options && options.showTotal;
 
-  deck.on('activate', function(e) {
-    console.log('Activated slide ' + (e.index + 1) +
-      (showTotal ? ' of ' + deck.slides.length : ''));
-  });
+    deck.on('activate', function(e) {
+      console.log('Activated slide ' + (e.index + 1) +
+        (showTotal ? ' of ' + deck.slides.length : ''));
+    });
+  }
 };
 
 // Using the plugin with options
-bespoke.from('#presentation', {
-  myPlugin: {
-    showTotal: true
-  }
-});
+bespoke.from('#presentation', [
+  myPlugin({ showTotal: true })
+]);
 ```
 
 ### Custom Event Data
@@ -360,23 +341,25 @@ Additional event data can be supplied to `next`, `prev` and `slide`, which is me
 This functionality is particularly useful if you need to differentiate between events caused by your plugin, and those caused by your end users or other plugins.
 
 ```js
-bespoke.plugins.myPlugin = function(deck) {
+var myPlugin = function() {
+  return function(deck) {
 
-  // Differentiating our plugin's events
-  deck.on('activate', function(event) {
-    if (event.foo === 'bar') {
-      // Triggered by my plugin...
-    } else {
-      // Triggered by end user, or another plugin...
-    }
-  });
+    // Differentiating our plugin's events
+    deck.on('activate', function(event) {
+      if (event.foo === 'bar') {
+        // Triggered by my plugin...
+      } else {
+        // Triggered by end user, or another plugin...
+      }
+    });
 
-  // Providing custom event data
-  deck.next({
-    foo: 'bar'
-  });
+    // Providing custom event data
+    deck.next({
+      foo: 'bar'
+    });
 
-};
+  };
+}
 ```
 
 ## Presentations

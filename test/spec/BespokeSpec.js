@@ -1,6 +1,8 @@
 (function() {
 	"use strict";
 
+	var bespoke = require('../../src/bespoke.js');
+
 	describe("bespoke", function() {
 
 		['selector', 'element'].forEach(function(fromType) {
@@ -709,62 +711,23 @@
 
 						describe("plugins", function() {
 
-							describe("custom", function() {
+							describe("when passed an array of plugins", function() {
 
-								var testPlugin,
-									onActivate;
+								var plugins;
 
 								beforeEach(function() {
-									bespoke.plugins.testPlugin = testPlugin = sinon.spy();
-
-									bespoke.plugins.onActivatePlugin = function(deck) {
-										onActivate = sinon.spy();
-										deck.on('activate', onActivate);
-									};
+									plugins = [
+										jasmine.createSpy('plugin1'),
+										jasmine.createSpy('plugin2'),
+										jasmine.createSpy('plugin3')
+									];
+									deck = bespoke.from("article", plugins);
 								});
 
-								afterEach(function() {
-									delete bespoke.plugins.testPlugin;
-									delete bespoke.plugins.onActivatePlugin;
-								});
-
-								it("should pass the deck instance as the first parameter", function() {
-									var deck = bespoke.from("article", { testPlugin: true });
-									expect(testPlugin.calledWith(deck)).toBe(true);
-								});
-
-								it("should pass 'true' as the second parameter if option is 'true'", function() {
-									var deck = bespoke.from("article", { testPlugin: true });
-									expect(testPlugin.calledWith(deck, true)).toBe(true);
-								});
-
-								it("should pass the options hash as the second parameter", function() {
-									var deck = bespoke.from("article", { testPlugin: { foo: 'bar' } });
-									expect(testPlugin.calledWith(deck, { foo: 'bar' })).toBe(true);
-								});
-
-								it("should not run the plugin if option is 'false'", function() {
-									bespoke.from("article", { testPlugin: false });
-									expect(testPlugin.called).toBe(false);
-								});
-
-								it("should call any 'activate' event handlers immediately", function() {
-									bespoke.from("article", { onActivatePlugin: true });
-									expect(onActivate.called).toBe(true);
-								});
-
-								it("should throw an error if a plugin isn't found", function() {
-									var createDeckWithMissingPlugin = function() {
-										bespoke.from("article", { foobar: true });
-									};
-									expect(createDeckWithMissingPlugin).toThrow("Missing plugin: bespoke-foobar");
-								});
-
-								it("should throw an error if a plugin isn't found even if the plugin is disabled", function() {
-									var createDeckWithMissingDisabledPlugin = function() {
-										bespoke.from("article", { foobar: false });
-									};
-									expect(createDeckWithMissingDisabledPlugin).toThrow("Missing plugin: bespoke-foobar");
+								it("should call all plugin functions, passing a deck instance", function() {
+									plugins.forEach(function(plugin) {
+										expect(plugin).toHaveBeenCalledWith(deck);
+									});
 								});
 
 							});
