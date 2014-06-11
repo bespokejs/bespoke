@@ -13,6 +13,7 @@ var gulp = require('gulp'),
 	pkg = require('./package.json'),
 	browserify = require('browserify'),
 	source = require('vinyl-source-stream'),
+	path = require('path'),
 	template = require('lodash').template;
 
 gulp.task('default', ['clean', 'jshint', 'karma', 'build']);
@@ -38,8 +39,9 @@ gulp.task('jshint', function() {
 gulp.task('instrument', function() {
 	return gulp.src('src/**/*.js')
 		.pipe(map(function(code, filename) {
-			var instrumenter = new istanbul.Instrumenter();
-			return instrumenter.instrumentSync(code.toString(), filename);
+			var instrumenter = new istanbul.Instrumenter(),
+				relativePath = path.relative(__dirname, filename);
+			return instrumenter.instrumentSync(code.toString(), relativePath);
 		}))
 		.pipe(gulp.dest('src-instrumented'));
 });
