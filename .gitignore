@@ -2,5 +2,6 @@
 node_modules/
 _SpecRunner.html
 .grunt
+src-instrumented
 test/coverage
 .coveralls.yml

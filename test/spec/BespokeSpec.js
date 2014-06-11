@@ -3,7 +3,7 @@
 
 	Function.prototype.bind = require('function-bind');
 
-	var bespoke = require('../../src/bespoke.js');
+	var bespoke = require('../../src-instrumented/bespoke.js');
 
 	describe("bespoke", function() {
 

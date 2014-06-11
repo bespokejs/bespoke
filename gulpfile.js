@@ -1,6 +1,8 @@
 var gulp = require('gulp'),
 	clean = require('gulp-clean'),
 	jshint = require('gulp-jshint'),
+	map = require('vinyl-map'),
+	istanbul = require('istanbul'),
 	karma = require('gulp-karma'),
 	coveralls = require('gulp-coveralls'),
 	header = require('gulp-header'),
@@ -33,7 +35,16 @@ gulp.task('jshint', function() {
 			.pipe(jshint.reporter('jshint-stylish'));
 });
 
-gulp.task('karma', ['clean'], function() {
+gulp.task('instrument', function() {
+	return gulp.src('src/**/*.js')
+		.pipe(map(function(code, filename) {
+			var instrumenter = new istanbul.Instrumenter();
+			return instrumenter.instrumentSync(code.toString(), filename);
+		}))
+		.pipe(gulp.dest('src-instrumented'));
+});
+
+gulp.task('karma', ['clean', 'instrument'], function() {
 	return gulp.src(['test/spec/*Spec.js'])
 		.pipe(karma({ configFile: 'karma.conf.js' }));
 });
