@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+	gutil = require('gulp-util'),
 	clean = require('gulp-clean'),
 	jshint = require('gulp-jshint'),
 	map = require('vinyl-map'),
@@ -7,21 +8,21 @@ var gulp = require('gulp'),
 	coveralls = require('gulp-coveralls'),
 	header = require('gulp-header'),
 	uglify = require('gulp-uglify'),
-	streamify = require('gulp-streamify'),
 	gzip = require('gulp-gzip'),
 	micro = require('gulp-micro'),
 	pkg = require('./package.json'),
 	browserify = require('browserify'),
 	source = require('vinyl-source-stream'),
+	buffer = require('vinyl-buffer'),
+	rename = require('gulp-rename'),
 	path = require('path'),
 	template = require('lodash').template;
 
-gulp.task('default', ['clean', 'jshint', 'karma', 'build']);
-gulp.task('build', ['compile', 'minify']);
-gulp.task('dev', ['build', 'watch']);
+gulp.task('default', ['clean', 'jshint', 'karma', 'compile']);
+gulp.task('dev', ['compile', 'watch']);
 
 gulp.task('watch', function() {
-	gulp.watch('src/**/*.js', ['karma', 'build']);
+	gulp.watch('src/**/*.js', ['karma', 'compile']);
 	gulp.watch('test/spec/**/*.js', ['karma']);
 });
 
@@ -56,15 +57,13 @@ gulp.task('coveralls', ['karma'], function() {
 		.pipe(coveralls());
 });
 
-var makeBundleStream = function(filename) {
+gulp.task('compile', ['clean'], function() {
 	return browserify('./src/bespoke.js')
 		.bundle({ standalone: 'bespoke' })
-		.pipe(source(filename));
-};
-
-gulp.task('compile', ['clean'], function() {
-	return makeBundleStream('bespoke.js')
-		.pipe(streamify(header(template([
+		.on('error', gutil.log)
+		.pipe(source('bespoke.js'))
+		.pipe(buffer())
+		.pipe(header(template([
 				'/*!',
 				' * <%= title %> v<%= version %>',
 				' *',
@@ -72,19 +71,16 @@ gulp.task('compile', ['clean'], function() {
 				' * This content is released under the <%= licenses[0].type %> license',
 				' * <%= licenses[0].url %>',
 				' */\n\n'
-			].join('\n'), pkg))))
-		.pipe(gulp.dest('dist'));
-});
-
-gulp.task('minify', ['clean'], function() {
-	return makeBundleStream('bespoke.min.js')
-    .pipe(streamify(uglify()))
-    .pipe(streamify(header(template([
-        '/*! <%= title %> v<%= version %> ',
-        '© <%= author.name %>, ',
-        '<%= licenses[0].type %> License */\n'
-      ].join(''), pkg))))
-    .pipe(gulp.dest('dist'))
-    .pipe(gzip())
-    .pipe(streamify(micro({ limit: 1024 })));
+			].join('\n'), pkg)))
+		.pipe(gulp.dest('dist'))
+		.pipe(rename('bespoke.min.js'))
+		.pipe(uglify())
+		.pipe(header(template([
+				'/*! <%= title %> v<%= version %> ',
+				'© <%= author.name %>, ',
+				'<%= licenses[0].type %> License */\n'
+			].join(''), pkg)))
+		.pipe(gulp.dest('dist'))
+		.pipe(gzip())
+		.pipe(micro({ limit: 1024 }));
 });

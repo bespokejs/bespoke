@@ -22,7 +22,7 @@
   "devDependencies": {
     "browserify": "~4.1.5",
     "function-bind": "~0.1.0",
-    "gulp": "~3.5.1",
+    "gulp": "^3.8.0",
     "gulp-clean": "~0.2.4",
     "gulp-coveralls": "~0.1.0",
     "gulp-gzip": "0.0.8",
@@ -30,8 +30,7 @@
     "gulp-jshint": "~1.3.4",
     "gulp-karma": "0.0.2",
     "gulp-micro": "~0.1.2",
-    "gulp-rename": "~0.2.2",
-    "gulp-streamify": "0.0.5",
+    "gulp-rename": "^1.2.0",
     "gulp-uglify": "~0.3.0",
     "istanbul": "^0.2.11",
     "jshint-stylish": "~0.1.5",
@@ -44,7 +43,9 @@
     "lodash": "~2.4.1",
     "requirejs": "~2.1.10",
     "vinyl-map": "^1.0.1",
-    "vinyl-source-stream": "~0.1.1"
+    "vinyl-source-stream": "~0.1.1",
+    "vinyl-buffer": "0.0.0",
+    "gulp-util": "^2.2.16"
   },
   "licenses": [
     {
