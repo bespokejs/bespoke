@@ -18,12 +18,12 @@ var gulp = require('gulp'),
 	path = require('path'),
 	template = require('lodash').template;
 
-gulp.task('default', ['clean', 'jshint', 'karma', 'compile']);
+gulp.task('default', ['clean', 'lint', 'test', 'compile']);
 gulp.task('dev', ['compile', 'watch']);
 
 gulp.task('watch', function() {
-	gulp.watch('src/**/*.js', ['karma', 'compile']);
-	gulp.watch('test/spec/**/*.js', ['karma']);
+	gulp.watch('src/**/*.js', ['test', 'compile']);
+	gulp.watch('test/spec/**/*.js', ['test']);
 });
 
 gulp.task('clean', function() {
@@ -31,7 +31,7 @@ gulp.task('clean', function() {
 		.pipe(clean());
 });
 
-gulp.task('jshint', function() {
+gulp.task('lint', function() {
 	return gulp.src(['gulpfile.js', 'src/**/*.js', 'specs/**/*.js'])
 			.pipe(jshint('.jshintrc'))
 			.pipe(jshint.reporter('jshint-stylish'));
@@ -47,12 +47,12 @@ gulp.task('instrument', function() {
 		.pipe(gulp.dest('src-instrumented'));
 });
 
-gulp.task('karma', ['clean', 'instrument'], function() {
+gulp.task('test', ['clean', 'instrument'], function() {
 	return gulp.src(['test/spec/*Spec.js'])
 		.pipe(karma({ configFile: 'karma.conf.js' }));
 });
 
-gulp.task('coveralls', ['karma'], function() {
+gulp.task('coveralls', ['test'], function() {
 	return gulp.src(['test/coverage/**/lcov.info'])
 		.pipe(coveralls());
 });
