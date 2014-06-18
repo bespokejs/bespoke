@@ -14,7 +14,7 @@
     "test": "gulp",
     "coveralls": "gulp coveralls"
   },
-  "main": "./src/bespoke.js",
+  "main": "./lib/bespoke.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/markdalgleish/bespoke.js.git"

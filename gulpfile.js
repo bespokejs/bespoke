@@ -22,7 +22,7 @@ gulp.task('default', ['clean', 'lint', 'test', 'compile']);
 gulp.task('dev', ['compile', 'watch']);
 
 gulp.task('watch', function() {
-	gulp.watch('src/**/*.js', ['test', 'compile']);
+	gulp.watch('lib/**/*.js', ['test', 'compile']);
 	gulp.watch('test/spec/**/*.js', ['test']);
 });
 
@@ -32,19 +32,19 @@ gulp.task('clean', function() {
 });
 
 gulp.task('lint', function() {
-	return gulp.src(['gulpfile.js', 'src/**/*.js', 'specs/**/*.js'])
+	return gulp.src(['gulpfile.js', 'lib/**/*.js', 'specs/**/*.js'])
 			.pipe(jshint('.jshintrc'))
 			.pipe(jshint.reporter('jshint-stylish'));
 });
 
 gulp.task('instrument', function() {
-	return gulp.src('src/**/*.js')
+	return gulp.src('lib/**/*.js')
 		.pipe(map(function(code, filename) {
 			var instrumenter = new istanbul.Instrumenter(),
 				relativePath = path.relative(__dirname, filename);
 			return instrumenter.instrumentSync(code.toString(), relativePath);
 		}))
-		.pipe(gulp.dest('src-instrumented'));
+		.pipe(gulp.dest('lib-instrumented'));
 });
 
 gulp.task('test', ['clean', 'instrument'], function() {
@@ -58,7 +58,7 @@ gulp.task('coveralls', ['test'], function() {
 });
 
 gulp.task('compile', ['clean'], function() {
-	return browserify('./src/bespoke.js')
+	return browserify('./lib/bespoke.js')
 		.bundle({ standalone: 'bespoke' })
 		.on('error', gutil.log)
 		.pipe(source('bespoke.js'))
