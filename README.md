@@ -6,9 +6,9 @@
 
 [Bespoke.js](http://markdalgleish.com/projects/bespoke.js) is a super minimal (1KB min'd and gzipped), modular presentation library for modern browsers, designed to foster a rich [plugin ecosystem](#plugins).
 
-The core library [sets up the presentation](#javascript), provides a simple [control API](#control-api), manages [events](#events) and adds [classes](#CSS) to the slides to allow CSS transitions.
+The core library [sets up the presentation](#javascript), provides a simple [control API](#control-api) and manages [events](#events).
 
-Any other functionality, from [keyboard](https://github.com/markdalgleish/bespoke-keys) and [touch](https://github.com/markdalgleish/bespoke-touch) interactions to [bullet lists](https://github.com/markdalgleish/bespoke-bullets) and [hash routing](https://github.com/markdalgleish/bespoke-hash), is implemented as a [plugin](#plugins). Joining the Bespoke.js plugin ecosystem is simple with [Bespoke.js Plugin Generator](https://github.com/markdalgleish/generator-bespokeplugin).
+Any other functionality, from [keyboard](https://github.com/markdalgleish/bespoke-keys) and [touch](https://github.com/markdalgleish/bespoke-touch) interactions to [CSS classes](https://github.com/markdalgleish/bespoke-classes), [bullet lists](https://github.com/markdalgleish/bespoke-bullets) and [hash routing](https://github.com/markdalgleish/bespoke-hash), is implemented as a [plugin](#plugins). Joining the Bespoke.js plugin ecosystem is simple with [Bespoke.js Plugin Generator](https://github.com/markdalgleish/generator-bespokeplugin).
 
 ## Creating a Presentation
 
@@ -72,45 +72,6 @@ deck.slide(0);
 deck.slide(); // 0
 ```
 
-### CSS
-
-To create your own custom deck styles, Bespoke.js provides the necessary classes to your elements.
-
-<table>
-   <tr>
-    <td><b>bespoke-parent</b></td>
-    <td>The deck's containing element</td>
-   </tr>
-   <tr>
-    <td><b>bespoke-slide</b></td>
-    <td>Every slide element</td>
-   </tr>
-   <tr>
-    <td><b>bespoke-active</b></td>
-    <td>The active slide</td>
-   </tr>
-   <tr>
-    <td><b>bespoke-inactive</b></td>
-    <td>All inactive slides</td>
-   </tr>
-   <tr>
-    <td><b>bespoke-before</b></td>
-    <td>All slides before the active slide</td>
-   </tr>
-   <tr>
-    <td><b>bespoke-before-<em>n</em></b></td>
-    <td>All slides before the active slide, with <em>n</em> value incrementing</td>
-   </tr>
-   <tr>
-    <td><b>bespoke-after</b></td>
-    <td>All slides after the active slide</td>
-   </tr>
-   <tr>
-    <td><b>bespoke-after-<em>n</em></b></td>
-    <td>All slides after the active slide, with <em>n</em> value incrementing</td>
-   </tr>
-</table>
-
 ## Plugins
 
 ### Official Plugins
@@ -119,6 +80,7 @@ All official plugins can be installed from npm or Bower, e.g. `$ npm install bes
 
  - [bespoke-keys](https://github.com/markdalgleish/bespoke-keys) for keyboard interaction.
  - [bespoke-touch](https://github.com/markdalgleish/bespoke-touch) for touch interaction.
+ - [bespoke-classes](https://github.com/markdalgleish/bespoke-classes) for deck status classes.
  - [bespoke-bullets](https://github.com/markdalgleish/bespoke-bullets) for animated bullet lists.
  - [bespoke-scale](https://github.com/markdalgleish/bespoke-scale) for responsive slide scaling.
  - [bespoke-hash](https://github.com/markdalgleish/bespoke-hash) for hash routing.

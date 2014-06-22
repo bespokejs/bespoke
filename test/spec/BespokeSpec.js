@@ -41,101 +41,6 @@ describe("bespoke", function() {
         document.body.removeChild(article);
       });
 
-      describe("classes", function() {
-
-        it("should add a 'bespoke' class to the container", function() {
-          expect(article.className).toMatch(/bespoke-parent/);
-        });
-
-        it("should add a 'bespoke-slide' class to the slides", function() {
-          slides.forEach(function(slide) {
-            expect(slide.className).toMatch(/bespoke-slide(\s|$)/);
-          });
-        });
-
-        describe("bespoke-active", function() {
-
-          it("should add a 'bespoke-active' class to the active slide", function() {
-            deck.slide(3);
-            expect(slides[3].className).toMatch(/bespoke-active(\s|$)/);
-          });
-
-          it("should not add a 'bespoke-active' class to all inactive slides", function() {
-            slides = slides.reverse().slice(0, slides.length - 2).reverse();
-
-            slides.forEach(function(slide) {
-              expect(slide.className).not.toMatch(/bespoke-active(\s|$)/);
-            });
-          });
-
-        });
-
-        describe("bespoke-inactive", function() {
-
-          it("should add a 'bespoke-inactive' class to all inactive slides", function() {
-            slides = slides.reverse().slice(0, slides.length - 2).reverse();
-
-            slides.forEach(function(slide) {
-              expect(slide.className).toMatch(/bespoke-inactive(\s|$)/);
-            });
-          });
-
-          it("should not add a 'bespoke-inactive' class to the active slide", function() {
-            expect(slides[0].className).not.toMatch(/bespoke-inactive(\s|$)/);
-          });
-
-        });
-
-        describe("bespoke-before", function() {
-
-          it("should add a 'bespoke-before' class to all slides before active slide", function() {
-            deck.slide(5);
-
-            var beforeSlides = slides.slice(0, 4);
-
-            beforeSlides.forEach(function(slide) {
-              expect(slide.className).toMatch(/bespoke-before(\s|$)/);
-            });
-          });
-
-          it("should not add a 'bespoke-before' class to all slides after active slide", function() {
-            deck.slide(5);
-
-            var notBeforeSlides = slides.slice(5, 9);
-
-            notBeforeSlides.forEach(function(slide) {
-              expect(slide.className).not.toMatch(/bespoke-before(\s|$)/);
-            });
-          });
-
-        });
-
-        describe("bespoke-before", function() {
-
-          it("should add a 'bespoke-after' class to all slides after active slide", function() {
-            deck.slide(5);
-
-            var afterSlides = slides.slice(6);
-
-            afterSlides.forEach(function(slide) {
-              expect(slide.className).toMatch(/bespoke-after(\s|$)/);
-            });
-          });
-
-          it("should not add a 'bespoke-after' class to all slides before active slide", function() {
-            deck.slide(5);
-
-            var notAfterSlides = slides.slice(0, 5);
-
-            notAfterSlides.forEach(function(slide) {
-              expect(slide.className).not.toMatch(/bespoke-after(\s|$)/);
-            });
-          });
-
-        });
-
-      });
-
       describe("API", function() {
 
         describe("global 'bespoke' object", function() {
@@ -238,14 +143,14 @@ describe("bespoke", function() {
 
             it("should go to the next slide when not last slide", function() {
               deck.next();
-              expect(slides[1].className).toMatch(/bespoke-active(\s|$)/);
+              expect(deck.slide()).toBe(1);
             });
 
             it("should do nothing when on last slide", function() {
               deck.slide(9);
               deck.next();
               deck.next();
-              expect(slides[9].className).toMatch(/bespoke-active(\s|$)/);
+              expect(deck.slide()).toBe(9);
             });
 
             it("should do nothing when on last slide and not change any state", function() {
@@ -253,7 +158,7 @@ describe("bespoke", function() {
               deck.next();
               deck.next();
               deck.prev();
-              expect(slides[8].className).toMatch(/bespoke-active(\s|$)/);
+              expect(deck.slide()).toBe(8);
             });
 
             it("shouldn't activate the next slide if event handler activates an earlier slide while on last slide", function() {
@@ -263,7 +168,7 @@ describe("bespoke", function() {
               var off = deck.on("next", activateAnotherSlide);
               deck.next();
 
-              expect(deck.slides[5].classList.contains('bespoke-active')).toBe(true);
+              expect(deck.slide()).toBe(5);
 
               off();
             });
@@ -285,19 +190,19 @@ describe("bespoke", function() {
             it("should go to the previous slide when not first slide", function() {
               deck.slide(1);
               deck.prev();
-              expect(slides[0].className).toMatch(/bespoke-active(\s|$)/);
+              expect(deck.slide()).toBe(0);
             });
 
             it("should do nothing when on first slide", function() {
               deck.prev();
               deck.prev();
-              expect(slides[0].className).toMatch(/bespoke-active(\s|$)/);
+              expect(deck.slide()).toBe(0);
             });
 
             it("should do nothing when on first slide and not change any state", function() {
               deck.prev();
               deck.next();
-              expect(slides[1].className).toMatch(/bespoke-active(\s|$)/);
+              expect(deck.slide()).toBe(1);
             });
 
             it("shouldn't activate the previous slide if event handler activates a later slide while on first slide", function() {
@@ -306,7 +211,7 @@ describe("bespoke", function() {
               var off = deck.on("prev", activateAnotherSlide);
               deck.prev();
 
-              expect(deck.slides[5].classList.contains('bespoke-active')).toBe(true);
+              expect(deck.slide()).toBe(5);
 
               off();
             });
