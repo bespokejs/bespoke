@@ -111,11 +111,13 @@ For example, if you're using CommonJS modules via [browserify](http://browserify
 
 ```js
 var bespoke = require('bespoke'),
+  classes = require('bespoke-classes'),
   keys = require('bespoke-keys'),
   touch = require('bespoke-touch');
 
 var deck = bespoke.from('#presentation', [
-  keys()
+  classes(),
+  keys(),
   touch()
 ]);
 ```
@@ -124,6 +126,7 @@ If you're using browser globals, all official plugins are added to the `bespoke.
 
 ```js
 var deck = bespoke.from('#presentation', [
+  bespoke.plugins.classes(),
   bespoke.plugins.keys(),
   bespoke.plugins.touch()
 ]);
