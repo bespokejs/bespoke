@@ -395,6 +395,7 @@ bespoke.plugins.myPlugin = function(deck) {
  - [Introduction to hapi](http://wolfe.id.au/presentations/hapi/) by [Mark Wolfe](http://twitter.com/wolfeidau)
  - [How to Cook a Graph Database in a Night](http://nodejsconfit.levelgraph.io) by [Matteo Collina](http://twitter.com/matteocollina)
  - [Asynchronous JavaScript Interfaces](http://medikoo.com/asynchronous-javascript-interfaces/?notes) by [Mariusz Nowak](http://medikoo.com)
+ - [MQTT and Node.js - Messaging in the Internet of Things](http://mcollina.github.io/mqtt_and_nodejs/) by [Matteo Collina](http://twitter.com/matteocollina)
 
 Made a presentation with Bespoke.js? [Let me know](http://twitter.com/markdalgleish).
 
