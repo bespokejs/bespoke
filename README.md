@@ -165,6 +165,10 @@ All official plugins can be installed from Bower or npm, e.g. `$ bower install b
  - [bespoke-advanced](https://github.com/joelpurra/bespoke-advanced) by [@joelpurra](https://github.com/joelpurra), to automatically advance slides on a timer.
  - [bespoke-jumpy](https://github.com/joelpurra/bespoke-jumpy) by [@joelpurra](https://github.com/joelpurra), for keyboard shortcuts to jump straight to specific slides.
  - [bespoke-run](https://github.com/mcollina/bespoke-run) by [@mcollina](https://github.com/mcollina), for running `<code>` snippets.
+ - [bespoke-substeps](https://github.com/medikoo/bespoke-substeps#bespoke-substeps) by [@medikoo](https://github.com/medikoo), for interim steps.
+ - [bespoke-history](https://github.com/medikoo/bespoke-history#bespoke-history) by [@medikoo](https:///github.com/medikoo), for url (`window.history` based) routing.
+ - [bespoke-notes](https://github.com/medikoo/bespoke-notes#bespoke-notes) by [@medikoo](https:///github.com/medikoo), for slide notes aside of slide content.
+ - [bespoke-sync](https://github.com/medikoo/bespoke-sync#bespoke-sync) by [@medikoo](https:///github.com/medikoo), for slides synchronization between different browsers, windows or tabs.
 
 If you'd like your plugin added to this list, [let me know](http://twitter.com/markdalgleish).
 
