@@ -90,19 +90,6 @@ All official plugins can be installed from npm or Bower, e.g. `$ npm install bes
  - [bespoke-loop](https://github.com/markdalgleish/bespoke-loop) for looped presentations.
  - [bespoke-vcr](https://github.com/markdalgleish/bespoke-vcr) for recording and playback.
 
-### Third-Party Plugins
-
- - [bespoke-fx](https://github.com/ebow/bespoke-fx) by [@ebow](https://github.com/ebow), for configurable slide transitions.
- - [bespoke-dir](https://github.com/ryanseddon/bespoke-dir) by [@ryanseddon](https://github.com/ryanseddon), for direction-based deck classes.
- - [bespoke-spotlight](https://github.com/mobz/bespoke-spotlight) by [@mobz](https://github.com/mobz), for quick-searching slide content.
- - [bespoke-blackout](https://github.com/originell/bespoke-blackout) by [@originell](https://github.com/originell), for temporarily blacking out the screen.
- - [bespoke-secondary](https://github.com/joelpurra/bespoke-secondary) by [@joelpurra](https://github.com/joelpurra), for slide notes in a secondary window.
- - [bespoke-advanced](https://github.com/joelpurra/bespoke-advanced) by [@joelpurra](https://github.com/joelpurra), to automatically advance slides on a timer.
- - [bespoke-jumpy](https://github.com/joelpurra/bespoke-jumpy) by [@joelpurra](https://github.com/joelpurra), for keyboard shortcuts to jump straight to specific slides.
- - [bespoke-run](https://github.com/mcollina/bespoke-run) by [@mcollina](https://github.com/mcollina), for running `<code>` snippets.
-
-If you'd like your plugin added to this list, [let me know](http://twitter.com/markdalgleish).
-
 ### Using Plugins
 
 All official plugins are provided in a [UMD format](https://github.com/umdjs/umd), meaning they are available as CommonJS/AMD modules or browser globals.
