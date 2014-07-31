@@ -12,7 +12,7 @@ Any other functionality, from [keyboard](https://github.com/markdalgleish/bespok
 
 ## Creating a Presentation
 
-Due to the highly modular nature of Bespoke.js, the quickest way to get started is with [Bespoke.js Generator](https://github.com/markdalgleish/generator-bespoke), a [Yeoman](http://yeoman.io) generator that scaffolds a boilerplate presentation with a [Grunt](http://gruntjs.com) build system.
+Due to the highly modular nature of Bespoke.js, the quickest way to get started is with [Bespoke.js Generator](https://github.com/markdalgleish/generator-bespoke), a [Yeoman](http://yeoman.io) generator that scaffolds a boilerplate presentation with a [Gulp](http://gulpjs.com) build system.
 
 Assuming you have [Node.js](http://nodejs.org) installed, in a blank directory:
 
@@ -21,11 +21,11 @@ $ npm install -g generator-bespoke
 $ yo bespoke
 ```
 
-In your newly scaffolded project, you can use the following Grunt tasks:
+In your newly scaffolded project, you can use the following Gulp tasks:
 
- * ```$ grunt server``` to run a preview server with LiveReload.
- * ```$ grunt deploy``` to deploy to GitHub Pages.
- * ```$ grunt``` to compile static assets to 'public'.
+ * ```$ gulp serve``` to run a preview server with LiveReload.
+ * ```$ gulp deploy``` to deploy to GitHub Pages.
+ * ```$ gulp``` to compile static assets to 'public'.
 
 For more detailed instructions, check out the [Bespoke.js Generator](https://github.com/markdalgleish/generator-bespoke) repo.
 
