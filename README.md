@@ -6,7 +6,7 @@
 
 [Bespoke.js](http://markdalgleish.com/projects/bespoke.js) is a super minimal (1KB min'd and gzipped), modular presentation library for modern browsers, designed to foster a rich [plugin ecosystem](#plugins).
 
-The core library [sets up the presentation](#javascript), provides a simple [control API](#control-api) and manages [events](#events). Any other functionality, from [keyboard](https://github.com/markdalgleish/bespoke-keys) and [touch](https://github.com/markdalgleish/bespoke-touch) interactions to [CSS classes](https://github.com/markdalgleish/bespoke-classes), [bullet lists](https://github.com/markdalgleish/bespoke-bullets) and [hash routing](https://github.com/markdalgleish/bespoke-hash), is implemented as a [plugin](#plugins).
+The core library [sets up the presentation](#javascript), provides a simple [control API](#control-api) and manages [events](#events). Any other functionality is implemented as a [plugin](#plugins).
 
 Joining the Bespoke.js ecosystem is simple with the suite of official [Yeoman](http://yeoman.io) generators:
  - [Bespoke.js Generator](https://github.com/markdalgleish/generator-bespoke)
