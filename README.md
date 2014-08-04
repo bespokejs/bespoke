@@ -119,6 +119,42 @@ var deck = bespoke.from('#presentation', [
 ]);
 ```
 
+## Themes
+
+### Official Themes
+
+ - [Cube](https://github.com/markdalgleish/bespoke-theme-cube) &mdash; [(view demo)](http://markdalgleish.github.io/bespoke-theme-cube)
+ - [Voltaire](https://github.com/markdalgleish/bespoke-theme-voltaire) &mdash; [(view demo)](http://markdalgleish.github.io/bespoke-theme-voltaire)
+
+As with plugins, all official themes can be installed from npm or Bower, e.g. `$ npm install bespoke-theme-cube` or `$ bower install bespoke-theme-voltaire`
+
+### Using Themes
+
+Themes are included just like any other plugin:
+
+```js
+var bespoke = require('bespoke'),
+  cube = require('bespoke-theme-cube'),
+  keys = require('bespoke-keys'),
+  touch = require('bespoke-touch');
+
+var deck = bespoke.from('#presentation', [
+  cube(),
+  keys(),
+  touch()
+]);
+```
+
+If you're using browser globals, all official themes are added to the `bespoke.themes` object, for example:
+
+```js
+var deck = bespoke.from('#presentation', [
+  bespoke.themes.cube(),
+  bespoke.plugins.keys(),
+  bespoke.plugins.touch()
+]);
+```
+
 ## Advanced Usage
 
 ### From HTMLElement
@@ -313,6 +349,12 @@ var myPlugin = function() {
   };
 }
 ```
+
+## Creating Themes
+
+Themes are essentially just plugins that also happen to insert styles into the page.
+
+You can quickly scaffold a boilerplate theme project with the official [Bespoke.js Theme Generator](https://github.com/markdalgleish/generator-bespoketheme).
 
 ## Presentations
 
