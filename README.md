@@ -93,6 +93,10 @@ All official plugins can be installed from npm or Bower, e.g. `$ npm install bes
  - [bespoke-loop](https://github.com/markdalgleish/bespoke-loop) for looped presentations.
  - [bespoke-vcr](https://github.com/markdalgleish/bespoke-vcr) for recording and playback.
 
+### All Plugins
+
+You can view the [full list of Bespoke.js plugins on npm](https://www.npmjs.org/browse/keyword/bespoke-plugin) by browsing the [bespoke-plugin](https://www.npmjs.org/browse/keyword/bespoke-plugin) keyword.
+
 ### Using Plugins
 
 All official plugins are provided in a [UMD format](https://github.com/umdjs/umd), meaning they are available as CommonJS/AMD modules or browser globals.
@@ -130,6 +134,10 @@ var deck = bespoke.from('#presentation', [
  - [Voltaire](https://github.com/markdalgleish/bespoke-theme-voltaire) &mdash; [(view demo)](http://markdalgleish.github.io/bespoke-theme-voltaire)
 
 As with plugins, all official themes can be installed from npm or Bower, e.g. `$ npm install bespoke-theme-cube` or `$ bower install bespoke-theme-voltaire`
+
+### All Themes
+
+You can view the [full list of Bespoke.js themes on npm](https://www.npmjs.org/browse/keyword/bespoke-theme) by browsing the [bespoke-theme](https://www.npmjs.org/browse/keyword/bespoke-theme) keyword.
 
 ### Using Themes
 
