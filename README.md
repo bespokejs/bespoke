@@ -87,6 +87,7 @@ All official plugins can be installed from npm or Bower, e.g. `$ npm install bes
  - [bespoke-bullets](https://github.com/markdalgleish/bespoke-bullets) for animated bullet lists.
  - [bespoke-scale](https://github.com/markdalgleish/bespoke-scale) for responsive slide scaling.
  - [bespoke-hash](https://github.com/markdalgleish/bespoke-hash) for hash routing.
+ - [bespoke-backdrop](https://github.com/markdalgleish/bespoke-backdrop) for animated backdrop elements.
  - [bespoke-state](https://github.com/markdalgleish/bespoke-state) for slide-specific deck styles.
  - [bespoke-progress](https://github.com/markdalgleish/bespoke-progress) for progress bars.
  - [bespoke-forms](https://github.com/markdalgleish/bespoke-forms) for form element support.
