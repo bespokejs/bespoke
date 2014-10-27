@@ -1,4 +1,4 @@
-[![Build Status](https://secure.travis-ci.org/markdalgleish/bespoke.js.png?branch=master)](http://travis-ci.org/markdalgleish/bespoke.js) [![Coverage Status](https://coveralls.io/repos/markdalgleish/bespoke.js/badge.png)](https://coveralls.io/r/markdalgleish/bespoke.js)
+[![Build Status](https://img.shields.io/travis/markdalgleish/bespoke.js/master.svg?style=flat)](http://travis-ci.org/markdalgleish/bespoke.js) [![Coverage Status](https://img.shields.io/coveralls/markdalgleish/bespoke.js/master.svg?style=flat)](https://coveralls.io/r/markdalgleish/bespoke.js)
 
 # Bespoke.js
 
