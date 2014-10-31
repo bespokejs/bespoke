@@ -133,6 +133,7 @@ var deck = bespoke.from('#presentation', [
 
  - [Cube](https://github.com/markdalgleish/bespoke-theme-cube) &mdash; [(view demo)](http://markdalgleish.github.io/bespoke-theme-cube)
  - [Voltaire](https://github.com/markdalgleish/bespoke-theme-voltaire) &mdash; [(view demo)](http://markdalgleish.github.io/bespoke-theme-voltaire)
+ - [Nebula](https://github.com/markdalgleish/bespoke-theme-nebula) &mdash; [(view demo)](http://markdalgleish.github.io/bespoke-theme-nebula)
 
 As with plugins, all official themes can be installed from npm or Bower, e.g. `$ npm install bespoke-theme-cube` or `$ bower install bespoke-theme-voltaire`
 
