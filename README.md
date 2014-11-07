@@ -1,4 +1,4 @@
-[![Build Status](https://img.shields.io/travis/markdalgleish/bespoke.js/master.svg?style=flat)](http://travis-ci.org/markdalgleish/bespoke.js) [![Coverage Status](https://img.shields.io/coveralls/markdalgleish/bespoke.js/master.svg?style=flat)](https://coveralls.io/r/markdalgleish/bespoke.js)
+[![Build Status](https://img.shields.io/travis/markdalgleish/bespoke.js/master.svg?style=flat)](http://travis-ci.org/markdalgleish/bespoke.js) [![Coverage Status](https://img.shields.io/coveralls/markdalgleish/bespoke.js/master.svg?style=flat)](https://coveralls.io/r/markdalgleish/bespoke.js) [![Gitter](https://img.shields.io/badge/gitter-join%20chat-45cba1.svg?style=flat)](https://gitter.im/markdalgleish/bespoke.js)
 
 # Bespoke.js
 
