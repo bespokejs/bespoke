@@ -213,6 +213,10 @@ Deck instances are provided to plugins and returned when instantiating a present
     <td><strong>slides</strong></td>
     <td>An array of slide elements</td>
   </tr>
+  <tr>
+    <td><strong>destroy</strong></td>
+    <td>Destroy the deck instance and unbind all of it's event handlers.</td>
+  </tr>
 </table>
 
 ### Events
@@ -243,6 +247,10 @@ In most cases, you will only need to use these standard events.
   <tr>
     <td><strong>deactivate</strong></td>
     <td>A slide has been deactivated. <strong>event.slide</strong> is the <em>deactivated</em> slide.</td>
+  </tr>
+  <tr>
+    <td><strong>destroy</strong></td>
+    <td>Presentation is about to be destroyed, it's time for clean-up.</td>
   </tr>
 </table>
 
