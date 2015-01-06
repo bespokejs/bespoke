@@ -371,6 +371,7 @@ You can quickly scaffold a boilerplate theme project with the official [Bespoke.
 
 ## Presentations
 
+ - [A State of Change — On the future of Object.observe](https://github.com/markdalgleish/presentation-a-state-of-change-object-observe) by [Mark Dalgleish](http://twitter.com/markdalgleish)
  - [Build Wars: Gulp vs Grunt](http://markdalgleish.github.io/presentation-build-wars-gulp-vs-grunt/) by [Mark Dalgleish](http://twitter.com/markdalgleish)
  - [Bespoke.js: The Road to 1KB](http://markdalgleish.github.io/presentation-bespoke.js-the-road-to-1kb/) by [Mark Dalgleish](http://twitter.com/markdalgleish)
  - [DIY Presentations With Bespoke.js](http://markdalgleish.com/presentations/bespoke.js/) by [Mark Dalgleish](http://twitter.com/markdalgleish)
