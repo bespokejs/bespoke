@@ -219,7 +219,7 @@ Deck instances are provided to plugins and returned when instantiating a present
 
 ##### Binding Events
 
-Events are bound via the [deck instance](deck-instances). Each event is passed an event object containing a reference to the relevant slide and its index.
+Events are bound via the [deck instance](#deck-instances). Each event is passed an event object containing a reference to the relevant slide and its index.
 
 ```js
 deck.on(eventName, function(event) {
