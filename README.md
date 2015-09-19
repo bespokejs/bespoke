@@ -75,6 +75,8 @@ deck.slide(0);
 deck.slide(); // 0
 ```
 
+By default, all non-script child elements of the resolved parent element become slides.
+
 ## Plugins
 
 ### Official Plugins
@@ -177,6 +179,23 @@ If you already have a reference to a DOM node, you can pass it directly to the `
 ```js
 bespoke.from(element);
 ```
+
+### Slide Selector
+
+You can specify which elements become slides by passing an options Hash containing the key `parent` and, optionally, the key `slides`) to the `from` method.
+The value of either key can be a CSS selector or a DOM node.
+
+```js
+bespoke.from({ parent: selectorOrElement, slides: selectorOrElementList });
+```
+
+For example:
+
+```js
+bespoke.from({ parent: '#presentation', slides: '#presentation > section' });
+```
+
+This advanced usage allows you to include auxilary HTML inside the parent element, skip slides that don't match the selector or explicitly filter out slides before passing on the collection.
 
 ### Deck Instances
 
