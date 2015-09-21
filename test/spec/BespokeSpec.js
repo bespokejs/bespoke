@@ -4,7 +4,7 @@ var bespoke = require('../../lib-instrumented/bespoke.js');
 
 describe("bespoke", function() {
 
-  ['selector', 'element'].forEach(function(fromType) {
+  ['selector', 'element', 'selectors', 'elements'].forEach(function(fromType) {
 
     describe("from " + fromType, function() {
 
@@ -31,7 +31,9 @@ describe("bespoke", function() {
 
         var from = {
           selector: PARENT_TAG,
-          element: article
+          element: article,
+          selectors: { parent: PARENT_TAG, slides: SLIDE_TAG },
+          elements: { parent: article, slides: article.children }
         };
 
         decks.push((deck = bespoke.from(from[fromType])));
