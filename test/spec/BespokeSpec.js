@@ -482,6 +482,18 @@ describe("bespoke", function() {
 
           });
 
+          describe("off", function() {
+            it("should unbind the event", function() {
+              var callback = jasmine.createSpy('callback');
+              deck.on("foo", callback);
+              deck.fire("foo");
+              expect(callback.callCount).toBe(1);
+              deck.off("foo", callback);
+              deck.fire("foo");
+              expect(callback.callCount).toBe(1);
+            });
+          });
+
           describe("fire", function() {
 
             it("should allow custom events to be triggered", function() {
