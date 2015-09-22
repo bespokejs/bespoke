@@ -221,6 +221,10 @@ Deck instances are provided to plugins and returned when instantiating a present
     <td>Attach <a href="#events">event handlers</a></td>
   </tr>
   <tr>
+    <td><strong>off(<em>event, callback</em>)</strong></td>
+    <td>Unbind <a href="#events">event handlers</a></td>
+  </tr>
+  <tr>
     <td><strong>fire(<em>event[, eventData]</em>)</strong></td>
     <td>Fire custom events. <em>This method is primarily designed for plugin authors.</em></td>
   </tr>
@@ -297,6 +301,16 @@ var off = deck.on('activate', function() {
 
 // Unbind event
 off();
+```
+
+You can also use the `off` method. However, you must use the same function reference that was used when registering the event.
+
+```js
+// Bind event
+deck.on('activate', onActivate);
+
+// Unbind event
+deck.off('activate', onActivate);
 ```
 
 ## Creating Plugins

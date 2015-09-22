@@ -39,12 +39,11 @@ var from = function(opts, plugins) {
 
     on = function(eventName, callback) {
       (listeners[eventName] || (listeners[eventName] = [])).push(callback);
+      return off.bind(null, eventName, callback);
+    },
 
-      return function() {
-        listeners[eventName] = listeners[eventName].filter(function(listener) {
-          return listener !== callback;
-        });
-      };
+    off = function(eventName, callback) {
+      listeners[eventName] = (listeners[eventName] || []).filter(function(listener) { return listener !== callback; });
     },
 
     fire = function(eventName, eventData) {
@@ -63,6 +62,7 @@ var from = function(opts, plugins) {
 
     deck = {
       on: on,
+      off: off,
       fire: fire,
       slide: slide,
       next: step.bind(null, 1),
