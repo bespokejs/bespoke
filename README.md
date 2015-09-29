@@ -1,4 +1,4 @@
-[![Build Status](https://img.shields.io/travis/markdalgleish/bespoke.js/master.svg?style=flat)](http://travis-ci.org/markdalgleish/bespoke.js) [![Coverage Status](https://img.shields.io/coveralls/markdalgleish/bespoke.js/master.svg?style=flat)](https://coveralls.io/r/markdalgleish/bespoke.js) [![Gitter](https://img.shields.io/badge/gitter-join%20chat-45cba1.svg?style=flat)](https://gitter.im/markdalgleish/bespoke.js)
+[![Build Status](https://img.shields.io/travis/bespokejs/bespoke/master.svg?style=flat)](http://travis-ci.org/bespokejs/bespoke) [![Coverage Status](https://img.shields.io/coveralls/bespokejs/bespoke/master.svg?style=flat)](https://coveralls.io/r/bespokejs/bespoke) [![Gitter](https://img.shields.io/badge/gitter-join%20chat-45cba1.svg?style=flat)](https://gitter.im/bespokejs/bespoke)
 
 # Bespoke.js
 
@@ -9,13 +9,13 @@
 The core library [sets up the presentation](#javascript), provides a simple [control API](#control-api) and manages [events](#events). Any other functionality is implemented as a [plugin](#plugins).
 
 Joining the Bespoke.js ecosystem is simple with the suite of official [Yeoman](http://yeoman.io) generators:
- - [Bespoke.js Generator](https://github.com/markdalgleish/generator-bespoke)
- - [Bespoke.js Plugin Generator](https://github.com/markdalgleish/generator-bespokeplugin)
- - [Bespoke.js Theme Generator](https://github.com/markdalgleish/generator-bespoketheme)
+ - [Bespoke.js Generator](https://github.com/bespokejs/generator-bespoke)
+ - [Bespoke.js Plugin Generator](https://github.com/bespokejs/generator-bespokeplugin)
+ - [Bespoke.js Theme Generator](https://github.com/bespokejs/generator-bespoketheme)
 
 ## Creating a Presentation
 
-Due to the highly modular nature of Bespoke.js, the quickest way to get started is with [Bespoke.js Generator](https://github.com/markdalgleish/generator-bespoke), a [Yeoman](http://yeoman.io) generator that scaffolds a boilerplate presentation with a [Gulp](http://gulpjs.com) build system.
+Due to the highly modular nature of Bespoke.js, the quickest way to get started is with [Bespoke.js Generator](https://github.com/bespokejs/generator-bespoke), a [Yeoman](http://yeoman.io) generator that scaffolds a boilerplate presentation with a [Gulp](http://gulpjs.com) build system.
 
 Assuming you have [Node.js](http://nodejs.org) installed, in a blank directory:
 
@@ -30,12 +30,12 @@ In your newly scaffolded project, you can use the following Gulp tasks:
  * ```$ gulp deploy``` to deploy to GitHub Pages.
  * ```$ gulp``` to compile static assets to 'public'.
 
-For more detailed instructions, check out the [Bespoke.js Generator](https://github.com/markdalgleish/generator-bespoke) repo.
+For more detailed instructions, check out the [Bespoke.js Generator](https://github.com/bespokejs/generator-bespoke) repo.
 
 If you'd prefer to craft a new presentation from scratch, you can install Bespoke.js from [npm](http://npmjs.org) with `npm install bespoke`, [Bower](http://bower.io) with `bower install bespoke.js`, or manually download either the [production version][min] or the [development version][max]. The Bespoke.js core is extremely lightweight, so you'll probably want to include some [plugins](#plugins).
 
-[min]: https://raw.github.com/markdalgleish/bespoke.js/master/dist/bespoke.min.js
-[max]: https://raw.github.com/markdalgleish/bespoke.js/master/dist/bespoke.js
+[min]: https://raw.github.com/bespokejs/bespoke/master/dist/bespoke.min.js
+[max]: https://raw.github.com/bespokejs/bespoke/master/dist/bespoke.js
 
 ## Basic Usage
 
@@ -83,18 +83,18 @@ By default, all non-script child elements of the resolved parent element become 
 
 All official plugins can be installed from npm or Bower, e.g. `$ npm install bespoke-keys` or `$ bower install bespoke-touch`
 
- - [bespoke-keys](https://github.com/markdalgleish/bespoke-keys) for keyboard interaction.
- - [bespoke-touch](https://github.com/markdalgleish/bespoke-touch) for touch interaction.
- - [bespoke-classes](https://github.com/markdalgleish/bespoke-classes) for deck status classes.
- - [bespoke-bullets](https://github.com/markdalgleish/bespoke-bullets) for animated bullet lists.
- - [bespoke-scale](https://github.com/markdalgleish/bespoke-scale) for responsive slide scaling.
- - [bespoke-hash](https://github.com/markdalgleish/bespoke-hash) for hash routing.
- - [bespoke-backdrop](https://github.com/markdalgleish/bespoke-backdrop) for animated backdrop elements.
- - [bespoke-state](https://github.com/markdalgleish/bespoke-state) for slide-specific deck styles.
- - [bespoke-progress](https://github.com/markdalgleish/bespoke-progress) for progress bars.
- - [bespoke-forms](https://github.com/markdalgleish/bespoke-forms) for form element support.
- - [bespoke-loop](https://github.com/markdalgleish/bespoke-loop) for looped presentations.
- - [bespoke-vcr](https://github.com/markdalgleish/bespoke-vcr) for recording and playback.
+ - [bespoke-keys](https://github.com/bespokejs/bespoke-keys) for keyboard interaction.
+ - [bespoke-touch](https://github.com/bespokejs/bespoke-touch) for touch interaction.
+ - [bespoke-classes](https://github.com/bespokejs/bespoke-classes) for deck status classes.
+ - [bespoke-bullets](https://github.com/bespokejs/bespoke-bullets) for animated bullet lists.
+ - [bespoke-scale](https://github.com/bespokejs/bespoke-scale) for responsive slide scaling.
+ - [bespoke-hash](https://github.com/bespokejs/bespoke-hash) for hash routing.
+ - [bespoke-backdrop](https://github.com/bespokejs/bespoke-backdrop) for animated backdrop elements.
+ - [bespoke-state](https://github.com/bespokejs/bespoke-state) for slide-specific deck styles.
+ - [bespoke-progress](https://github.com/bespokejs/bespoke-progress) for progress bars.
+ - [bespoke-forms](https://github.com/bespokejs/bespoke-forms) for form element support.
+ - [bespoke-loop](https://github.com/bespokejs/bespoke-loop) for looped presentations.
+ - [bespoke-vcr](https://github.com/bespokejs/bespoke-vcr) for recording and playback.
 
 ### All Plugins
 
@@ -133,9 +133,9 @@ var deck = bespoke.from('#presentation', [
 
 ### Official Themes
 
- - [Cube](https://github.com/markdalgleish/bespoke-theme-cube) &mdash; [(view demo)](http://markdalgleish.github.io/bespoke-theme-cube)
- - [Voltaire](https://github.com/markdalgleish/bespoke-theme-voltaire) &mdash; [(view demo)](http://markdalgleish.github.io/bespoke-theme-voltaire)
- - [Nebula](https://github.com/markdalgleish/bespoke-theme-nebula) &mdash; [(view demo)](http://markdalgleish.github.io/bespoke-theme-nebula)
+ - [Cube](https://github.com/bespokejs/bespoke-theme-cube) &mdash; [(view demo)](http://bespokejs.github.io/bespoke-theme-cube)
+ - [Voltaire](https://github.com/bespokejs/bespoke-theme-voltaire) &mdash; [(view demo)](http://bespokejs.github.io/bespoke-theme-voltaire)
+ - [Nebula](https://github.com/bespokejs/bespoke-theme-nebula) &mdash; [(view demo)](http://bespokejs.github.io/bespoke-theme-nebula)
 
 As with plugins, all official themes can be installed from npm or Bower, e.g. `$ npm install bespoke-theme-cube` or `$ bower install bespoke-theme-voltaire`
 
@@ -315,7 +315,7 @@ deck.off('activate', onActivate);
 
 ## Creating Plugins
 
-Want a boilerplate plugin? Use the official [Bespoke.js Plugin Generator](https://github.com/markdalgleish/generator-bespokeplugin).
+Want a boilerplate plugin? Use the official [Bespoke.js Plugin Generator](https://github.com/bespokejs/generator-bespokeplugin).
 
 If you'd like to learn by example, check out the [list of existing plugins](#plugins).
 
@@ -400,7 +400,7 @@ var myPlugin = function() {
 
 Themes are essentially just plugins that also happen to insert styles into the page.
 
-You can quickly scaffold a boilerplate theme project with the official [Bespoke.js Theme Generator](https://github.com/markdalgleish/generator-bespoketheme).
+You can quickly scaffold a boilerplate theme project with the official [Bespoke.js Theme Generator](https://github.com/bespokejs/generator-bespoketheme).
 
 ## Presentations
 

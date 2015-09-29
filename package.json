@@ -17,7 +17,7 @@
   "main": "./lib/bespoke.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/markdalgleish/bespoke.js.git"
+    "url": "git://github.com/bespokejs/bespoke.git"
   },
   "devDependencies": {
     "browserify": "~4.1.5",
