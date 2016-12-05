@@ -420,6 +420,7 @@ You can quickly scaffold a boilerplate theme project with the official [Bespoke.
  - [How to Cook a Graph Database in a Night](http://nodejsconfit.levelgraph.io) by [Matteo Collina](http://twitter.com/matteocollina)
  - [Asynchronous JavaScript Interfaces](http://medikoo.com/asynchronous-javascript-interfaces/?notes) by [Mariusz Nowak](http://medikoo.com)
  - [MQTT and Node.js - Messaging in the Internet of Things](http://mcollina.github.io/mqtt_and_nodejs/) by [Matteo Collina](http://twitter.com/matteocollina)
+ - [At Least 6 Ways to Win with CSS Modules](https://github.com/joshwnj/6-ways-to-win) by [Josh Johnston](https://twitter.com/joshwnj)
 
 Made a presentation with Bespoke.js? [Let me know](http://twitter.com/markdalgleish).
 
