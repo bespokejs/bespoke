@@ -83,7 +83,7 @@ By default, all non-script child elements of the resolved parent element become 
 
 All official plugins can be installed from npm or Bower, e.g. `$ npm install bespoke-keys` or `$ bower install bespoke-touch`
 
- - [bespoke-keys](https://github.com/bespokejs/bespoke-keys) for keyboard interaction.
+ - [bespoke-keys](https://github.com/bespokejs/bespoke-keys) for keyboard and remote control interaction.
  - [bespoke-touch](https://github.com/bespokejs/bespoke-touch) for touch interaction.
  - [bespoke-classes](https://github.com/bespokejs/bespoke-classes) for deck status classes.
  - [bespoke-bullets](https://github.com/bespokejs/bespoke-bullets) for animated bullet lists.
