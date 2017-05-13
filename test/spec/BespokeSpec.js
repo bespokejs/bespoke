@@ -1,6 +1,6 @@
-Function.prototype.bind = require('function-bind');
+Function.prototype.bind = Function.prototype.bind || require('function-bind');
 
-var bespoke = require('../../lib-instrumented/bespoke.js');
+var bespoke = require('../../lib/bespoke.js');
 
 describe("bespoke", function() {
 
@@ -142,10 +142,10 @@ describe("bespoke", function() {
               var callback = jasmine.createSpy('callback');
               var off = deck.on("foo", callback);
               deck.fire("foo");
-              expect(callback.callCount).toBe(1);
+              expect(callback.calls.count()).toBe(1);
               off();
               deck.fire("foo");
-              expect(callback.callCount).toBe(1);
+              expect(callback.calls.count()).toBe(1);
             });
 
             it("should allow multiple events to be bound", function() {
@@ -235,7 +235,7 @@ describe("bespoke", function() {
                   slide: DEACTIVATED_SLIDE,
                   index: SLIDE_INDEX
                 });
-                expect(callback.callCount).toBe(1);
+                expect(callback.calls.count()).toBe(1);
               });
 
               it("should pass merged payload to 'deactivate' handler when next slide is activated with user payload", function() {
@@ -279,7 +279,7 @@ describe("bespoke", function() {
                 deck.on("next", callback);
                 deck.next();
 
-                expect(callback.callCount).toBe(1);
+                expect(callback.calls.count()).toBe(1);
               });
 
               it("should call handler when next slide is requested while on last slide", function() {
@@ -305,7 +305,7 @@ describe("bespoke", function() {
                   slide: ACTIVE_SLIDE,
                   index: ACTIVE_SLIDE_INDEX
                 });
-                expect(callback.callCount).toBe(1);
+                expect(callback.calls.count()).toBe(1);
               });
 
               it("should not activate next slide if an event handler returns false", function() {
@@ -355,7 +355,7 @@ describe("bespoke", function() {
                 deck.on("prev", callback);
                 deck.prev();
 
-                expect(callback.callCount).toBe(1);
+                expect(callback.calls.count()).toBe(1);
               });
 
               it("should call handler when previous slide is requested while on first slide", function() {
@@ -380,7 +380,7 @@ describe("bespoke", function() {
                   slide: ACTIVE_SLIDE,
                   index: ACTIVE_SLIDE_INDEX
                 });
-                expect(callback.callCount).toBe(1);
+                expect(callback.calls.count()).toBe(1);
               });
 
               it("should not activate previous slide if an event handler returns false", function() {
@@ -439,7 +439,7 @@ describe("bespoke", function() {
                 deck.on("slide", callback);
                 deck.slide(1);
 
-                expect(callback.callCount).toBe(1);
+                expect(callback.calls.count()).toBe(1);
               });
 
               it("should pass payload to 'slide' handler when specific slide is requested", function() {
@@ -487,10 +487,10 @@ describe("bespoke", function() {
               var callback = jasmine.createSpy('callback');
               deck.on("foo", callback);
               deck.fire("foo");
-              expect(callback.callCount).toBe(1);
+              expect(callback.calls.count()).toBe(1);
               deck.off("foo", callback);
               deck.fire("foo");
-              expect(callback.callCount).toBe(1);
+              expect(callback.calls.count()).toBe(1);
             });
           });
 

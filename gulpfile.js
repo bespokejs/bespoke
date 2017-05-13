@@ -1,55 +1,42 @@
-var gulp = require('gulp'),
-  gutil = require('gulp-util'),
-  clean = require('gulp-clean'),
-  jshint = require('gulp-jshint'),
-  map = require('vinyl-map'),
-  istanbul = require('istanbul'),
-  karma = require('gulp-karma'),
-  coveralls = require('gulp-coveralls'),
-  header = require('gulp-header'),
-  uglify = require('gulp-uglify'),
-  gzip = require('gulp-gzip'),
-  micro = require('gulp-micro'),
-  pkg = require('./package.json'),
+var pkg = require('./package.json'),
   browserify = require('browserify'),
-  source = require('vinyl-source-stream'),
   buffer = require('vinyl-buffer'),
+  coveralls = require('gulp-coveralls'),
+  del = require('del'),
+  gulp = require('gulp'),
+  gutil = require('gulp-util'),
+  gzip = require('gulp-gzip'),
+  header = require('gulp-header'),
+  jshint = require('gulp-jshint'),
+  karma = require('karma'),
+  micro = require('gulp-micro'),
   rename = require('gulp-rename'),
-  path = require('path'),
-  template = require('lodash').template;
+  source = require('vinyl-source-stream'),
+  uglify = require('gulp-uglify');
 
 gulp.task('default', ['clean', 'lint', 'test', 'compile']);
-gulp.task('dev', ['compile', 'watch']);
+gulp.task('dev', ['compile', 'lint', 'test', 'watch']);
 
 gulp.task('watch', function() {
-  gulp.watch('lib/**/*.js', ['test', 'compile']);
+  gulp.watch('lib/**/*.js', ['test', 'lint', 'compile']);
   gulp.watch('test/spec/**/*.js', ['test']);
 });
 
 gulp.task('clean', function() {
-  return gulp.src(['dist', 'test/coverage'], { read: false })
-    .pipe(clean());
+  return del.sync(['dist', 'test/coverage']);
 });
 
 gulp.task('lint', function() {
   return gulp.src(['gulpfile.js', 'lib/**/*.js', 'specs/**/*.js'])
-      .pipe(jshint('.jshintrc'))
-      .pipe(jshint.reporter('jshint-stylish'));
+    .pipe(jshint('.jshintrc'))
+    .pipe(jshint.reporter('jshint-stylish'));
 });
 
-gulp.task('instrument', function() {
-  return gulp.src('lib/**/*.js')
-    .pipe(map(function(code, filename) {
-      var instrumenter = new istanbul.Instrumenter(),
-        relativePath = path.relative(__dirname, filename);
-      return instrumenter.instrumentSync(code.toString(), relativePath);
-    }))
-    .pipe(gulp.dest('lib-instrumented'));
-});
-
-gulp.task('test', ['clean', 'instrument'], function() {
-  return gulp.src(['test/spec/*Spec.js'])
-    .pipe(karma({ configFile: 'karma.conf.js' }));
+gulp.task('test', ['clean'], function(done) {
+  new karma.Server({ configFile: __dirname + '/karma.conf.js', singleRun: true })
+    // prevent karma from calling process.exit
+    .on('run_complete', function() { done(); })
+    .start();
 });
 
 gulp.task('coveralls', ['test'], function() {
@@ -58,28 +45,27 @@ gulp.task('coveralls', ['test'], function() {
 });
 
 gulp.task('compile', ['clean'], function() {
-  return browserify('./lib/bespoke.js')
-    .bundle({ standalone: 'bespoke' })
+  return browserify('lib/bespoke.js', { standalone: 'bespoke' }).bundle()
     .on('error', gutil.log)
     .pipe(source('bespoke.js'))
     .pipe(buffer())
-    .pipe(header(template([
-        '/*!',
-        ' * <%= title %> v<%= version %>',
-        ' *',
-        ' * Copyright <%= new Date().getFullYear() %>, <%= author.name %>',
-        ' * This content is released under the <%= licenses[0].type %> license',
-        ' * <%= licenses[0].url %>',
-        ' */\n\n'
-      ].join('\n'), pkg)))
+    .pipe(header([
+      '/*!',
+      ' * <%= title %> v<%= version %>',
+      ' *',
+      ' * Copyright <%= new Date().getFullYear() %>, <%= author.name %>',
+      ' * This content is released under the <%= licenses[0].type %> license',
+      ' * <%= licenses[0].url %>',
+      ' */\n\n'
+    ].join('\n'), pkg))
     .pipe(gulp.dest('dist'))
     .pipe(rename('bespoke.min.js'))
     .pipe(uglify())
-    .pipe(header(template([
-        '/*! <%= title %> v<%= version %> ',
-        '© <%= author.name %>, ',
-        '<%= licenses[0].type %> License */\n'
-      ].join(''), pkg)))
+    .pipe(header([
+      '/*! <%= title %> v<%= version %> ',
+      '© <%= author.name %>, ',
+      '<%= licenses[0].type %> License */\n'
+    ].join(''), pkg))
     .pipe(gulp.dest('dist'))
     .pipe(gzip())
     .pipe(micro({ limit: 1024 }));
