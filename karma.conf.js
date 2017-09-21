@@ -14,11 +14,17 @@ module.exports = function(config) {
       'test/**/*.js': 'browserify'
     },
 
+    browserify: {
+      transform: ['browserify-istanbul'],
+    },
+
     reporters: ['progress', 'coverage'],
 
     coverageReporter: {
-      type : 'lcov',
-      dir : 'test/coverage'
+      dir: 'test/coverage',
+      reporters: [
+        { type: 'lcov' }
+      ]
     },
 
     port: 8080,
@@ -27,8 +33,6 @@ module.exports = function(config) {
 
     autoWatch: false,
 
-    browsers: ['PhantomJS'],
-
-    singleRun: true
+    browsers: ['PhantomJS']
   });
 };
