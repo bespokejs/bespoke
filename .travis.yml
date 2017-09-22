@@ -1,4 +1,5 @@
 sudo: false
+dist: trusty
 git:
   depth: 2
 language: node_js
