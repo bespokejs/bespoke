@@ -494,6 +494,19 @@ describe("bespoke", function() {
             });
           });
 
+          describe("destroy", function() {
+
+            it("should fire the destroy event when destroy is called", function() {
+              var callback = jasmine.createSpy('callback');
+              deck.on("destroy", callback);
+              deck.destroy();
+              expect(callback.calls.count()).toBe(1);
+              // listener should be automatically unregistered after first call
+              deck.destroy();
+              expect(callback.calls.count()).toBe(1);
+            });
+          });
+
           describe("fire", function() {
 
             it("should allow custom events to be triggered", function() {

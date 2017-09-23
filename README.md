@@ -238,7 +238,7 @@ Deck instances are provided to plugins and returned when instantiating a present
   </tr>
   <tr>
     <td><strong>destroy</strong></td>
-    <td>Destroy the deck instance and unbind all of it's event handlers.</td>
+    <td>Fire the destroy event. <em>This method can be used to remove the deck from the DOM.</em></td>
   </tr>
 </table>
 

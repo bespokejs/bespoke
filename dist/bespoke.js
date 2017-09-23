@@ -36,6 +36,11 @@ var from = function(opts, plugins) {
         }, true);
     },
 
+    destroy = function(customData) {
+      fire('destroy', createEventData(activeSlide, customData));
+      listeners = {};
+    },
+
     activate = function(index, customData) {
       if (!slides[index]) {
         return;
@@ -68,7 +73,8 @@ var from = function(opts, plugins) {
       next: step.bind(null, 1),
       prev: step.bind(null, -1),
       parent: parent,
-      slides: slides
+      slides: slides,
+      destroy: destroy
     };
 
   (plugins || []).forEach(function(plugin) {
