@@ -1,5 +1,5 @@
 /*!
- * Bespoke.js v1.1.0
+ * Bespoke.js v1.2.0-dev
  *
  * Copyright 2017, Mark Dalgleish
  * This content is released under the MIT license
@@ -45,7 +45,6 @@ var from = function(opts, plugins) {
       if (!slides[index]) {
         return;
       }
-
       fire('deactivate', createEventData(activeSlide, customData));
       activeSlide = slides[index];
       fire('activate', createEventData(activeSlide, customData));
@@ -61,7 +60,6 @@ var from = function(opts, plugins) {
 
     step = function(offset, customData) {
       var slideIndex = slides.indexOf(activeSlide) + offset;
-
       fire(offset > 0 ? 'next' : 'prev', createEventData(activeSlide, customData)) && activate(slideIndex, customData);
     },
 
@@ -77,9 +75,7 @@ var from = function(opts, plugins) {
       destroy: destroy
     };
 
-  (plugins || []).forEach(function(plugin) {
-    plugin(deck);
-  });
+  (plugins || []).forEach(function(plugin) { plugin(deck); });
 
   activate(0);
 
