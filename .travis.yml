@@ -8,7 +8,6 @@ node_js:
 - v0.12
 - v4
 - v6
-- v7
 - v8
 #before_install:
 #- npm -g install npm@latest
