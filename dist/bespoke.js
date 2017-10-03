@@ -10,7 +10,7 @@
 var from = function(opts, plugins) {
   var parent = (opts.parent || opts).nodeType === 1 ? (opts.parent || opts) : document.querySelector(opts.parent || opts),
     slides = [].filter.call(typeof opts.slides === 'string' ? parent.querySelectorAll(opts.slides) : (opts.slides || parent.children), function(el) { return el.nodeName !== 'SCRIPT'; }),
-    activeSlide = slides[0],
+    activeSlide,
     listeners = {},
 
     createEventData = function(el, eventData) {
@@ -45,7 +45,9 @@ var from = function(opts, plugins) {
       if (!slides[index]) {
         return;
       }
-      fire('deactivate', createEventData(activeSlide, customData));
+      if (activeSlide) {
+        fire('deactivate', createEventData(activeSlide, customData));
+      }
       activeSlide = slides[index];
       fire('activate', createEventData(activeSlide, customData));
     },
@@ -77,7 +79,9 @@ var from = function(opts, plugins) {
 
   (plugins || []).forEach(function(plugin) { plugin(deck); });
 
-  activate(0);
+  if (!activeSlide) {
+    activate(0);
+  }
 
   return deck;
 };
