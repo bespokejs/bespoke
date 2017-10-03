@@ -13,7 +13,6 @@ describe("bespoke", function() {
         NO_OF_SLIDES = 10,
         article,
         slides,
-        decks = [],
         deck;
 
       beforeEach(function() {
@@ -36,7 +35,7 @@ describe("bespoke", function() {
           elements: { parent: article, slides: article.children }
         };
 
-        decks.push((deck = bespoke.from(from[fromType])));
+        deck = bespoke.from(from[fromType]);
       });
 
       afterEach(function() {
