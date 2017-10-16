@@ -76,6 +76,7 @@ deck.slide(); // 0
 ```
 
 By default, all non-script child elements of the resolved parent element become slides.
+You can customize this behavior by passing a custom selector.
 
 ## Plugins
 
