@@ -4,24 +4,53 @@ var bespoke = require('../../lib/bespoke.js');
 
 describe("bespoke", function() {
 
+  var PARENT_TAG = 'article',
+    SLIDE_TAG = 'section',
+    NO_OF_SLIDES = 10,
+    article,
+    deck;
+
+  describe('init', function() {
+    var deactivatedSlides = [],
+      customPlugin = function(_deck) {
+        _deck.on('deactivate', function(e) {
+          deactivatedSlides.push(e.slide);
+        });
+        _deck.slide(1);
+      };
+
+    beforeEach(function() {
+      article = document.createElement(PARENT_TAG);
+      for (var i = 0; i < NO_OF_SLIDES; i++) {
+        article.appendChild(document.createElement(SLIDE_TAG));
+      }
+
+      document.body.appendChild(article);
+
+      deck = bespoke.from('article', [customPlugin])
+    });
+
+    afterEach(function() {
+      document.body.removeChild(article);
+    });
+
+    it('should not activate first slide if plugin activates slide', function() {
+      expect(deck.slide()).toBe(1);
+    });
+
+    it('should not call deactivate when first slide is activated', function() {
+      expect(deactivatedSlides).toEqual([]);
+    });
+  });
+
   ['selector', 'element', 'selectors', 'elements'].forEach(function(fromType) {
 
     describe("from " + fromType, function() {
 
-      var PARENT_TAG = 'article',
-        SLIDE_TAG = 'section',
-        NO_OF_SLIDES = 10,
-        article,
-        slides,
-        deck;
-
       beforeEach(function() {
-        slides = [];
-
         article = document.createElement(PARENT_TAG);
         for (var i = 0; i < NO_OF_SLIDES; i++) {
-          slides.push(document.createElement(SLIDE_TAG));
-          article.appendChild(slides[i]);
+          article.appendChild(document.createElement(SLIDE_TAG));
           // Ensure script tags are ignored
           article.appendChild(document.createElement('script'));
         }
