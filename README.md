@@ -130,7 +130,7 @@ var deck = bespoke.from('#presentation', [
 ]);
 ```
 
-The first slide is activated automatically after all the plugins are called unless a slide is activated by one of the plugins.
+The first slide is activated automatically after all plugins are called unless one of those plugins has already activated a slide.
 
 ## Themes
 
