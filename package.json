@@ -41,7 +41,7 @@
     "karma-coverage": "^1.1.1",
     "karma-jasmine": "^1.1.0",
     "karma-phantomjs-launcher": "^1.0.4",
-    "phantomjs-prebuilt": "^2.1.15",
+    "phantomjs-prebuilt": "2.1.15",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "gulp-util": "^3.0.8",
