@@ -198,7 +198,7 @@ For example:
 bespoke.from({ parent: '#presentation', slides: '#presentation > section' });
 ```
 
-This advanced usage allows you to include auxilary HTML inside the parent element, skip slides that don't match the selector or explicitly filter out slides before passing on the collection.
+This advanced usage allows you to include auxiliary HTML inside the parent element, skip slides that don't match the selector or explicitly filter out slides before passing on the collection.
 
 ### Deck Instances
 
